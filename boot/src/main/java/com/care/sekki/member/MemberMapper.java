@@ -1,4 +1,4 @@
-package com.care.boot.member;
+package com.care.sekki.member;
 
 import java.util.ArrayList;
 
