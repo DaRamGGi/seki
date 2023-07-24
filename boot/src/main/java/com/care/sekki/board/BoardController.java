@@ -1,4 +1,4 @@
-package com.care.boot.board;
+package com.care.sekki.board;
 
 import java.io.IOException;
 

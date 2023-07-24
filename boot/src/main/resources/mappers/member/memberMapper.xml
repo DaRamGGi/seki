@@ -3,8 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.care.boot.member.MemberMapper">
-	<resultMap type="com.care.boot.member.MemberDTO" id="memberDto">
+<mapper namespace="com.care.sekki.member.MemberMapper">
+	<resultMap type="com.care.sekki.member.MemberDTO" id="memberDto">
 		<id column="id" property="id"/>
 		<result column="pw" property="pw"/>
 		<result column="user_name" property="userName"/>
@@ -15,7 +15,7 @@
 		SELECT * FROM session_quiz WHERE id=#{id}
 	</select>
 	
-	<insert id="registerProc" parameterType="com.care.boot.member.MemberDTO">
+	<insert id="registerProc" parameterType="com.care.sekki.member.MemberDTO">
 		INSERT INTO session_quiz VALUES(#{id}, #{pw}, #{userName}, #{address}, #{mobile})
 	</insert>
 	
@@ -56,7 +56,7 @@
 		</choose>
 	</select>
 	
-	<update id="updateProc" parameterType="com.care.boot.member.MemberDTO">
+	<update id="updateProc" parameterType="com.care.sekki.member.MemberDTO">
 		UPDATE session_quiz 
 		SET pw=#{pw}, user_name=#{userName}, address=#{address}, mobile=#{mobile} 
 		WHERE id=#{id}
