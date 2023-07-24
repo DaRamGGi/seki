@@ -22,7 +22,7 @@
 		<li><a href="${context }register">마이페이지</a></li>
 		<li><a href="${context }boardForm">커뮤니티</a></li>
 		<li><a href="${context }memberInfo">밀키트스토어</a></li>
-		<li><a href="${context }logout">고객센터</a></li>
+		<li><a href="${context }announcement">고객센터</a></li>
 	</ul>
 </div>
 <hr>

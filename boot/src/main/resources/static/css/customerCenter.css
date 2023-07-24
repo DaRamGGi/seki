@@ -1,0 +1,5 @@
+@charset "UTF-8";
+#wrap{margin: 100px auto; width: 1200px; border: 1px solid red; text-align:center}
+table{color: black;  margin: 0 auto;}
+table{border-collapse: collapse;}
+h2{color:black;}
