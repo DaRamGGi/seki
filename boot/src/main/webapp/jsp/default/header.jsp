@@ -17,14 +17,21 @@
 		</a>
 	</div>
 	<ul class="nav">
-		<li><a href="${context }login">로그인</a></li>
-		<li><a href="${context }index">레시피</a></li>
-		<li><a href="${context }register">마이페이지</a></li>
-		<li><a href="${context }boardForm">커뮤니티</a></li>
-		<li><a href="${context }memberInfo">밀키트스토어</a></li>
-		<li><a href="${context }logout">고객센터</a></li>
+		<li><a href="${context }index">HOME</a></li>
+		<li><a href="${context }register">Register</a></li>
+		<li><a href="${context }login">Login</a></li>
+		<li><a href="${context }memberInfo">MemberInfo</a></li>
+		<li><a href="${context }logout">Logout</a></li>
+		<li><a href="${context }boardForm">Board</a></li>
 	</ul>
 </div>
 <hr>
 <c:url var="context" value="/"/>
+
+
+
+
+
+
+
 

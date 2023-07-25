@@ -1,4 +1,4 @@
-package com.care.sekki.member;
+package com.care.boot.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSendException;

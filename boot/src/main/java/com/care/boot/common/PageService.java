@@ -1,4 +1,4 @@
-package com.care.sekki.common;
+package com.care.boot.common;
 
 public class PageService {
 	public static String printPage(String url, int currentPage, int totalCount, int pageBlock) {

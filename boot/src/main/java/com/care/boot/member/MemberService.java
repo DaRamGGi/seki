@@ -1,4 +1,4 @@
-package com.care.sekki.member;
+package com.care.boot.member;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.care.sekki.common.PageService;
+import com.care.boot.common.PageService;
 
 import jakarta.servlet.http.HttpSession;
 

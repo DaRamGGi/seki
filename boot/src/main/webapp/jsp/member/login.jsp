@@ -22,7 +22,7 @@
 		<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&
 		client_id=2e151bc9c1174ea0e8836b77c28803c3&
 		redirect_uri=http://localhost/kakaoLogin">
-			<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" style="width:210px;" />
+			<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" />
 		</a>
 	</td></tr>
 	</table>

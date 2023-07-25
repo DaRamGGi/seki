@@ -1,4 +1,4 @@
-package com.care.sekki.member;
+package com.care.boot.member;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

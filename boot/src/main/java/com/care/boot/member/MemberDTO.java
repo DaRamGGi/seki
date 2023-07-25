@@ -1,4 +1,4 @@
-package com.care.sekki.member;
+package com.care.boot.member;
 
 public class MemberDTO {
 	private String id;
