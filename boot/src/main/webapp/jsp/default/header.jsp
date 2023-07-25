@@ -8,6 +8,7 @@
 </style>    
 
 <script src="dbQuiz.js"></script>
+<script src="js/center.js"></script>
 <link href="css/common.css" rel="stylesheet"/> 	
 
 <div id="header">

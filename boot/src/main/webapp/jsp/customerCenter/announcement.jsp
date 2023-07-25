@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,12 +15,12 @@
 <div id="wrap">
 	<div class="searchDiv">
 		<h2>공지사항</h2>
-		<form action="memberInfo">
+		<form action="announcement">
 			<input type="text" name="search" />
 			<input type="submit" value="검색" />
 		</form>
 	</div>
-	<table>
+	<table class="announceTable">
 		<colgroup>
 			<col width="10%"></col>
 			<col width="45%"></col>
@@ -37,15 +38,18 @@
 		</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>1</td>
-				<td>제목</td>
-				<td>작성자</td>
-				<td>2023-07-04</td>
-				<td>1</td>
-			</tr>
+			<c:forEach var="announcement" items="${ announcements}" varStatus="loop">
+				<tr onclick="location.href='announcementContent?num=${announcement.num }">
+					<td>${loop.index + 1}</td>
+					<td class="announceHover" >${announcement.title }</td>
+					<td>${announcement.writer }</td>
+					<td>${announcement.writeDate }</td>
+					<td>${announcement.hits }</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
+	<div class="pages"> ${result}	</div>
 	<div class="btnDiv">
 		<button type="button" onclick="location.href='writeAnnouncement'">공지사항 등록</button>
 	</div>

@@ -11,17 +11,25 @@ import com.care.sekki.board.BoardDTO;
 public interface centerMapper {
 	ArrayList<BoardDTO> boardForm(@Param("begin")int begin, @Param("end")int end);
 
-	int count();
+	void writeAnnouncementProc(centerDTO announceDTO);
 
-	void boardWriteProc(BoardDTO board);
-
-	BoardDTO boardContent(int no);
-	
-	void incHit(int no);
-
-	String boardDownload(int no);
-	
 	void boardModifyProc(BoardDTO board);
 
 	void boardDeleteProc(int no);
+
+	ArrayList<centerDTO> partAnnouncement(
+			@Param("begin")int begin, @Param("end")int end,
+			@Param("search")String search);
+
+	ArrayList<centerDTO> allAnnouncement(int begin, int end);
+
+	int count(String search);
+
+	centerDTO announcementContent(int num);
+
+	void incHit(int no);
+
+	String announceDownload(int num);
+
+
 }

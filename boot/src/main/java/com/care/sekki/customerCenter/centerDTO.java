@@ -22,10 +22,27 @@ public class centerDTO {
 	private String content;
 	private String writer;
 	private String writeTime;
+	private String writeDate;
+	
 	private String files;
 	private char secret;
 	private int hits;
 	private int likes;
+	
+	public centerDTO() {}
+	
+	public centerDTO(centerDTO other) {
+		this.num = other.num;
+		this.category = other.category;
+        this.title = other.title;
+        this.content = other.content;
+        this.writer = other.writer;
+        this.writeTime = other.writeTime;
+        this.files = other.files;
+        this.secret = other.secret;
+        this.hits = other.hits;
+        this.likes = other.likes;
+    }
 	
 	public int getNum() {
 		return num;
@@ -63,6 +80,12 @@ public class centerDTO {
 	public void setWriteTime(String writeTime) {
 		this.writeTime = writeTime;
 	}
+	public String getWriteDate() {
+		return writeDate;
+	}
+	public void setWriteDate(String writeDate) {
+		this.writeDate = writeDate;
+	}
 	public String getFiles() {
 		return files;
 	}
@@ -87,6 +110,5 @@ public class centerDTO {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
-	
-	
+
 }
