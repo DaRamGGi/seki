@@ -1,4 +1,4 @@
-package com.care.boot.board;
+package com.care.sekki.board;
 /*
 CREATE TABLE session_board(
 	no number,
