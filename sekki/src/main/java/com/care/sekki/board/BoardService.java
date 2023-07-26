@@ -33,7 +33,7 @@ public class BoardService {
 			currentPage = 1;
 		}
 
-		int pageBlock = 3; // 한 페이지에 보일 데이터의 수 
+		int pageBlock = 6; // 한 페이지에 보일 데이터의 수 
 		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
 		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
 
