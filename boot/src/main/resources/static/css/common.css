@@ -23,7 +23,7 @@ button {cursor:pointer; background-color:black; color:white; font-weight:bold; w
 	background-size: cover;
 	}
 .main_div div{
-	position: absolute ;
+	position: absolute; 
 	top:25%;
 	left:35%;
 }
