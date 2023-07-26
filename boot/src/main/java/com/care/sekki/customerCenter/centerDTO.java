@@ -23,12 +23,11 @@ public class centerDTO {
 	private String writer;
 	private String writeTime;
 	private String writeDate;
-	
 	private String files;
 	private char secret;
 	private int hits;
 	private int likes;
-	
+
 	public centerDTO() {}
 	
 	public centerDTO(centerDTO other) {

@@ -1,36 +1,33 @@
 @charset "UTF-8";
-#wrap{margin: 100px auto; width: 1200px; border: 1px solid red; }
+#wrap{margin: 100px auto; width: 1200px; }
 
 /*공지사항 보기*/
 .searchDiv {
   display: flex; /* Flexbox를 적용하여 요소들을 수평으로 정렬 */
-  align-items: center; /* 요소들을 수직 가운데 정렬 */
-  height: 100px;
-  line-height: 100px;
+  justify-content: space-between;
+  padding: 0px 60px 0px;
 }
 
-.searchDiv h2 {
-  margin-right: 10px; /* 공지사항 제목과 검색 폼 사이의 간격을 조정 */
-  margin-left: 60px;
-}
-
-.searchDiv form {
+.searchDiv > form {
   display: flex; /* 폼 안의 input과 submit 버튼을 수평으로 정렬하기 위해 추가 */
-  height: 65px;
-  line-height: 100px;
-  vertical-align: middle;	
+  vertical-align: middle;
+  height: 60%;
+  padding-top: 30px;
 }
 
-.searchDiv input[type="text"]{
+.searchDiv form input[type="text"]{
+	border: none;
 	border-bottom: 1px solid black;
-	margin-left: 730px;
-	margin-right: 12px;
+	margin-right: 15px;
 }
 
-.searchDiv input[type="submit"]{
-	margin-top: 30px;
+.searchDiv form input[type="submit"]{
 	height: 30px;
 	width: 50px;
+	border: none;
+    border-radius: 5px;
+    cursor: pointer;
+	background-color: rgb(251, 189, 74);
 }
 
 .announceTable{
@@ -51,7 +48,9 @@
 	height: 40px;
 }
 
-.announceTable .announceHover:hover{text-decoration-line: underline;}
+.announceTable .announceHover:hover{
+	text-decoration-line: underline;}
+	
 .pages{
 	height: 50px;
 	line-height: 50px;
@@ -59,32 +58,103 @@
     font-size: 20px;
 }
 
-.btnDiv {
+.announcebtnDiv {
 	height: 50px;
 	line-height: 50px;
+    padding-right: 60px;
     text-align: right;
-    padding-right: 50px;
+}
+
+.announcebtnDiv > button{
+	padding: 10px 15px;
+    background-color: rgb(251, 189, 74);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
  
 /*공지사항 등록*/
-h2{margin-left: 55px;}
-table tr th{vertical-align: middle;}
-input[type="text"]{line-height: 30px;}
-input[type="text"]:focus,
-textarea:focus {
+.writeTable input[type="text"]:focus,
+.writeTable textarea:focus {
   outline: none; /* 포커스시 기본적으로 적용되는 아웃라인을 제거합니다. (선택사항) */
   border: none; /* 포커스시 border를 제거하여 보이지 않게 합니다. */
 }
-input[type="text"],
-textarea {
-  width: 100%;
+
+.writeTable input[type="text"],
+.writeTable textarea {
+  width: 95%;
   padding: 8px;
   margin-bottom: 15px;
   resize: vertical; /* 사용자가 textarea를 수직으로 조절 가능하도록 함 */
   border: none;
   margin-top:10px;
+  font-size: 20px;
 }
 
-input[type="submit"]:hover {
-  background-color: #45a049;
+.writeTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 20px;
 }
+
+.writeTable th,
+.writeTable td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Center align the table header */
+.writeTable th {
+    text-align: center;
+}
+
+.writeTable td:nth-child(1){height: 60px;}
+.writeTable tr:nth-child(2) > td{height: 400px;}
+.writeTable tr:nth-child(3) > td{height: 50px;}
+
+/* Style the input and textarea */
+.writeTable input[type="text"],
+.writeTable textarea {
+    width: 98%;
+    padding: 5px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.writeTable textarea {
+ resize: vertical;
+}
+ 
+/* Style the buttons */
+.writeAnnounceBtn,
+.Listbtn {
+    padding: 10px 20px;
+    background-color: rgb(251, 189, 74);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.Listbtn {
+    background-color: #ccc;
+    margin-left: 10px;
+}
+
+/* Center the buttons */
+.writebtnDiv {
+    text-align: center;
+    padding: 30px 0;
+}
+
+.writebtnDiv > input[type="button"]:hover {
+  background-color: rgb(255, 128, 64);
+}
+
+/*공지사항 컨텐츠*/
+.viewAnnounce{padding: 20px 100px;}
+
+.fileName{text-align: right;}

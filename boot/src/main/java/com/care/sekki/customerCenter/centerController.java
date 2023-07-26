@@ -19,6 +19,12 @@ public class centerController {
 	@Autowired private centerMapper mapper;
 	@Autowired private HttpSession session;
 	
+	/*
+	 * @RequestMapping("header") public String header() { return "default/header"; }
+	 * 
+	 * @RequestMapping("footer") public String footer() { return "default/footer"; }
+	 */
+	
 	@RequestMapping("announcement")
 	public String announcement(
 			@RequestParam(value="currentPage", required = false)String cp,
@@ -49,12 +55,12 @@ public class centerController {
 	
 	@RequestMapping("announcementContent")
 	public String announcementContent(
-			@RequestParam(value="no", required = false)String n, Model model) {
+			@RequestParam(value="num", required = false)String n, Model model) {
 		centerDTO announcement = service.announcementContent(n);
 		
-		if(announcement == null) {
-			return "redirect:announcement";
-		}
+		/*
+		 * if(announcement == null) { return "redirect:announcement"; }
+		 */
 		model.addAttribute("announcement", announcement);
 		return "customerCenter/announcementContent";
 	}

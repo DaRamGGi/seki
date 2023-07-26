@@ -14,7 +14,7 @@
 	<h2>공지사항 등록</h2>
 		<form action="writeAnnouncementProc" method='post' enctype="multipart/form-data" id="f">
 		<div class="writeForm">
-			<table>
+			<table class="writeTable">
 			<tr>
 				<th>제목</th>
 				<td><input type="text" name="title" id="title" placeholder="제목(최대 45자)"></td>
@@ -32,7 +32,7 @@
 		</table>
 		</div>
 	
-		<div class="btnDiv">
+		<div class="writebtnDiv">
 			<input type="button" value="글쓰기" onclick="nullCheck()" class="writeAnnounceBtn">
 			<input type="button" value="목록" onclick="location.href='announcement'" class="Listbtn">
 		</div>

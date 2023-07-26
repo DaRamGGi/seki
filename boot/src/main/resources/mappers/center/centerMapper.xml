@@ -44,18 +44,18 @@
 	
 	<!-- 공지사항 목록 보기  -->
 	<select id="allAnnouncement" resultMap="centerDTO">
-		SELECT AAA.* FROM 
-		(SELECT rownum as rn, title, writer, write_date, hits  
-		FROM sekki_board )AAA 
-		WHERE AAA.rn BETWEEN #{begin} AND #{end}
+		SELECT BBB.* FROM 
+		(SELECT rownum as rn, AAA.* FROM 
+		(SELECT num, title, writer, write_date, hits FROM sekki_board ORDER BY num DESC)AAA)BBB
+		WHERE BBB.rn BETWEEN #{begin} AND #{end}
 	</select>
 	
 	<select id="partAnnouncement" resultMap="centerDTO">
-		SELECT AAA.* FROM 
-		(SELECT rownum as rn, title, writer, write_date, hits
-		FROM sekki_board WHERE title like '%'||#{search}||'%')AAA 
-		WHERE AAA.rn BETWEEN #{begin} AND #{end}
-	</select>
+        SELECT BBB.* FROM 
+        (SELECT rownum as rn, AAA.* FROM 
+        (SELECT num, title, writer, write_date, hits FROM sekki_board WHERE title LIKE '%'||#{search}||'%' ORDER BY num DESC) AAA
+		) BBB WHERE BBB.rn BETWEEN #{begin} AND #{end}
+	</select> 
 	
 	<select id="count">
 		<choose>

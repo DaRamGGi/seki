@@ -38,10 +38,12 @@
 		</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="announcement" items="${ announcements}" varStatus="loop">
-				<tr onclick="location.href='announcementContent?num=${announcement.num }">
-					<td>${loop.index + 1}</td>
-					<td class="announceHover" >${announcement.title }</td>
+			<c:forEach var="announcement" items="${ announcements}">
+				<tr>
+					<td>${announcement.num}</td>
+					<td class="announceHover" onclick="location.href='announcementContent?num=${announcement.num }">
+						${announcement.title }
+					</td>
 					<td>${announcement.writer }</td>
 					<td>${announcement.writeDate }</td>
 					<td>${announcement.hits }</td>
@@ -50,7 +52,7 @@
 		</tbody>
 	</table>
 	<div class="pages"> ${result}	</div>
-	<div class="btnDiv">
+	<div class="announcebtnDiv">
 		<button type="button" onclick="location.href='writeAnnouncement'">공지사항 등록</button>
 	</div>
 </div>
