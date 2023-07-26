@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="/header" />
-<div align="center" class="main_div">
+<div align="center" class="sub_div">
 	<h1>로그인</h1>
 	<table ><tr><td>
 	<form action="loginProc" method="post" id="f">
@@ -22,7 +22,7 @@
 		<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&
 		client_id=2e151bc9c1174ea0e8836b77c28803c3&
 		redirect_uri=http://localhost/kakaoLogin">
-			<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" style="width:210px;" />
+			<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" style="width:200px;" />
 		</a>
 	</td></tr>
 	</table>

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="/header" />
 
-<div align="center" class="main_div">
+<div align="center" class="sub_div">
 <h1>회원 탈퇴</h1>
 <table>
 	<tr><td>${msg }</td></tr>

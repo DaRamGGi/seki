@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="/header" />
 
-<div align="center" class="main_div">
+<div align="center" class="sub_div">
 	<h1>개인 정보</h1>
 	아이디 : ${member.id } <br> 
 	비밀번호 : ${member.pw }<br>

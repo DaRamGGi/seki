@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <c:import url="/header" />
 
-<div align="center" class="main_div">
+<div align="center" class="sub_div">
 	<form action="boardWriteProc" method='post' enctype="multipart/form-data">
 		<table>
 			<caption>
@@ -22,13 +23,11 @@
 				<th>파일첨부</th>
 				<td><input type="file" name="upfile"></td>
 			</tr>
-			<tr>
-				<td colspan="2" align="center">
-					<input type="submit" value="글쓰기" class="btn"> 
-					<input type="button" value="목록" onclick="location.href='boardForm'" class="btn">
-				</td>
-			</tr>
 		</table>
+		<div>
+			<input type="submit" value="글쓰기" class="btn"> 
+			<input type="button" value="목록" onclick="location.href='boardForm'" class="btn">
+		</div>
 	</form>
 </div>
 <c:import url="/footer" />

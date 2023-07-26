@@ -29,7 +29,7 @@
 		<selectKey order="BEFORE" keyProperty="no" resultType="int">
 			SELECT nvl(max(no),0) + 1 FROM session_board
 		</selectKey>
-		INSERT INTO boot_board VALUES(#{no}, #{title}, #{content}, #{id}, #{writeDate}, 0, #{fileName} )
+		INSERT INTO session_board VALUES(#{no}, #{title}, #{content}, #{id}, #{writeDate}, 0, #{fileName} )
 	</insert>
 	
 	<select id="boardContent" resultMap="boardDto">

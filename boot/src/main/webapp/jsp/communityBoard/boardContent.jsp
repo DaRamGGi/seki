@@ -1,6 +1,7 @@
 <%@ page import="java.io.OutputStream"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <c:import url="/header" />
 
 <script>
@@ -11,9 +12,9 @@
 		}
 	}
 </script>
-<div align="center" class="main_div">
+<div align="center" class="sub_div">
 	<h1>글 내용</h1>
-	<table border='1'>
+	<table class="boardContent">
 		<tr>
 			<th width="100">작성자</th>
 			<td width="200">${board.id }</td>
@@ -40,17 +41,15 @@
 			<td colspan="3">${board.title }</td>
 		</tr>
 		<tr>
-			<th>문서내용</th>
+			<th>게시내용</th>
 			<td colspan="3">${board.content }</td>
 		</tr>
-		<tr>
-			<td colspan="4">
-				<button type="button" onclick="location.href='boardForm'">목록</button>
-				<button type="button" onclick="location.href='boardModify?no=${board.no }'">수정</button>
-				<button type="button" onclick="deleteCheck()">삭제</button> 
-			</td>
-		</tr>
 	</table>
+	<div>
+		<button type="button" onclick="location.href='boardForm'">목록</button>
+		<button type="button" onclick="location.href='boardModify?no=${board.no }'">수정</button>
+		<button type="button" onclick="deleteCheck()">삭제</button> 
+	</div>
 </div>
 <c:import url="/footer" />
 
