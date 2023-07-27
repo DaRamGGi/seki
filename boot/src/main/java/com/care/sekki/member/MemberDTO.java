@@ -2,12 +2,13 @@ package com.care.sekki.member;
 
 public class MemberDTO {
 	private String id;
-	private String pw;
-	private String userName;
-	private String address;
-	private String mobile;
-	
-	public String getId() {
+    private String pw;
+    private String userName;
+    private String email;
+    private String address;
+    private String mobile;
+    private String profilePictureUrl;
+    public String getId() {
 		return id;
 	}
 	public void setId(String id) {
@@ -25,6 +26,12 @@ public class MemberDTO {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getAddress() {
 		return address;
 	}
@@ -37,6 +44,25 @@ public class MemberDTO {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	
+	public String getProfilePictureUrl() {
+		return profilePictureUrl;
+	}
+	public void setProfilePictureUrl(String profilePictureUrl) {
+		this.profilePictureUrl = profilePictureUrl;
+	}
+	public String getHeight() {
+		return height;
+	}
+	public void setHeight(String height) {
+		this.height = height;
+	}
+	public String getWeight() {
+		return weight;
+	}
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+	private String height;
+    private String weight;
 	
 }
