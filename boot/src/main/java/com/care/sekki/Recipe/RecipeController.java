@@ -17,4 +17,14 @@ public class RecipeController {
 		return "recipe/recipeBoard";
 	}
 	
+	@GetMapping("/recipeBoardWrite")
+    public String recipeBoardWrite() {
+        return "recipe/recipeBoardWrite";
+    }
+	
+	@PostMapping("/recipeBoardWrite")
+	public String recipeBoardWritee() {
+		return "recipe/recipeBoardWrite";
+	}
+	
 }
