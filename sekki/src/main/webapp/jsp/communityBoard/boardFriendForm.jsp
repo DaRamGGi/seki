@@ -4,7 +4,7 @@
 
 <c:import url="/header" />
 
-<div align="center" class="sub_div">
+<div align="center" class="community_div">
 	<h1>
 	<a href="boardForm">공동구매</a> ㆍ <span>밥친구</span>
 	</h1>
@@ -16,25 +16,31 @@
 			<ul class="boardForm">
 				<c:forEach var="board" items="${ boards}">
 					<li onclick="location.href='boardContent?no=${board.no }'" >
-						<div id="top">
-							<span>${board.no } </span>
-							<span class="material-symbols-outlined">account_circle</span>
-							 <span>${board.id }</span>
-							<span>${board.title }</span>
+						<div class="top">
+							<span class="material-symbols-outlined" id="person">person_pin_circle</span>
+							<span id="Bid">${board.id }</span>
+							<span id="Btitle">${board.title }</span>
+							<span id="BwriteDate">${board.writeDate }</span>
+							<span id="Bhits">조회수 ${board.hits }</span>
 						</div>
-						<div id="down">
-							<span>${board.content }</span>
-							<span>${board.writeDate }</span>
-							<span>${board.hits }</span>
+						<div class="down">
+							<span id="Bcontent">${board.content }</span>
+							<span class="material-symbols-outlined" id="Blikes">thumb_up</span>
+							<span id="Blike">256</span>
 						</div>
 					</li>
 				</c:forEach>
 			</ul>
-			
+			<div class="tail">
+				<form action="boardForm" class="sch">
+					<input type="text" placeholder="검색어를 입력하세요." name="search"/>
+					<input type="submit" value="확인"/>
+				</form>
 				<div class="boardList">
 					${result }
-					<button type="button" onclick="location.href='boardWrite'">글쓰기</button>
 				</div>
+				<button type="button" onclick="location.href='boardWrite'">글쓰기</button>
+			</div>
 		</c:otherwise>
 	</c:choose>
 </div>

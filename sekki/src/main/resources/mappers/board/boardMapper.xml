@@ -15,14 +15,25 @@
 	</resultMap>
 
 	<select id="count">
-	  	SELECT count(no) FROM session_board
+	  	SELECT count(no) FROM session_board WHERE content like '%'||#{search}||'%'
 	</select>
 
 	<select id="boardForm" resultMap="boardDto">
 		SELECT BBB.* FROM 
 		(SELECT rownum as rn, AAA.* FROM 
-		(SELECT * FROM session_board ORDER BY no DESC)AAA)BBB
+		(SELECT * FROM session_board
+		WHERE content like '%'||#{search}||'%' 
+		ORDER BY no DESC)AAA)BBB
 		WHERE BBB.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="boardFriendForm" resultMap="boardDto">
+		SELECT BBB.* FROM 
+		(SELECT rownum as rn, AAA.* FROM 
+		(SELECT * FROM session_board
+		WHERE content like '%'||#{search}||'%' 
+		ORDER BY no DESC)AAA)BBB
+		WHERE BBB.rn BETWEEN #{begin} AND #{end}	
 	</select>
 
 	<insert id="boardWriteProc">
