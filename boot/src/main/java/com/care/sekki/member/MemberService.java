@@ -1,5 +1,6 @@
 package com.care.sekki.member;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.care.sekki.S3.S3UploadService;
 import com.care.sekki.common.PageService;
 
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +20,8 @@ import jakarta.servlet.http.HttpSession;
 public class MemberService {
 	@Autowired private MemberMapper memberMapper;
 	@Autowired private HttpSession session;
+	@Autowired
+	private S3UploadService s3UploadService;
 	
 	public String loginProc(MemberDTO member) {
 		if(member.getId() == null || member.getId().isEmpty()) {
@@ -36,6 +41,10 @@ public class MemberService {
 				session.setAttribute("userName", result.getUserName());
 				session.setAttribute("address", result.getAddress());
 				session.setAttribute("mobile", result.getMobile());
+				session.setAttribute("profilePictureUrl", result.getProfilePictureUrl());
+				session.setAttribute("email", result.getEmail());
+				session.setAttribute("height", result.getHeight());
+				session.setAttribute("weight", result.getWeight());
 				return "로그인 성공";
 			}
 		}
@@ -43,7 +52,7 @@ public class MemberService {
 		return "아이디/비밀번호를 확인 후 다시 시도하세요.";
 	}
 
-	public String registerProc(MemberDTO member, String confirm) {
+	public String registerProc(MemberDTO member, String confirm, MultipartFile profilePicture) {
 		if(member.getId() == null || member.getId().isEmpty()) {
 			return "아이디를 입력하세요.";
 		}
@@ -74,8 +83,19 @@ public class MemberService {
 			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
 			String cryptPassword = bpe.encode(member.getPw());
 			member.setPw(cryptPassword);
-			memberMapper.registerProc(member);
-			return "회원 등록 완료";
+			
+			
+			try {
+	            // 프로필 사진을 S3에 업로드하고 해당 URL을 받아옵니다.
+	            String profilePictureUrl = s3UploadService.saveFile(profilePicture);
+	            member.setProfilePictureUrl(profilePictureUrl); // 회원 정보에 프로필 사진 URL을 설정합니다.
+
+	            memberMapper.registerProc(member);
+	            return "회원 등록 완료";
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            return "회원 등록 실패: 프로필 사진 업로드 중 오류가 발생하였습니다.";
+	        }
 		}
 		
 		return "이미 가입된 아이디 입니다.";

@@ -1,6 +1,7 @@
 package com.care.sekki.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -16,6 +18,9 @@ import jakarta.servlet.http.HttpSession;
 public class MemberController {
 	@Autowired private MemberService service;
 	@Autowired private HttpSession session;
+	
+	@Value("${cloud.aws.s3.bucket}")
+    private String bucket;
 	
 	@RequestMapping("index")
 	public String index() {
@@ -56,8 +61,8 @@ public class MemberController {
 	}
 	
 	@PostMapping("registerProc")
-	public String registerProc(MemberDTO member, String confirm) {
-		String result = service.registerProc(member, confirm);
+	public String registerProc(MemberDTO member, String confirm, MultipartFile profilePicture) {
+		String result = service.registerProc(member, confirm, profilePicture);
 		if(result.equals("회원 등록 완료")) {
 			return "redirect:index";
 		}
@@ -172,16 +177,3 @@ public class MemberController {
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
