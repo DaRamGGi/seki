@@ -8,6 +8,7 @@ public class MemberDTO {
     private String address;
     private String mobile;
     private String profilePictureUrl;
+    
     public String getId() {
 		return id;
 	}
