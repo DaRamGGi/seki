@@ -8,7 +8,7 @@
 <title>index</title>
 </head>
 <body>
-	
+
 	<c:import url="/header"/>
 	<c:import url="/main"/>
 	<div align="center" >
@@ -17,3 +17,7 @@
 	<c:import url="/footer"/>
 </body>
 </html>
+
+
+
+

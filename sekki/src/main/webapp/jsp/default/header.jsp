@@ -8,8 +8,7 @@
 </style>    
 
 <script src="dbQuiz.js"></script>
-<script src="js/center.js"></script>
-<link href="css/common.css" rel="stylesheet"/> 	
+<link href="css/reset.css" rel="stylesheet" type="text/css" /> 	
 
 <div id="header">
 	<div class="mainLogo">
@@ -20,13 +19,11 @@
 	<ul class="nav">
 		<li><a href="${context }login">로그인</a></li>
 		<li><a href="${context }index">레시피</a></li>
-		<li><a href="${context }recipeBoard">레시피모음</a><li>
 		<li><a href="${context }register">마이페이지</a></li>
 		<li><a href="${context }boardForm">커뮤니티</a></li>
-		<li><a href="${context }memberInfo">밀키트스토어</a></li>
-		<li><a href="${context }announcement">고객센터</a></li>
+		<li><a href="${context }memberInfo">스토어</a></li>
+		<li><a href="${context }logout">고객센터</a></li>
 	</ul>
 </div>
 <hr>
 <c:url var="context" value="/"/>
-
