@@ -25,15 +25,25 @@ public class BoardController {
 			Model model) {
 		System.out.println("호출되는거야?");
 		service.boardForm(cp, model);
-		return "board/boardForm";
+		return "communityBoard/boardForm";
 	}
+	
+	@RequestMapping("boardFriendForm")
+	public String boardFriendForm(
+			@RequestParam(value="currentPage", required = false)String cp,
+			Model model) {
+		System.out.println("호출되는거야?");
+		service.boardForm(cp, model);
+		return "communityBoard/boardFriendForm";
+	}
+	
 	@GetMapping("boardWrite")
 	public String boardWrite() {
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.isEmpty()) {
 			return "redirect:login";
 		}
-		return "board/boardWrite";
+		return "communityBoard/boardWrite";
 	}
 	
 	@PostMapping("boardWriteProc")
@@ -46,7 +56,7 @@ public class BoardController {
 			return "redirect:boardForm";
 		
 		model.addAttribute("msg", msg);
-		return "board/boardWrite";
+		return "communityBoard/boardWrite";
 	}
 	
 	@RequestMapping("boardContent")
@@ -58,7 +68,7 @@ public class BoardController {
 			return "redirect:boardForm";
 		}
 		model.addAttribute("board", board);
-		return "board/boardContent";
+		return "communityBoard/boardContent";
 	}
 
 	@RequestMapping("boardDownload")
@@ -93,7 +103,7 @@ public class BoardController {
 			return "redirect:boardContent?no="+n;
 	
 		model.addAttribute("board", board);
-		return "board/boardModify";
+		return "communityBoard/boardModify";
 	}
 	
 	@PostMapping("boardModifyProc")
