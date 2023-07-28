@@ -8,9 +8,10 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface BoardMapper {
 
-	ArrayList<BoardDTO> boardForm(@Param("begin")int begin, @Param("end")int end);
+	ArrayList<BoardDTO> boardForm(@Param("begin")int begin, @Param("end")int end, 
+			@Param("search")String search);
 
-	int count();
+	int count(@Param("search")String search);
 
 	void boardWriteProc(BoardDTO board);
 

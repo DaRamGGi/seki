@@ -15,16 +15,35 @@
 	</resultMap>
 
 	<select id="count">
-	  	SELECT count(no) FROM session_board
+		<choose>
+	  		<when test="search != null">
+	  			SELECT count(no) FROM session_board WHERE content like '%'||#{search}||'%'
+	  		</when>
+	  		<otherwise>
+	  			SELECT count(no) FROM session_board 
+	  		</otherwise>
+		</choose>
 	</select>
 
 	<select id="boardForm" resultMap="boardDto">
-		SELECT BBB.* FROM 
-		(SELECT rownum as rn, AAA.* FROM 
-		(SELECT no, title, id, write_date, hits FROM session_board ORDER BY no DESC)AAA)BBB
-		WHERE BBB.rn BETWEEN #{begin} AND #{end}
+		<choose>
+			<when test="search != null">
+				SELECT BBB.* FROM 
+				(SELECT rownum as rn, AAA.* FROM 
+				(SELECT * FROM session_board WHERE content like '%'||#{search}||'%'
+				 ORDER BY no DESC)AAA)BBB
+				WHERE BBB.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<otherwise>
+				SELECT BBB.* FROM 
+				(SELECT rownum as rn, AAA.* FROM 
+				(SELECT * FROM session_board ORDER BY no DESC)AAA)BBB
+				WHERE BBB.rn BETWEEN #{begin} AND #{end}
+			</otherwise>
+		</choose>
 	</select>
 
+	
 	<insert id="boardWriteProc">
 		<selectKey order="BEFORE" keyProperty="no" resultType="int">
 			SELECT nvl(max(no),0) + 1 FROM session_board

@@ -22,21 +22,20 @@ public class BoardController {
 	@RequestMapping("boardForm")
 	public String boardForm(
 			@RequestParam(value="currentPage", required = false)String cp,
-			Model model) {
-		System.out.println("호출되는거야?");
-		service.boardForm(cp, model);
+			String search, Model model) {
+		service.boardForm(cp, search ,model);
 		return "communityBoard/boardForm";
 	}
-
+	
 	@RequestMapping("boardFriendForm")
 	public String boardFriendForm(
 			@RequestParam(value="currentPage", required = false)String cp,
-			Model model) {
-		System.out.println("호출되는거야?");
-		service.boardForm(cp, model);
+			String search, Model model) {
+		service.boardForm(cp, search ,model);
 		return "communityBoard/boardFriendForm";
 	}
-
+	
+	
 	@GetMapping("boardWrite")
 	public String boardWrite() {
 		String id = (String)session.getAttribute("id");
