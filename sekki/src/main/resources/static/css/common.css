@@ -68,7 +68,8 @@ button {cursor:pointer; background-color:black; color:white; font-weight:bold; w
 
 /* register */
 .register{
-	height: 670px;
-	padding: 70px 0 0 0;
+	height: 700px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 .register form{margin-top:30px;}
