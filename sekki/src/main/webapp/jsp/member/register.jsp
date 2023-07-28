@@ -58,11 +58,11 @@
 	    }
     }
 </script>
-<div align="center" class="register">
+<div align="center" class="main_div">
 	<h3 id="msg"></h3>
 	<h1>회원 등록</h1>
 	<table ><tr><td>
-	<form action="registerProc" method="post" id="f">
+	<form action="registerProc" method="post" id="f" enctype="multipart/form-data">
 		<input type="text" name="id" placeholder="아이디" id="id" class="sub_input"> (*필수 항목) <br>
 		<input type="password" name="pw" placeholder="비밀번호" id="pw" class="sub_input"><br>
 		<input type="password" name="confirm" placeholder="비밀번호 확인 " id="confirm"
@@ -74,11 +74,14 @@
 		<input type="text" id="address" name="address" placeholder="주소" class="sub_input"><br>
 		<input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소" class="sub_input"><br>
 		<input type="text" name="mobile" placeholder="전화번호" class="sub_input"><br>
+		<input type="file" name="profilePicture" id="profilePicture">
+		<br>
 		<input type="text" id="email" placeholder="이메일" class="sub_input">
 		<input type="button" id="emailBtn" onclick="sendEmail()" value="이메일 주소 전송" class="send_input" style="width:120px"><br>
 		<input type="text" id="auth"  placeholder="인증번호" class="sub_input">
 		<input type="button" id="authBtn" onclick="sendAuth()" value="인증번호 전송" class="send_input"><br>
-
+		<input type="text" name="height" placeholder="키(cm)" class="sub_input"><br>
+		<input type="text" name="weight" placeholder="몸무게(kg)" class="sub_input"><br>
 		<input type="button" value="회원가입" onclick="allCheck()" class="btn">
 		<input type="button" value="취소" onclick="location.href='index'" class="btn"><br>
 	</form>
@@ -86,3 +89,6 @@
 </div>
 
 <c:import url="/footer" />
+
+
+
