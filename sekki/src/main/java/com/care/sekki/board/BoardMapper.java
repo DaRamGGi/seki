@@ -18,6 +18,8 @@ public interface BoardMapper {
 	BoardDTO boardContent(int no);
 
 	void incHit(int no);
+	
+	void incLike(int no);
 
 	String boardDownload(int no);
 

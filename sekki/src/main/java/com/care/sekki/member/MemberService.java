@@ -1,5 +1,6 @@
 package com.care.sekki.member;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.care.sekki.S3.S3UploadService;
 import com.care.sekki.common.PageService;
 
 import jakarta.servlet.http.HttpSession;
@@ -17,45 +20,51 @@ import jakarta.servlet.http.HttpSession;
 public class MemberService {
 	@Autowired private MemberMapper memberMapper;
 	@Autowired private HttpSession session;
-
+	@Autowired
+	private S3UploadService s3UploadService;
+	
 	public String loginProc(MemberDTO member) {
 		if(member.getId() == null || member.getId().isEmpty()) {
 			return "아이디를 입력하세요.";
 		}
-
+		
 		if(member.getPw() == null || member.getPw().isEmpty()) {
 			return "비밀번호를 입력하세요.";
 		}
-
+		
 		MemberDTO result = memberMapper.loginProc(member.getId());
 		if(result != null) {
 			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
-
+			
 			if(bpe.matches(member.getPw(), result.getPw())) {
 				session.setAttribute("id", result.getId());
 				session.setAttribute("userName", result.getUserName());
 				session.setAttribute("address", result.getAddress());
 				session.setAttribute("mobile", result.getMobile());
+				session.setAttribute("profilePictureUrl", result.getProfilePictureUrl());
+				session.setAttribute("email", result.getEmail());
+				session.setAttribute("height", result.getHeight());
+				session.setAttribute("weight", result.getWeight());
 				return "로그인 성공";
 			}
 		}
-
+		
 		return "아이디/비밀번호를 확인 후 다시 시도하세요.";
 	}
 
-	public String registerProc(MemberDTO member, String confirm) {
+	public String registerProc(MemberDTO member, String confirm, MultipartFile profilePicture) {
 		if(member.getId() == null || member.getId().isEmpty()) {
 			return "아이디를 입력하세요.";
 		}
-
+		
 		if(member.getPw() == null || member.getPw().isEmpty()) {
 			return "비밀번호를 입력하세요.";
 		}
-
+		
 		if(member.getPw().equals(confirm) == false) {
 			return "두 비밀번호를 일치하여 입력하세요.";
 		}
-
+		
 		if(member.getUserName() == null || member.getUserName().isEmpty()) {
 			return "이름을 입력하세요.";
 		}
@@ -74,10 +83,21 @@ public class MemberService {
 			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
 			String cryptPassword = bpe.encode(member.getPw());
 			member.setPw(cryptPassword);
-			memberMapper.registerProc(member);
-			return "회원 등록 완료";
-		}
+			
+			
+			try {
+	            // 프로필 사진을 S3에 업로드하고 해당 URL을 받아옵니다.
+	            String profilePictureUrl = s3UploadService.saveFile(profilePicture);
+	            member.setProfilePictureUrl(profilePictureUrl); // 회원 정보에 프로필 사진 URL을 설정합니다.
 
+	            memberMapper.registerProc(member);
+	            return "회원 등록 완료";
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            return "회원 등록 실패: 프로필 사진 업로드 중 오류가 발생하였습니다.";
+	        }
+		}
+		
 		return "이미 가입된 아이디 입니다.";
 	}
 
@@ -85,23 +105,23 @@ public class MemberService {
 		if(select == null){
 			select = "";
 		}
-
+		
 		int currentPage = 1;
 		try{
 			currentPage = Integer.parseInt(cp);
 		}catch(Exception e){
 			currentPage = 1;
 		}
-
+		
 		int pageBlock = 3; // 한 페이지에 보일 데이터의 수 
 		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
 		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
-
+	
 		ArrayList<MemberDTO> members = memberMapper.memberInfo(begin, end, select, search);
 		int totalCount = memberMapper.count(select, search);
 		String url = "memberInfo?select="+select+"&search="+search+"&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
-
+		
 		model.addAttribute("members", members);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
@@ -111,11 +131,11 @@ public class MemberService {
 		if(id == null || id.isEmpty()) {
 			return null;
 		}
-
+		
 		String sessionId = (String)session.getAttribute("id");
 		if(sessionId.equals(id) == false && sessionId.equals("admin") == false)
 			return null;
-
+		
 //		MemberDTO result = memberMapper.loginProc(id);
 		return memberMapper.loginProc(id);
 	}
@@ -124,19 +144,19 @@ public class MemberService {
 		if(member.getPw() == null || member.getPw().isEmpty()) {
 			return "비밀번호를 입력하세요.";
 		}
-
+		
 		if(member.getPw().equals(confirm) == false) {
 			return "두 비밀번호를 일치하여 입력하세요.";
 		}
-
+		
 		if(member.getUserName() == null || member.getUserName().isEmpty()) {
 			return "이름을 입력하세요.";
 		}
-
+		
 		BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
 		String cryptPassword = bpe.encode(member.getPw());
 		member.setPw(cryptPassword);
-
+		
 		int result = memberMapper.updateProc(member);
 		if(result == 1)
 			return "회원 정보 수정 완료";
@@ -147,7 +167,7 @@ public class MemberService {
 		if(pw == null || pw.isEmpty()) {
 			return "비밀번호를 입력하세요.";
 		}
-
+		
 		if(pw.equals(confirmPw) == false) {
 			return "두 비밀번호를 일치하여 입력하세요.";
 		}
@@ -167,7 +187,7 @@ public class MemberService {
 		Random r = new Random();
 		// 1,000,000 
 		// 100 000 , 001234
-
+	
 		content = String.format("%06d", r.nextInt(1000000));
 		System.out.println("인증번호 : " + content);
 		String msg = mailService.sendMail(email, "인증번호가 도착했습니다", content);
@@ -177,19 +197,22 @@ public class MemberService {
 		return msg;
 	}
 	private String content;
-
+	
 	public String sendAuth(String auth) {
 		if(auth == null || auth.isEmpty())
 			return "인증번호를 입력 후 다시 시도하세요.";
-
+		
 		if(content == null || content.isEmpty())
 			return "인증번호를 입력 후 다시 시도하세요.";
-
+		
 		if(auth.equals(content)) {
 			return "인증 성공";
 		}
-
+		
 		return "인증 실패";
 	}
 }
+
+
+
 

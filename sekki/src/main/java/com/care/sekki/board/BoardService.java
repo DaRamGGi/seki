@@ -123,6 +123,10 @@ public class BoardService {
 	public void incHit(int no) {
 		boardMapper.incHit(no);
 	}
+	
+	public void incLike(int no) {
+		boardMapper.incLike(no);
+	}
 
 	public boolean boardDownload(String n, HttpServletResponse res) {
 		int no = 0;
@@ -167,7 +171,8 @@ public class BoardService {
 		if(board == null)
 			return null;
 
-		if(board.getFileName() != null && board.getFileName().isEmpty() == false) {
+		//&& board.getFileName().isEmpty() == false
+		if(board.getFileName() != null ) {
 			String fn = board.getFileName();
 			String[] fileName = fn.split("-", 2);
 			board.setFileName(fileName[1]);

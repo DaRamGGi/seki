@@ -21,6 +21,7 @@ public class BoardDTO {
 	private String writeDate;
 	private int hits;
 	private String fileName;
+	private int likes;
 
 
 	public int getNo() {
@@ -64,6 +65,12 @@ public class BoardDTO {
 	}
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 
 }
