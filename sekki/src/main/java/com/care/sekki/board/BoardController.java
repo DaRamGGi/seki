@@ -26,14 +26,15 @@ public class BoardController {
 		service.boardForm(cp, search ,model);
 		return "communityBoard/boardForm";
 	}
-
+	
 	@RequestMapping("boardFriendForm")
 	public String boardFriendForm(
 			@RequestParam(value="currentPage", required = false)String cp,
 			String search, Model model) {
-		service.boardFriendForm(cp, search ,model);
+		service.boardForm(cp, search ,model);
 		return "communityBoard/boardFriendForm";
 	}
+	
 	
 	@GetMapping("boardWrite")
 	public String boardWrite() {
