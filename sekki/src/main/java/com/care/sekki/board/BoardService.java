@@ -218,4 +218,26 @@ public class BoardService {
 
 		return "게시글 삭제 완료";
 	}
+	
+	public String likeProc(String n) {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.isEmpty()) {
+			return "로그인";
+		}
+
+		int no = 0;
+		try{
+			no = Integer.parseInt(n);
+		}catch(Exception e){
+			return "게시글 번호에 문제가 생겼습니다.";
+		}
+
+		BoardDTO board = boardMapper.boardContent(no);
+		if(board == null)
+			return "게시글 번호에 문제가 생겼습니다.";
+
+		boardMapper.incLike(no);
+
+		return "좋아요";
+	}
 }
