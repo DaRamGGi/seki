@@ -9,6 +9,7 @@
 
 <script src="dbQuiz.js"></script>
 <script src="/js/center.js"></script>
+<script src="/js/community.js"></script>
 <link href="css/reset.css" rel="stylesheet" type="text/css" /> 	
 
 <div id="header">
