@@ -1,6 +1,7 @@
 package com.care.sekki.customerCenter;
+
 /*
-CREATE TABLE sekki_board (
+CREATE TABLE sekki_center_board (
 	    num         NUMBER,
 	    category    VARCHAR2(30),
 	    title       VARCHAR2(100),
@@ -9,11 +10,13 @@ CREATE TABLE sekki_board (
 	    write_date  VARCHAR2(50),
 	    write_time  VARCHAR2(50),
 	    files       VARCHAR2(1000),
-	    secret      char(1),
+	    secret	    VARCHAR2(20),
+	    secret_pw	VARCHAR2(50),
 	    hits        NUMBER,
 	    likes       NUMBER,
+	    replys       NUMBER,
 	    PRIMARY KEY(num)
-	);
+  );
  */
 
 public class centerDTO {
@@ -25,9 +28,12 @@ public class centerDTO {
 	private String writeTime;
 	private String writeDate;
 	private String files;
-	private char secret;
+	private String secret;
+	private String secretPw;
 	private int hits;
 	private int likes;
+	private int replys;
+
 
 	public centerDTO() {}
 	
@@ -92,12 +98,6 @@ public class centerDTO {
 	public void setFiles(String files) {
 		this.files = files;
 	}
-	public char getSecret() {
-		return secret;
-	}
-	public void setSecret(char secret) {
-		this.secret = secret;
-	}
 	public int getHits() {
 		return hits;
 	}
@@ -111,4 +111,28 @@ public class centerDTO {
 		this.likes = likes;
 	}
 
+	public String getSecret() {
+		return secret;
+	}
+
+	public void setSecret(String secret) {
+		this.secret = secret;
+	}
+
+	public String getSecretPw() {
+		return secretPw;
+	}
+
+	public void setSecretPw(String secretPw) {
+		this.secretPw = secretPw;
+	}
+	
+	public int getReplys() {
+		return replys;
+	}
+
+	public void setReplys(int replys) {
+		this.replys = replys;
+	}
+	
 }
