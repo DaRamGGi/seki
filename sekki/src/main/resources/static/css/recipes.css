@@ -252,11 +252,12 @@ width:430px;
 }
 
 .stepPhotoHolder_STEP_css{
-	width:160; 
-	height:160; 
-	cursor: pointer;
-	border: 1px solid #e1e1e1;
-	margin-left: 5px;
+
+	width: 160px;
+  height: 160px;
+  cursor: pointer;
+  border: 1px solid #e1e1e1;
+  margin-left: 5px;
 }
 .cok_cute{
 	display:flex;
@@ -279,6 +280,10 @@ width:430px;
 	border-radius: 8px;
 	margin-top:10px;
 	
+}
+
+.step_photoInput {
+    display: none;
 }
 
 .step_button{

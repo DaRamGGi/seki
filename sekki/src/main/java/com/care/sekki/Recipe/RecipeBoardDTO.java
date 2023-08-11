@@ -1,11 +1,12 @@
 package com.care.sekki.Recipe;
 
+
 import java.sql.Timestamp;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class RecipeBoardDTO {
-	private Long reNo;
+	private Long re_no;
 	private String title;
 	private String content;
 	private String id;
@@ -17,42 +18,47 @@ public class RecipeBoardDTO {
 	private Timestamp written_time;
 
 	private String tip;
-	private String mainphoto;
+	private String mainphoto = "";
 
-	private Long stepNo;
-	private String stepText;
-	private String stepPhotoHolder;
 	
-	
+	private List<MaterialDTO> mararials;
+	private List<StepDTO> steps;
+
 	public RecipeBoardDTO() {
-		materials = new ArrayList<>();
+		this.mainphoto = "";
 	}
 	
+
 	
-	private List<MaterialDTO> materials;
-
-	public List<MaterialDTO> getMaterials() {
-		return materials;
+	public List<MaterialDTO> getMararials() {
+		return mararials;
 	}
 
-	public void setMaterials(List<MaterialDTO> materials) {
-		this.materials = materials;
-	}
-	
-	public void addMaterial(MaterialDTO material) {
-        if (materials == null) {
-            materials = new ArrayList<>();
-        }
-        materials.add(material);
-    }
-
-	public Long getReNo() {
-		return reNo;
+	public void setMararials(List<MaterialDTO> mararials) {
+		this.mararials = mararials;
 	}
 
-	public void setReNo(Long reNo) {
-		this.reNo = reNo;
+	public List<StepDTO> getSteps() {
+		return steps;
 	}
+
+	public void setSteps(List<StepDTO> steps) {
+		this.steps = steps;
+	}
+
+
+
+	public Long getRe_no() {
+		return re_no;
+	}
+
+
+
+	public void setRe_no(Long re_no) {
+		this.re_no = re_no;
+	}
+
+
 
 	public String getTitle() {
 		return title;
@@ -116,30 +122,6 @@ public class RecipeBoardDTO {
 
 	public void setMainphoto(String mainphoto) {
 		this.mainphoto = mainphoto;
-	}
-
-	public Long getStepNo() {
-		return stepNo;
-	}
-
-	public void setStepNo(Long stepNo) {
-		this.stepNo = stepNo;
-	}
-
-	public String getStepText() {
-		return stepText;
-	}
-
-	public void setStepText(String stepText) {
-		this.stepText = stepText;
-	}
-
-	public String getStepPhotoHolder() {
-		return stepPhotoHolder;
-	}
-
-	public void setStepPhotoHolder(String stepPhotoHolder) {
-		this.stepPhotoHolder = stepPhotoHolder;
 	}
 
 	public Timestamp getWritten_time() {

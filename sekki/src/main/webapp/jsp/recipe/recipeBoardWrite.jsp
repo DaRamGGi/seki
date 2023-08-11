@@ -90,21 +90,21 @@
 					<%--오른쪽 --%>
 
 					<div class="coumngka">
-					<div id="materialContainer">
-						<div class="right_boxs">
-							<input type="text" name="materialName" id="cok_material_nm_1_1"
-								class="form-control materials_css" placeholder="예) 돼지고기">
-							<input type="text" name="materialAmount"
-								id="cok_material_amt_1_1" class="form-control materials_css"
-								placeholder="예) 100g">
+						<div id="materialContainer">
+							<div class="right_boxs">
+								<input type="text" name="materialName"
+									class="form-control materials_css" placeholder="예) 돼지고기">
+								<input type="text" name="materialAmount"
+									id="cok_material_amt_1_1" class="form-control materials_css"
+									placeholder="예) 100g">
+							</div>
+
 						</div>
-						
+						<div class="right_btnadd">
+							<button type="button" id="addMaterialButton">추가</button>
+						</div>
 					</div>
-					<div class="right_btnadd">
-						<button type="button" id="addMaterialButton">추가</button>
-					</div>
-					</div>
-					
+
 
 
 
@@ -127,22 +127,28 @@
 				</p>
 				<%--요리 순서 box!--%>
 
-				<div class="cok_step">
-					<p class="cok_step_p">Step1</p>
-					<div id="cok_step_box">
-						<textarea name="step_text[]" id="step_text_STEP"
-							class="form-co훈제 닭가슴살ntrol step_cont step_text_STEP_css"
-							placeholder="예) 소고기 맛나게 구워드세요"></textarea>
-					</div>
-					<div id="divStepPhotoBox_STEP" class="stepPhotoHolder_STEP_css"
-						is_over="0">
-						<img id="stepPhotoHolder_STEP" name="step_photoHolder"
-							src="https://recipe1.ezmember.co.kr/img/pic_none2.gif">
-					</div>
+				<!-- 여러 Step들을 감싸는 부모 요소 -->
+				<div id="stepContainer">
+					<!-- Step 1 -->
+					<div class="cok_step">
+    <p class="cok_step_p">Step1</p>
+    <div id="cok_step_box">
+        <textarea name="step_text" id="step_text_STEP_1" class="form-control step_cont step_text_STEP_css" placeholder="예) 소고기 맛나게 구워드세요"></textarea>
+    </div>
+    <div id="divStepPhotoBox_STEP_1">
+        <label for="step_photoInput_STEP_${stepCount}" class="step_photoLabel">
+            <img id="stepPhotoHolder_STEP_1" class="stepPhotoHolder_STEP_css" src="https://recipe1.ezmember.co.kr/img/pic_none2.gif">
+        </label>
+        <input type="file" name="step_photoinput" id="step_photoInput_STEP_${stepCount}" class="step_photoInput" accept="image/*" onchange="previewImage(this, ${stepCount})" multiple>
+    </div>
+</div>
 				</div>
+
+				<!-- 스텝 추가 버튼 -->
 				<div class="step_button">
 					<button type="button" id="step_plus_btn">추가</button>
 				</div>
+
 
 				<%--
 			 ----- 보류 ------
