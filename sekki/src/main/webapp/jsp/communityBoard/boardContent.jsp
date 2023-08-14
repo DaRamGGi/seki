@@ -82,7 +82,11 @@
 		</div>
 		<div class="phone">
 	        <div class="screen">
-	            <!-- 내용을 이곳에 넣으세요 -->
+	            <ul>
+	            	<li>
+	            		{댓글작성자 } {댓글 내용 } {시간 } <input type="submit" value="수정" />|<input type="submit" value="삭제" />(해당 아이디만)
+	            	</li>
+	            </ul>
 	        </div>
   		</div>
 </div>
