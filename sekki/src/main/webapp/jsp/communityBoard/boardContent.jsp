@@ -7,22 +7,6 @@
 <c:import url="/header" />
 
 <script>
-	var token = User.createToken("john", null, null);
-	
-	// Or with specific expiration:
-	var calendar = new GregorianCalendar();
-	calendar.add(Calendar.MINUTE, 60);
-	
-	var token = User.createToken("john", calendar.getTime(), null);
-	
-	var usersUpsertRequest = User.upsert();
-	usersUpsertRequest.user(UserRequestObject.builder().id("bob-1").name("Bob").build());
-
-	var response = usersUpsertRequest.request();
-	
-	
-	
-	
 	function deleteCheck(){
 		result = confirm('진짜로 삭제하겠습니까?');
 		if(result == true){

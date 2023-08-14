@@ -43,7 +43,7 @@
 		</choose>
 	</select>
 
-	
+
 	<insert id="boardWriteProc">
 		<selectKey order="BEFORE" keyProperty="no" resultType="int">
 			SELECT nvl(max(no),0) + 1 FROM community_board
@@ -58,7 +58,7 @@
 	<update id="incHit">
 		UPDATE community_board SET hits=hits+1 WHERE no=#{no}
 	</update>
-	
+
 	<update id="incLike">
 		UPDATE community_board SET likes=likes+1 WHERE no=#{no}
 	</update>

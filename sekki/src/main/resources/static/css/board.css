@@ -142,7 +142,6 @@
 }
 
 .boardContent{
-	position: absolute;
 	width:500px;
 	box-sizing: border-box;
     border: 10px solid #000;
@@ -229,17 +228,17 @@
 	cursor: pointer;
 }
 
+
 .phone {
-	position:fixed;
-	right:12%;
-	bottom:20%;
-	border: 0.0625rem solid #ddd;
     width: 300px;
     height: 600px;
     background-color: #444;
     border-radius: 30px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+    position:fixed;
+	right:15%;
+	bottom:20%;
 }
 
 .screen {
@@ -250,7 +249,3 @@
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
-
-
-
-
