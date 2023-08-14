@@ -1,5 +1,7 @@
 package com.care.sekki.member;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.care.sekki.customerCenter.centerReplyDTO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -39,7 +43,7 @@ public class MemberController {
 	public String footer() {
 		return "default/footer";
 	}
-	/* http://localhost:8086/dbQuiz/login */
+
 	@GetMapping("login")
 	public String login() {
 		return "member/login";
@@ -54,14 +58,36 @@ public class MemberController {
 		return "member/login";
 	}
 	
-	/* http://localhost:8086/dbQuiz/register */
+	@GetMapping("agreeCondition")
+	public String agreeCondition() {
+		return "member/agreeCondition";
+	}
+	
 	@GetMapping("register")
 	public String register() {
 		return "member/register";
 	}
 	
+	@ResponseBody 
+	@PostMapping(value="regIdCheck", produces = "text/plain; charset=UTF-8")
+	public String regIdCheck(@RequestBody(required = false) String id) {
+		return service.regIdCheck(id);
+	}
+	
+	@ResponseBody 
+	@PostMapping(value="regPwCheck", produces = "text/plain; charset=UTF-8")
+	public String regPwCheck(@RequestBody(required = false) String pw) {
+		return service.regPwCheck(pw);
+	}
+	@ResponseBody 
+	@PostMapping(value="regMobileCheck", produces = "text/plain; charset=UTF-8")
+	public String regMobileCheck(@RequestBody(required = false) String mobile) {
+		return service.regMobileCheck(mobile);
+	}
+	
 	@PostMapping("registerProc")
 	public String registerProc(MemberDTO member, String confirm, MultipartFile profilePicture) {
+		System.out.println("profilePicture : " + profilePicture);
 		String result = service.registerProc(member, confirm, profilePicture);
 		if(result.equals("회원 등록 완료")) {
 			return "redirect:index";

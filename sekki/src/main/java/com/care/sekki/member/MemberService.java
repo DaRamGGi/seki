@@ -3,6 +3,8 @@ package com.care.sekki.member;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -43,15 +45,64 @@ public class MemberService {
 				session.setAttribute("mobile", result.getMobile());
 				session.setAttribute("profilePictureUrl", result.getProfilePictureUrl());
 				session.setAttribute("email", result.getEmail());
-				session.setAttribute("height", result.getHeight());
-				session.setAttribute("weight", result.getWeight());
+				//session.setAttribute("height", result.getHeight());
+				//session.setAttribute("weight", result.getWeight());
 				return "로그인 성공";
 			}
 		}
 		
 		return "아이디/비밀번호를 확인 후 다시 시도하세요.";
 	}
+	
+	public String regIdCheck(String id) {
+		if(id == null || id.isEmpty())
+			return "* 아이디를 입력하세요.";
+		
+		Pattern pattern = Pattern.compile("^[a-z0-9]{1}[a-z0-9_-]{4,19}$");
+		Matcher matcher = pattern.matcher(id);
+		if(matcher.matches() == false)
+			return "* 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
+		
+		String user_id = memberMapper.regIdCheck(id);
+		if(user_id == null)
+			return "* 사용 가능한 아이디 입니다.";
+		return "* 중복되는 아이디 입니다. 다른 아이디를 입력하세요.";
+	}
+	
+	public String regPwCheck(String pw) {
+		if(pw == null || pw.isEmpty())
+			return "* 비빌번호를 입력하세요.";
+		
+		Pattern pattern = Pattern.compile("^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$");
+		Matcher matcher = pattern.matcher(pw);
+		if(matcher.matches() == false)
+			return "* 영문, 숫자, 특수문자 세 가지를 모두 포함 (8~15자)";
+		
+		return "";
+	}
+	
+	public String regConfirmCheck(String pw) {
+		if(pw == null || pw.isEmpty())
+			return "* 비빌번호를 입력하세요.";
+		
+		Pattern pattern = Pattern.compile("^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$");
+		Matcher matcher = pattern.matcher(pw);
+		if(matcher.matches() == false)
+			return "* 영문, 숫자, 특수문자 세 가지를 모두 포함 (8~15자)";
+		
+		return "";
+	}
+	
+	public String regMobileCheck(String mobile) {
+		Pattern pattern = Pattern.compile("^[0-9]+$");
+		Matcher matcher = pattern.matcher(mobile);
+		if(matcher.matches() == false)
+			return "* (-) 없이 번호만 입력하세요.";
+		
+		return "";
+	}
 
+	
 	public String registerProc(MemberDTO member, String confirm, MultipartFile profilePicture) {
 		if(member.getId() == null || member.getId().isEmpty()) {
 			return "아이디를 입력하세요.";
@@ -84,7 +135,6 @@ public class MemberService {
 			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
 			String cryptPassword = bpe.encode(member.getPw());
 			member.setPw(cryptPassword);
-			
 			
 			try {
 	            // 프로필 사진을 S3에 업로드하고 해당 URL을 받아옵니다.
@@ -212,6 +262,11 @@ public class MemberService {
 		
 		return "인증 실패";
 	}
+
+	
+	
+
+	
 }
 
 

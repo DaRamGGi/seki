@@ -51,6 +51,11 @@ public class MemberDTO {
 	public void setProfilePictureUrl(String profilePictureUrl) {
 		this.profilePictureUrl = profilePictureUrl;
 	}
+	
+	/*
+	private String height;
+    private String weight;
+    
 	public String getHeight() {
 		return height;
 	}
@@ -63,7 +68,6 @@ public class MemberDTO {
 	public void setWeight(String weight) {
 		this.weight = weight;
 	}
-	private String height;
-    private String weight;
+	*/
 	
 }

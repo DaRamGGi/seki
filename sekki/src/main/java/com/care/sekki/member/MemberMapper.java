@@ -10,6 +10,8 @@ public interface MemberMapper {
 
 	MemberDTO loginProc(String id);
 
+	String regIdCheck(String id);
+	
 	void registerProc(MemberDTO member);
 
 	ArrayList<MemberDTO> memberInfo(
@@ -21,5 +23,7 @@ public interface MemberMapper {
 	int updateProc(MemberDTO member);
 
 	void delete(String id);
+
+	
 
 }
