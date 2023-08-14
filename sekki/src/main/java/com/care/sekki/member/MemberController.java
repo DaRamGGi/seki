@@ -1,5 +1,12 @@
 package com.care.sekki.member;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.util.List;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -11,6 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.amazonaws.http.HttpResponse;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -39,7 +51,16 @@ public class MemberController {
 	public String footer() {
 		return "default/footer";
 	}
-	/* http://localhost:8086/dbQuiz/login */
+	
+	@RequestMapping("mypage")
+	public String mypage() {
+		return "member/mypage";
+	}
+	
+	
+	
+	
+	/* 로그인 */
 	@GetMapping("login")
 	public String login() {
 		return "member/login";
@@ -53,8 +74,15 @@ public class MemberController {
 		}
 		return "member/login";
 	}
+	@RequestMapping("logout")
+	public String logout() {
+		session.invalidate();
+		return "forward:index";
+	}
 	
-	/* http://localhost:8086/dbQuiz/register */
+		
+	
+	/* 회원가입 */
 	@GetMapping("register")
 	public String register() {
 		return "member/register";
@@ -69,6 +97,49 @@ public class MemberController {
 		return "member/register";
 	}
 	
+	
+	
+	/* 마이페이지                                */
+	@GetMapping("update")
+	public String update() {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.isEmpty()) {
+			return "redirect:login";
+		}
+		return "member/update";
+	}
+	@PostMapping("updateProc")
+	public String updateProc(MemberDTO member, String confirm) {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.isEmpty()) {
+			return "redirect:login";
+		}
+		member.setId(id);
+		String result = service.updateProc(member, confirm);
+		if(result.equals("회원 정보 수정 완료")) {
+			return "forward:logout";
+		}
+		return "member/update";
+	}
+	
+	
+	@GetMapping("/recipehoogi")
+	public String recipehoogi(Model model) {
+	    String id = (String) session.getAttribute("id");
+	    if (id == null || id.isEmpty()) {
+	        return "redirect:login";
+	    }
+
+	    model.addAttribute("listofIngredients", service.getIngredients());
+	    model.addAttribute("listofSeasoning", service.getSeasoning());
+
+	    JSONObject recipeData = service.getRecipeData();
+	    model.addAttribute("recipeData", recipeData);
+
+	    return "member/recipehoogi";
+	}
+	
+		
 	@RequestMapping("memberInfo")
 	public String memberInfo(
 			@RequestParam(value="currentPage", required = false)String cp,
@@ -93,37 +164,11 @@ public class MemberController {
 		return "member/userInfo";
 	}
 	
-	@RequestMapping("logout")
-	public String logout() {
-		session.invalidate();
-		return "forward:index";
-	}
+        
+    	
+		
 	
-	/* http://localhost:8086/dbQuiz/update */
-	@GetMapping("update")
-	public String update() {
-		String id = (String)session.getAttribute("id");
-		if(id == null || id.isEmpty()) {
-			return "redirect:login";
-		}
-		return "member/update";
-	}
-	@PostMapping("updateProc")
-	public String updateProc(MemberDTO member, String confirm) {
-		String id = (String)session.getAttribute("id");
-		if(id == null || id.isEmpty()) {
-			return "redirect:login";
-		}
-		member.setId(id);
-		String result = service.updateProc(member, confirm);
-		if(result.equals("회원 정보 수정 완료")) {
-			return "forward:logout";
-		}
-		return "member/update";
-	}
-	
-	
-	/* http://localhost:8086/dbQuiz/delete */
+
 	@GetMapping("delete")
 	public String delete() {
 		String id = (String)session.getAttribute("id");
@@ -148,6 +193,8 @@ public class MemberController {
 		return "member/delete";
 	}
 	
+	
+	/*email / kakao*/
 	@ResponseBody
 	@PostMapping(value="sendEmail", produces = "text/plain; charset=utf-8")
 	public String sendEmail(@RequestBody(required = false) String email) {
