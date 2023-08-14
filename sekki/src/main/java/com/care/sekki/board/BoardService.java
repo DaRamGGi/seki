@@ -80,7 +80,7 @@ public class BoardService {
 // 업로드 파일 저장 경로
 // ubuntu@ip-172-31-32-35:~$ sudo mkdir /opt/tomcat/tomcat-10/webapps/upload
 // ubuntu@ip-172-31-32-35:~$ sudo chown -RH tomcat: /opt/tomcat/tomcat-10/webapps/upload
-			String fileLocation = "/opt/tomcat/tomcat-10/webapps/upload/";
+			String fileLocation = "C:\\javas\\upload\\";
 			File save = new File(fileLocation + fileName);
 
 			try {

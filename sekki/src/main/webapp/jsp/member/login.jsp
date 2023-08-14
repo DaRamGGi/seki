@@ -1,31 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<style type="text/css">
-	a {text-decoration: none; color:black;}
-	ul {padding: 20px;}
-	ul li {display: inline; padding: 15px;}
-	.main_div{height: 150px; padding-top : 80px;}
-</style>    
-
-<script src="dbQuiz.js"></script>
-<script src="/js/center.js"></script>
-<script src="/js/community.js"></script>
-<link href="css/reset.css" rel="stylesheet" type="text/css" /> 	
-
-<div id="header">
-	<div class="mainLogo">
-		<a href="index">
-			<img src="image/logo.png" alt="logo" />
+<c:import url="/header" />
+<div align="center" class="sub_div">
+	<h1>로그인</h1>
+	<table ><tr><td>
+	<form action="loginProc" method="post" id="f">
+		<input type="text" name="id" placeholder="아이디" id="id" class="sub_input" ><br>
+		<input type="password" name="pw" placeholder="비밀번호" id="pw" class="sub_input"><br>
+		<input type="button" value="로그인" onclick="loginCheck()" class="btn">
+		<input type="button" value="취소" onclick="location.href='index.jsp'" class="btn"><br>
+	</form>
+	</td></tr>
+	<!-- 
+		# 카카오 이미지 URL #
+		https://developers.kakao.com/tool/demo/login/login?method=dynamic
+		
+		# 인가 코드 요청 #
+		https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-code-request
+	 -->
+	<tr><td>
+		<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&
+		client_id=2e151bc9c1174ea0e8836b77c28803c3&
+		redirect_uri=http://localhost/kakaoLogin">
+			<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" style="width:200px;" />
 		</a>
-	</div>
-	<ul class="nav">
-		<li><a href="${context }login">로그인</a></li>
-		<li><a href="${context }index">레시피</a></li>
-		<li><a href="${context }register">마이페이지</a></li>
-		<li><a href="${context }boardForm">커뮤니티</a></li>
-		<li><a href="${context }memberInfo">스토어</a></li>
-		<li><a href="${context }announcement">고객센터</a></li>
-	</ul>
+	</td></tr>
+	</table>
 </div>
-<hr>
-<c:url var="context" value="/"/>
+<c:import url="/footer" />
+

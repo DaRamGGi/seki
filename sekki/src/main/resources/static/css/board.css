@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.boardForm{cursor: pointer; margin-top: 30px; text-align: center; width:50%;} 
+.boardForm{cursor: pointer; margin-top: 30px; text-align: center; width:70%;} 
 .boardForm li{
 	text-align: left;
 	box-sizing: border-box;
@@ -142,7 +142,7 @@
 }
 
 .boardContent{
-	width:70%;
+	width:500px;
 	box-sizing: border-box;
     border: 10px solid #000;
     border-top: 25px solid #000;
@@ -164,7 +164,7 @@
 .boardContent #wifi{
 	position: absolute;
 	top:0;
-	right:3.5%;
+	right:7%;
 	font-size: 25px;
 }
 .boardContent #battery{
@@ -179,7 +179,7 @@
 }
 .boardContent tr:nth-child(2) th:nth-child(1),
 .boardContent tr:nth-child(3) th:nth-child(1){
-	padding-left:10px;	
+	padding-left:12px;	
 }
 .boardContent tr:nth-child(3) th, 
 .boardContent tr:nth-child(3) td{
@@ -210,7 +210,7 @@
 	font-weight: 600;
 }
 .boardContent tr:nth-child(5) td{
-	padding:24px 20px 120px 20px;
+	padding:24px 20px 120px 30px;
 	font-size: 16.5px;
 	line-height: 145%;
 	color: #000;
@@ -218,7 +218,7 @@
 .boardContent tr:last-child{
 	margin-top:20px;
 	position:absolute;
-	left:25%;
+	left:45%;
 	bottom:15px;
 }
 .boardContent tr:last-child td:first-child{
@@ -226,4 +226,10 @@
 	color:#2d85cc;
 	font-weight: 900;
 	cursor: pointer;
+}
+
+.chatting{
+	position:fixed;
+	right:0;
+	bottom:10%;
 }
