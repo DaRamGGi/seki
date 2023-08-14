@@ -139,6 +139,17 @@ public class BoardController {
 		
 		return "redirect:boardForm";
 	}
+	
+	@RequestMapping("likeProc")
+	public String likeProc(@RequestParam(value="no", required = false)String n) {
+		String msg = service.likeProc(n);
+		if(msg.equals("로그인")) 
+			return "redirect:login";		
+			
+		return "forward:boardContent";	
+	}
+	
+	
 }
 
 

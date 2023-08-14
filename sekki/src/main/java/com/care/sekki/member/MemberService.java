@@ -92,6 +92,7 @@ public class MemberService {
 		}
 		
 		MemberDTO result = memberMapper.loginProc(member.getId());
+		String memberId = member.getId();
 		if(result == null) {
 			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
 			String cryptPassword = bpe.encode(member.getPw());
@@ -100,7 +101,7 @@ public class MemberService {
 			
 			try {
 	            // 프로필 사진을 S3에 업로드하고 해당 URL을 받아옵니다.
-	            String profilePictureUrl = s3UploadService.saveFile(profilePicture);
+	            String profilePictureUrl = s3UploadService.saveFile(profilePicture, memberId);
 	            member.setProfilePictureUrl(profilePictureUrl); // 회원 정보에 프로필 사진 URL을 설정합니다.
 
 	            memberMapper.registerProc(member);

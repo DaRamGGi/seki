@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
 	a {text-decoration: none; color:black;}
 	ul {padding: 20px;}
@@ -7,7 +8,10 @@
 	.main_div{height: 150px; padding-top : 80px;}
 </style>    
 
-<script src="dbQuiz.js"></script>
+<script src="dbQuiz.js">
+
+</script>
+<script src="/js/center.js"></script>
 <link href="css/reset.css" rel="stylesheet" type="text/css" /> 	
 
 <div id="header">
@@ -17,6 +21,16 @@
 		</a>
 	</div>
 	<ul class="nav">
+		<li><%-- 세션에서 "profilePictureUrl" 속성 가져오기 --%>
+    <%
+        HttpSession imgurl = request.getSession();
+        String profilePictureUrl = (String) session.getAttribute("profilePictureUrl");
+    %>
+
+    <%-- "profilePictureUrl" 값이 null이 아니면 이미지 표시 --%>
+    <% if (profilePictureUrl != null) { %>
+        <img src="<%= profilePictureUrl %>" class="profile">
+    <% }%></li>
 		<li><a href="${context }login">로그인</a></li>
 		<li><a href="${context }recipe">레시피</a></li>
 		<li><a href="${context }mypage">마이페이지</a></li>
