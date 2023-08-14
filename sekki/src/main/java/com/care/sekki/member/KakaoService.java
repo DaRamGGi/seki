@@ -216,6 +216,8 @@ public class KakaoService {
 			e.printStackTrace();
 		}
 	}
+	
+	
 }
 
 

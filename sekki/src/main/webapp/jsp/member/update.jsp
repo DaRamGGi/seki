@@ -14,8 +14,13 @@
 		<input type="text" name="userName" id="userName" value="${sessionScope.userName }" ><br>
 		<input type="text" name="address" value="${sessionScope.address }"><br>
 		<input type="text" name="mobile" value="${sessionScope.mobile }"><br>
+		<input type="file" name="profilePicture" id="profilePicture" ><br>
+		
+		<input type="text" name="height" placeholder="키(cm)" value="${sessionScope.height }" class="sub_input"><br>
+		<input type="text" name="weight" placeholder="몸무게(kg)" value="${sessionScope.weight }" class="sub_input"><br>
+		
 		<input type="button" value="회원수정" onclick="allCheck()" class="btn">
-		<input type="button" value="취소" onclick="location.href='index'" class="btn"><br>
+		<input type="button" value="취소" onclick="location.href='mypage'" class="btn"><br>
 	</form>
 	</td></tr></table>
 </div>

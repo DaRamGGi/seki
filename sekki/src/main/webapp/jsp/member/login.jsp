@@ -8,7 +8,7 @@
 		<input type="text" name="id" placeholder="아이디" id="id" class="sub_input" ><br>
 		<input type="password" name="pw" placeholder="비밀번호" id="pw" class="sub_input"><br>
 		<input type="button" value="로그인" onclick="loginCheck()" class="btn">
-		<input type="button" value="취소" onclick="location.href='index.jsp'" class="btn"><br>
+		<input type="button" value="회원가입" onclick="location.href='register'" class="btn"><br>
 	</form>
 	</td></tr>
 	<!-- 

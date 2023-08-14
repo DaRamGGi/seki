@@ -1,10 +1,28 @@
 package com.care.sekki.member;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -14,6 +32,10 @@ import com.care.sekki.S3.S3UploadService;
 import com.care.sekki.common.PageService;
 
 import jakarta.servlet.http.HttpSession;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 @Service
@@ -68,16 +90,7 @@ public class MemberService {
 		if(member.getUserName() == null || member.getUserName().isEmpty()) {
 			return "이름을 입력하세요.";
 		}
-		/*
-		System.out.println("암호화된 비밀번호 : " + cryptPassword);
-		System.out.println("암호화된 비밀번호 길이 : " + cryptPassword.length());
-		System.out.println("평문 비밀번호 : " + member.getPw());
 		
-		 암호화된 비밀번호 : $2a$10$.EOushkIDT8Gnb33i6NOSuS32ymKWipIvLCKeVlwGR20UWJYRYWEm
-		 암호화된 비밀번호 길이 : 60
-		 평문 비밀번호 : 1111
-		 ALTER TABLE session_quiz MODIFY pw varchar2(60);
-		 */
 		MemberDTO result = memberMapper.loginProc(member.getId());
 		String memberId = member.getId();
 		if(result == null) {
@@ -163,6 +176,13 @@ public class MemberService {
 			return "회원 정보 수정 완료";
 		return "회원 정보 수정 실패";
 	}
+	
+	
+	
+	
+	
+	
+	
 
 	public String deleteProc(String id, String pw, String confirmPw) {
 		if(pw == null || pw.isEmpty()) {
@@ -212,6 +232,134 @@ public class MemberService {
 		
 		return "인증 실패";
 	}
+	
+	
+	
+/*				Edamam.api 코드						*/
+	
+	private final String appId = "7d8f664a";
+    private final String appKey = "a6f332294d947d0141a2d499a7ac1688";
+    
+	
+	
+	public List<String> getIngredients() {
+	    // Edamam API를 호출하여 재료 데이터를 가져옴
+	    List<String> ingredients = new ArrayList<>();
+	    try {
+	        // Edamam API 호출하는 로직
+	    	String apiURL = "https://api.edamam.com/api/recipes/v2?type=public&app_id=" 
+	        + appId + "&app_key=" + appKey;
+	        URL url = new URL(apiURL);
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("GET");
+	        conn.connect();
+
+	        // API 응답 데이터를 파싱하고 필요한 정보를 추출하여 ingredients에 추가
+	        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        StringBuilder response = new StringBuilder();
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            response.append(line);
+	        }
+	        reader.close();
+
+	        // API 응답 데이터를 파싱하여 재료 목록을 추출
+	        JSONObject responseObject = new JSONObject(response.toString());
+	        JSONArray hits = responseObject.getJSONArray("hits");
+	        for (int i = 0; i < hits.length(); i++) {
+	            JSONObject hit = hits.getJSONObject(i);
+	            JSONObject recipe = hit.getJSONObject("recipe");
+	            JSONArray ingredientsArray = recipe.getJSONArray("ingredientLines");
+	            for (int j = 0; j < ingredientsArray.length(); j++) {
+	                ingredients.add(ingredientsArray.getString(j));
+	            }
+	        }
+
+	    } catch (IOException | JSONException e) {
+	        e.printStackTrace();
+	    }
+
+	    return ingredients;
+	}
+
+	public List<String> getSeasoning() {
+	    // Edamam API를 호출하여 양념 데이터를 가져옴
+	    List<String> seasoning = new ArrayList<>();
+	    try {
+	        // Edamam API 호출하는 로직
+	    	String apiURL = "https://api.edamam.com/api/recipes/v2?type=public&app_id=" 
+	    	        + appId + "&app_key=" + appKey;
+	        URL url = new URL(apiURL);
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("GET");
+	        conn.connect();
+
+	        // API 응답 데이터를 파싱하고 필요한 정보를 추출하여 seasoning에 추가
+	        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        StringBuilder response = new StringBuilder();
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            response.append(line);
+	        }
+	        reader.close();
+
+	        // API 응답 데이터를 파싱하여 양념 목록을 추출
+	        JSONObject responseObject = new JSONObject(response.toString());
+	        JSONArray hits = responseObject.getJSONArray("hits");
+	        for (int i = 0; i < hits.length(); i++) {
+	            JSONObject hit = hits.getJSONObject(i);
+	            JSONObject recipe = hit.getJSONObject("recipe");
+	            JSONArray dietLabelsArray = recipe.getJSONArray("dietLabels");
+	            for (int j = 0; j < dietLabelsArray.length(); j++) {
+	                seasoning.add(dietLabelsArray.getString(j));
+	            }
+	        }
+
+	    } catch (IOException | JSONException e) {
+	        e.printStackTrace();
+	    }
+
+	    return seasoning;
+	}
+
+	public JSONObject getRecipeData() {
+        String url = "https://api.edamam.com/api/recipes/v2?type=public&app_id="
+                + appId + "&app_key=" + appKey;
+
+        try {
+            HttpClient httpClient = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            String responseBody = response.body();
+
+            // API 응답 데이터를 JSON 형태로 파싱
+            JSONObject responseObject = new JSONObject(responseBody);
+
+            // 필요한 데이터 추출
+            JSONArray hits = responseObject.getJSONArray("hits");
+            List<String> recipeDataList = new ArrayList<>();
+            for (int i = 0; i < hits.length(); i++) {
+                JSONObject hit = hits.getJSONObject(i);
+                JSONObject recipe = hit.getJSONObject("recipe");
+                String recipeData = recipe.getString("recipeData");
+                recipeDataList.add(recipeData);
+            }
+
+            // 추출한 데이터를 JSON 배열로 변환하여 반환
+            return new JSONObject().put("recipeDataList", new JSONArray(recipeDataList));
+
+        } catch (IOException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+        }
+        return new JSONObject(); // 예외 발생 시 빈 JSONObject 반환
+    }
+	
+	/*				Edamam.api 코드						*/
+	
 }
 
 

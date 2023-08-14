@@ -32,10 +32,9 @@
         <img src="<%= profilePictureUrl %>" class="profile">
     <% }%></li>
 		<li><a href="${context }login">로그인</a></li>
-		<li><a href="${context }index">레시피</a></li>
-		<li><a href="${context }recipeBoardWrite">레시피</a></li>
-		<li><a href="${context }register">마이페이지</a></li>
-		<li><a href="${context }boardForm">커뮤니티</a></li>
+		<li><a href="${context }recipe">레시피</a></li>
+		<li><a href="${context }mypage">마이페이지</a></li>
+		<li><a href="${context }communityBoard">커뮤니티</a></li>
 		<li><a href="${context }memberInfo">스토어</a></li>
 		<li><a href="${context }announcement">고객센터</a></li>
 	</ul>

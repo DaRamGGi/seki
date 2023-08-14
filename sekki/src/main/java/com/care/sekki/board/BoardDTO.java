@@ -1,5 +1,4 @@
 package com.care.sekki.board;
-
 /*
 CREATE TABLE session_board(
 	no number,
@@ -22,8 +21,7 @@ public class BoardDTO {
 	private int hits;
 	private String fileName;
 	private int likes;
-
-
+  
 	public int getNo() {
 		return no;
 	}
@@ -66,11 +64,11 @@ public class BoardDTO {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+
 	public int getLikes() {
 		return likes;
 	}
 	public void setLikes(int likes) {
 		this.likes = likes;
-	}
-
+  }
 }
