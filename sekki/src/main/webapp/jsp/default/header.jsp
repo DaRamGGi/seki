@@ -8,7 +8,6 @@
 	.main_div{height: 150px; padding-top : 80px;}
 </style>    
 
-<script src="dbQuiz.js"></script>
 <script src="/js/center.js"></script>
 <script src="/js/member.js"></script>
 <link href="css/reset.css" rel="stylesheet" type="text/css" /> 	

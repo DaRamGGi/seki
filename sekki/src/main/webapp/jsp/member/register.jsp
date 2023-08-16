@@ -5,46 +5,18 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <link href="css/member.css" rel="stylesheet"/> 
-<script src="/js/member.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/member.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script>
-    var xhr;
-    function sendEmail(){
-    	xhr = new XMLHttpRequest();
-    	xhr.open('post', 'sendEmail')
-    	xhr.send(document.getElementById('email').value)
-    	xhr.onreadystatechange = resProc
-    }
-    function resProc(){
-    	if(xhr.readyState === 4 && xhr.status === 200){
-    		document.getElementById('msg').innerHTML = xhr.responseText;
-    	}
-    }
-    
-    function sendAuth(){
-    	if(xhr == null){
-    		document.getElementById('msg').innerHTML = '이메일 주소를 전송 후 이용하세요.'
-    		return;
-    	}
-    	xhr.open('post', 'sendAuth');
-    	xhr.send(document.getElementById('auth').value);
-    	xhr.onreadystatechange = sendAuthProc
-    }
-    function sendAuthProc(){
-    	if(xhr.readyState === 4 && xhr.status === 200){
-    		document.getElementById('msg').innerHTML = xhr.responseText;
-    	}
-    	if(xhr.responseText === '인증 성공'){
-	    	document.getElementById('auth').style='display:none';
-	    	document.getElementById('authBtn').style='display:none';
-	    	document.getElementById('email').style='display:none';
-	    	document.getElementById('emailBtn').style='display:none';
-	    }
-    }
-</script>
-
+$(document).ready(function() {
+    $("#profilePicture").on('change', function() {
+        var fileName = $(this).val().split('\\').pop();
+        $(".upload-name").val(fileName);
+    });
+});
+</script> 
 <body>
 <c:import url="/header"></c:import>
 <div id="visual">
@@ -75,11 +47,14 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="text" name="userName" id="userName" placeholder="이름/닉네임"></td>
+				<td colspan="2">
+					<input type="text" name="userName" id="userName" placeholder="이름/닉네임"  oninput="regUserNameCheck()">
+					<label id="regUserNameLabel">* 이름(닉네임)을 입력하세요.</label>	
+				</td>
 			</tr>
 			<tr>
 				<td><input type="button" onclick="execDaumPostcode()" value="주소 검색" class="searchDaumPostcode"></td>
-				<td><input type="text" id="address" name="address" placeholder="주소" class="sub_input"></td>
+				<td><input type="text" id="address" name="address" placeholder="주소" ></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소 입력"></td>
@@ -92,11 +67,25 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="upfileStyle" colspan="2">
-					  <label class="fileLabel" for="profilePicture">프로필</label>
-                      <input type="file" name="profilePicture" id="profilePicture">
-                      <input class="upload-name" value="프로필 사진 업로드" placeholder="첨부파일">
+				<td colspan="2" class="emailInput">
+					<input type="text" name="email" placeholder="비밀번호 분실시 확인용 이메일" id="email" oninput="regEmailCheck()">
+					<select name="emailSelect" id="emailSelect" onchange="regEmailSelectCheck()">
+						<option>@ 선택</option>
+						<option>@naver.com</option>
+						<option>@gmail.com</option>
+						<option>@daum.net</option>
+						<option>@hanmail.net</option>
+					</select>
+					<span class="material-symbols-outlined">mail</span>
+					<label id="regEmailLabel">* 이메일 주소를 입력하세요.</label>
 				</td>
+			</tr>
+			<tr>
+			    <td class="upfileStyle" colspan="2">
+			        <label class="fileLabel" for="profilePicture">프로필</label>
+			        <input type="file" name="profilePicture" id="profilePicture">
+			        <input class="upload-name" value="첨부파일" placeholder="첨부파일">
+			    </td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="button" value="회원가입" onclick="allCheck()" class="registerBtn"></td>

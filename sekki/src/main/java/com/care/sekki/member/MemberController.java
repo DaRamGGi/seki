@@ -63,6 +63,31 @@ public class MemberController {
 		return "member/agreeCondition";
 	}
 	
+	@ResponseBody
+	@PostMapping(value="sendAuthenticationNumEmail", produces = "text/plain; charset=utf-8")
+	public String sendAuthenticationNumEmail(@RequestBody(required = false)String sendTo) {
+		return service.sendAuthenticationNumEmail(sendTo);
+	}
+	
+	@ResponseBody
+	@PostMapping(value="checkAuthenticationNumEmail", produces = "text/plain; charset=utf-8")
+	public String checkAuthenticationNum(@RequestBody(required = false) String authenticationNum) {
+		//System.out.println("sendAuth()");
+		return service.checkAuthenticationNumEmail(authenticationNum);
+	}
+	
+	@ResponseBody
+	@PostMapping(value="sendAuthenticationNumSms", produces = "text/plain; charset=utf-8")
+	public String sendAuthenticationNumSms(@RequestBody(required = false)String sendTo) {
+		return service.sendAuthenticationNumSms(sendTo);
+	}
+	
+	@ResponseBody
+	@PostMapping(value="checkAuthenticationNumSms", produces = "text/plain; charset=utf-8")
+	public String checkAuthenticationNumSms(@RequestBody(required = false) String authenticationNum) {
+		return service.checkAuthenticationNumSms(authenticationNum);
+	}
+	
 	@GetMapping("register")
 	public String register() {
 		return "member/register";
@@ -79,17 +104,36 @@ public class MemberController {
 	public String regPwCheck(@RequestBody(required = false) String pw) {
 		return service.regPwCheck(pw);
 	}
+	
+	@ResponseBody 
+	@PostMapping(value="regUserNameCheck", produces = "text/plain; charset=UTF-8")
+	public String regUserNameCheck(@RequestBody(required = false) String userName) {
+		return service.regUserNameCheck(userName);
+	}
+	
 	@ResponseBody 
 	@PostMapping(value="regMobileCheck", produces = "text/plain; charset=UTF-8")
 	public String regMobileCheck(@RequestBody(required = false) String mobile) {
 		return service.regMobileCheck(mobile);
 	}
 	
+	@ResponseBody 
+	@PostMapping(value="regEmailCheck", produces = "text/plain; charset=UTF-8")
+	public String regEmailCheck(@RequestBody(required = false) String email) {
+		return service.regEmailCheck(email);
+	}
+	
+	@ResponseBody 
+	@PostMapping(value="regEmailSelectCheck", produces = "text/plain; charset=UTF-8")
+	public String regEmailSelectCheck(@RequestBody(required = false) String emailSelectedOption) {
+		return service.regEmailSelectCheck(emailSelectedOption);
+	}
+	
 	@PostMapping("registerProc")
-	public String registerProc(MemberDTO member, String confirm, MultipartFile profilePicture) {
+	public String registerProc(MemberDTO member, MultipartFile profilePicture) {
 		System.out.println("profilePicture : " + profilePicture);
-		String result = service.registerProc(member, confirm, profilePicture);
-		if(result.equals("회원 등록 완료")) {
+		String result = service.registerProc(member, profilePicture);
+		if(result.equals("회원 가입 완료")) {
 			return "redirect:index";
 		}
 		return "member/register";
@@ -148,7 +192,6 @@ public class MemberController {
 		return "member/update";
 	}
 	
-	
 	/* http://localhost:8086/dbQuiz/delete */
 	@GetMapping("delete")
 	public String delete() {
@@ -174,18 +217,7 @@ public class MemberController {
 		return "member/delete";
 	}
 	
-	@ResponseBody
-	@PostMapping(value="sendEmail", produces = "text/plain; charset=utf-8")
-	public String sendEmail(@RequestBody(required = false) String email) {
-		return service.sendEmail(email);
-	}
 	
-	@ResponseBody
-	@PostMapping(value="sendAuth", produces = "text/plain; charset=utf-8")
-	public String sendAuth(@RequestBody(required = false) String auth) {
-		//System.out.println("sendAuth()");
-		return service.sendAuth(auth);
-	}
 	
 	@Autowired private KakaoService kakao;
 	@GetMapping("kakaoLogin")

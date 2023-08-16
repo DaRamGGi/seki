@@ -112,13 +112,13 @@
     border: 1px solid #ccc;
     width: 20px;
     height: 20px;
-    margin-right: 10px; /* 체크박스와 레이블 사이의 간격 */
+    margin-right: 10px; 
+    cursor: pointer;
 }
 
-/* 체크된 상태일 때 스타일 지정 */
 .checkbox-container input[type="checkbox"]:checked {
-    background-color: rgb(255, 128, 0); /* 체크된 상태 배경색 */
-    border-color: rgb(255, 128, 0); /* 체크된 상태 테두리 색상 */
+    background-color: rgb(255, 128, 0); 
+    border-color: rgb(255, 128, 0); 
 }
 
 .agreeCondition h1{
@@ -134,9 +134,10 @@
 .authenticationTable thead tr th{
 	padding: 30px 0;
 	border: 1px solid #ddd;
+	cursor: pointer;
 }
 .authenticationTable thead tr .selected{
-	background-color: rgb(209, 209, 209);
+	background-color: rgb(255, 182, 47);
 	font-weight: 600;
 }
 
@@ -150,25 +151,42 @@
 	width: 150px;
 	height: 40px;
 	line-height: 40px;
-	background-color: rgb(255, 182, 47);
-	border: none;
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgb(200, 200, 200);
 	font-size: 15px;
 }
 .authenticationTable tbody tr td input[type="button"]:hover{
-	background-color: rgb(255, 126, 64);
+	background-color: rgb(200, 200, 200);
+	cursor:pointer;
 }
-
 .nextStageDiv{
 	text-align: right;
 	padding-right: 120px;
+	display: none;
 }
-.nextStageDiv input[type="submit"]{
+.nextStageDiv input[type="button"]{
 	width: 120px;
 	height: 40px;
 	line-height: 40px;
 	background-color: rgb(255, 182, 47);
 	font-size: 17px;
 	border: none;
+	cursor:pointer;
+	
+}
+.nextStageDiv input[type="button"]:hover{
+	background-color: rgb(255, 126, 64);
+	cursor:pointer;
+}
+
+.checkAuthenticationTd{
+	text-align: left;
+	color: orangered;
+	padding-top: 5px;
+	padding-left: 250px;
+}
+.checkAuthenticationTd:nth-child(1){
+	padding-bottom: 20px;
 }
 /*회원가입=====================================================================*/
 .registerProc{
@@ -283,6 +301,25 @@
 	position: relative;
 }
 .mobileInput span{
+	position: absolute;
+	top: 21px;
+	right: 20px;
+	font-size: 30px;
+}
+.emailInput{
+	position: relative;
+}
+.emailInput input[type="text"]{
+	width: 51%;
+	box-sizing: border-box;
+}
+.emailInput select{
+	width: 48%;
+	height: 51px;
+	box-sizing: border-box;
+	margin-bottom: 2px;
+}
+.emailInput span{
 	position: absolute;
 	top: 21px;
 	right: 20px;

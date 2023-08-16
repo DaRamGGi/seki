@@ -35,7 +35,7 @@
 	
 	<insert id="registerProc" parameterType="com.care.sekki.member.MemberDTO">
 		INSERT INTO sekki_member (id, pw, user_name, address, mobile, profilePictureUrl, email) 
-		VALUES(#{id}, #{pw}, #{userName}, #{address}, #{mobile}, #{profilePictureUrl}, 'email')
+		VALUES(#{id}, #{pw}, #{userName}, #{address}, #{mobile}, #{profilePictureUrl}, #{email})
 	</insert>
 	
 	<select id="count">
