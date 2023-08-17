@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.care.sekki.customerCenter.centerReplyDTO;
 
@@ -56,6 +57,12 @@ public class MemberController {
 			return "redirect:index";
 		}
 		return "member/login";
+	}
+	
+	@RequestMapping("logout")
+	public String logout() {
+		session.invalidate();
+		return "forward:login";
 	}
 	
 	@GetMapping("agreeCondition")
@@ -139,6 +146,39 @@ public class MemberController {
 		return "member/register";
 	}
 	
+	@GetMapping("findId")
+	public String findId() {
+		return "member/findId";
+	}
+	
+	@PostMapping("findIdByMobile")
+	public String findIdByMobile(MemberDTO member, RedirectAttributes ra) {
+		String id = service.findIdByMobile(
+				member.getUserName(), member.getMobile());
+		ra.addFlashAttribute("id", id);
+		ra.addFlashAttribute("userName", member.getUserName());
+		return "redirect:findIdResult";
+	}
+	
+	@PostMapping("findIdByEmail")
+	public String findIdByEmail(MemberDTO member, RedirectAttributes ra) {
+		String id = service.findIdByEmail(
+				member.getUserName(), member.getEmail(), member.getEmailSelect());
+		ra.addFlashAttribute("id", id);
+		ra.addFlashAttribute("userName", member.getUserName());
+		return "redirect:findIdResult";
+	}
+	
+	@GetMapping("findIdResult")
+	public String findIdResult() {
+		return "member/findIdResult";
+	}
+	
+	@GetMapping("findPw")
+	public String findPw() {
+		return "member/findPw";
+	}
+	/*
 	@RequestMapping("memberInfo")
 	public String memberInfo(
 			@RequestParam(value="currentPage", required = false)String cp,
@@ -163,13 +203,6 @@ public class MemberController {
 		return "member/userInfo";
 	}
 	
-	@RequestMapping("logout")
-	public String logout() {
-		session.invalidate();
-		return "forward:index";
-	}
-	
-	/* http://localhost:8086/dbQuiz/update */
 	@GetMapping("update")
 	public String update() {
 		String id = (String)session.getAttribute("id");
@@ -192,7 +225,6 @@ public class MemberController {
 		return "member/update";
 	}
 	
-	/* http://localhost:8086/dbQuiz/delete */
 	@GetMapping("delete")
 	public String delete() {
 		String id = (String)session.getAttribute("id");
@@ -216,9 +248,8 @@ public class MemberController {
 		}
 		return "member/delete";
 	}
-	
-	
-	
+	*/
+
 	@Autowired private KakaoService kakao;
 	@GetMapping("kakaoLogin")
 	public String kakaoLogin(String code) {

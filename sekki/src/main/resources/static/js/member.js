@@ -12,6 +12,14 @@ function loginCheck() {
 		f.submit();
 	}
 }
+
+function logout(){
+	result = confirm('로그아웃 하시겠습니까?');
+	if (result == true) {
+		location.href = 'logout';
+	}
+}
+
 /*약관동의&본인인증=============================================================================*/
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -252,11 +260,12 @@ function regUserNameCheck() {
 	xhr.send(sendData);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4 && xhr.status === 200) {
-			var regMobileLabel = document.getElementById('regUserNameLabel');
-			regMobileLabel.innerHTML = xhr.responseText;
+			var regUserNameLabel = document.getElementById('regUserNameLabel');
+			regUserNameLabel.innerHTML = xhr.responseText;
 		};
 	}
 }
+
 
 function regMobileCheck() {
 	xhr = new XMLHttpRequest();
@@ -324,7 +333,7 @@ function allCheck() {
     }
 
     if (regUserNameLabel.textContent !== '') {
-		alert('이름(닉네임) 입력을 확인하세요.')
+		alert('이름 입력을 확인하세요.')
         return;
     }
 
@@ -341,4 +350,27 @@ function allCheck() {
    	var f = document.getElementById('f');
 	f.submit();
 }
+/*아이디/비밀번호 찾기=============================================================================*/
+function findIdByMobile() {
+    var regMobileLabel = document.getElementById('regMobileLabel');
+    
+    if (regMobileLabel.textContent !== '') {
+		alert('전화번호 입력을 확인하세요.')
+        return;
+    }
+	
+    var f = document.getElementById('f');
+	f.submit();
+}
 
+function findIdByEmail() {
+    var regEmailLabel = document.getElementById('regEmailLabel');
+    
+    if (regEmailLabel.textContent !== '') {
+		alert('이메일 입력을 확인하세요.')
+        return;
+    }
+    
+     var ff = document.getElementById('ff');
+	ff.submit();
+}

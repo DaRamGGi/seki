@@ -17,7 +17,7 @@ public class SmsService {
 		Message message = new Message();
 		message.setFrom("01035056792");
 		message.setTo(sendTo);
-		message.setText("(자취세끼) 가입을 환영합니다. 인증번호 6자리를 입력해주세요. [" + auth + "]");
+		message.setText("(자취세끼) 가입을 환영합니다. 인증번호 6자리 [" + auth + "] 를 입력해주세요.");
 
 		try {
 			messageService.send(message);

@@ -74,7 +74,7 @@ public class MemberService {
 		auth = String.format("%06d", r.nextInt(1000000));
 
 		String msg = mailService.sendAuthenticationNumEmail(sendTo, "(자취세끼) 회원가입 본인인증",
-				"(자취세끼) 가입을 환영합니다. 인증번호 6자리를 입력해주세요. [" + auth + "]");
+				"(자취세끼) 가입을 환영합니다. 인증번호 6자리 [" + auth + "] 를 입력해주세요.");
 		if (msg.equals("* 입력하신 이메일 주소로 인증번호를 전송했습니다.") == false) {
 			auth = "";
 		}
@@ -168,16 +168,16 @@ public class MemberService {
 
 	public String regUserNameCheck(String userName) {
 		if (userName == null || userName.isEmpty())
-			return "* 이름(닉네음)을/를 입력하세요.";
+			return "* 이름을 입력하세요.";
 
 		if (userName.length() < 2) {
-			return "* 이름(닉네임)은/는 두 글자 이상 입력하세요.";
+			return "* 이름은 두 글자 이상 입력하세요.";
 		}
 
 		Pattern pattern = Pattern.compile("^[가-힣a-zA-Z]*$");
 		Matcher matcher = pattern.matcher(userName);
 		if (matcher.matches() == false)
-			return "* 이름(닉네임)은/는 숫자와 특수문자를 포함할 수 없습니다.";
+			return "* 이름은 숫자와 특수문자를 포함할 수 없습니다.";
 
 		return "";
 	}
@@ -185,12 +185,12 @@ public class MemberService {
 	public String regMobileCheck(String mobile) {
 		if (mobile == null || mobile.isEmpty())
 			return "* 전화번호를 입력하세요.";
-
-		Pattern pattern = Pattern.compile("^[0-9]+$");
+		
+		Pattern pattern = Pattern.compile("^(01[016789])([1-9]\\d{2,3})(\\d{4})$");
 		Matcher matcher = pattern.matcher(mobile);
 		if (matcher.matches() == false)
-			return "* (-) 없이 번호만 입력하세요.";
-
+			return "* 유효하지 않은 번호입니다. (-)없이 입력하세요.";
+		
 		return "";
 	}
 
@@ -212,14 +212,6 @@ public class MemberService {
 	}
 
 	public String registerProc(MemberDTO member, MultipartFile profilePicture) {
-		/*
-		 * System.out.println("암호화된 비밀번호 : " + cryptPassword);
-		 * System.out.println("암호화된 비밀번호 길이 : " + cryptPassword.length());
-		 * System.out.println("평문 비밀번호 : " + member.getPw());
-		 * 
-		 * 암호화된 비밀번호 : $2a$10$.EOushkIDT8Gnb33i6NOSuS32ymKWipIvLCKeVlwGR20UWJYRYWEm 암호화된
-		 * 비밀번호 길이 : 60 평문 비밀번호 : 1111 ALTER TABLE session_quiz MODIFY pw varchar2(60);
-		 */
 		String memberId = member.getId();
 
 		BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
@@ -239,7 +231,8 @@ public class MemberService {
 			return "회원 등록 실패: 프로필 사진 업로드 중 오류가 발생하였습니다.";
 		}
 	}
-
+	
+	/*
 	public void memberInfo(String cp, String select, String search, Model model) {
 		if (select == null) {
 			select = "";
@@ -317,6 +310,16 @@ public class MemberService {
 			return "회원 정보 삭제 완료";
 		}
 		return "비밀번호를 확인 후 다시 시도하세요.";
+	}
+	*/
+	
+	public String findIdByMobile(String userName, String mobile) {
+		return memberMapper.findIdByMobile(userName, mobile);
+	}
+
+	public String findIdByEmail(String userName, String emailInput, String emailSelect) {
+		String email = emailInput + emailSelect;
+		return memberMapper.findIdByEmail(userName, email);
 	}
 
 }

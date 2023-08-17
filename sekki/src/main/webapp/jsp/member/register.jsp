@@ -49,7 +49,7 @@ $(document).ready(function() {
 			<tr>
 				<td colspan="2">
 					<input type="text" name="userName" id="userName" placeholder="이름/닉네임"  oninput="regUserNameCheck()">
-					<label id="regUserNameLabel">* 이름(닉네임)을 입력하세요.</label>	
+					<label id="regUserNameLabel">* 이름을 입력하세요.</label>	
 				</td>
 			</tr>
 			<tr>
@@ -69,7 +69,7 @@ $(document).ready(function() {
 			<tr>
 				<td colspan="2" class="emailInput">
 					<input type="text" name="email" placeholder="비밀번호 분실시 확인용 이메일" id="email" oninput="regEmailCheck()">
-					<select name="emailSelect" id="emailSelect" onchange="regEmailSelectCheck()">
+					<select name="emailSelect" id="emailSelect" onchange="regEmailSelectCheck()" class="emailSelect">
 						<option>@ 선택</option>
 						<option>@naver.com</option>
 						<option>@gmail.com</option>

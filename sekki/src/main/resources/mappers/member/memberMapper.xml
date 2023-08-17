@@ -38,7 +38,7 @@
 		VALUES(#{id}, #{pw}, #{userName}, #{address}, #{mobile}, #{profilePictureUrl}, #{email})
 	</insert>
 	
-	<select id="count">
+	<!-- <select id="count">
 		<choose>
 	  		<when test="select == 'id'">
 	  			SELECT count(id) FROM sekki_member WHERE id like '%'||#{search}||'%'
@@ -83,7 +83,15 @@
 	
 	<delete id="delete">
 		DELETE FROM sekki_member WHERE id=#{id}
-	</delete>
+	</delete> -->
+	
+	<select id="findIdByMobile">
+		SELECT id FROM sekki_member WHERE user_name=#{userName} AND mobile=#{mobile}
+	</select>
+	
+	<select id="findIdByEmail">
+		SELECT id FROM sekki_member WHERE user_name=#{userName} AND email=#{email}
+	</select>
 </mapper>
 
 
