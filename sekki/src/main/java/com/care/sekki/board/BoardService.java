@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.care.sekki.common.PageService;
+import com.care.sekki.customerCenter.centerReplyDTO;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -25,7 +26,7 @@ public class BoardService {
 	@Autowired private BoardMapper boardMapper;
 	@Autowired private HttpSession session;
 
-	public void boardForm(String cp, String search ,Model model) {
+	public void boardForm(String cp, String search, Model model) {
 
 		int currentPage = 1;
 		try{
@@ -240,4 +241,13 @@ public class BoardService {
 
 		return "좋아요";
 	}
+	
+	// 댓글
+	public ArrayList<BoardReplyDTO> boardReplys(String n) {
+		
+		
+		ArrayList<BoardReplyDTO> replys = boardMapper.replys(n);
+		return replys;
+	}
+	
 }

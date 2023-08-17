@@ -20,9 +20,6 @@
 	}
 </script>
 
-<c:set var="id" value="${sessionScope.id}" />
-<c:set var="author" value="${board.id}" />
-
 <div align="center" class="sub_div">
 	<table class="boardContent">
 		<tr>
@@ -82,11 +79,25 @@
 		</div>
 		<div class="phone">
 	        <div class="screen">
+		        <c:choose>
+				<c:when test="${empty replys }">
+					<h4>등록된 댓글이 없습니다. </h4>
+				</c:when>
+				<c:otherwise>
 	            <ul>
-	            	<li>
-	            		{댓글작성자 } {댓글 내용 } {시간 } <input type="submit" value="수정" />|<input type="submit" value="삭제" />(해당 아이디만)
-	            	</li>
+	            	<c:forEach var="reply" items="${ replys}">
+		            	<li>
+		            		<p>${reply.writer }</p>
+		            		<p>${reply.reply }</p>
+		            		<p>${reply.writeDate }</p>
+		            		댓글작성자  댓글 내용 시간
+		            		<input type="submit" value="수정" />|
+		            		<input type="submit" value="삭제" />
+		            	</li>
+		            </c:forEach>
 	            </ul>
+	            </c:otherwise>
+	            </c:choose>
 	        </div>
   		</div>
 </div>

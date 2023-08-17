@@ -66,6 +66,7 @@ public class BoardController {
 			System.out.println("boardContent 게시글 번호 : " + n);
 			return "redirect:boardForm";
 		}
+		
 		model.addAttribute("board", board);
 		return "communityBoard/boardContent";
 	}

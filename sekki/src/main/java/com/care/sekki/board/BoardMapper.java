@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.care.sekki.customerCenter.centerReplyDTO;
+
 @Mapper
 public interface BoardMapper {
 
@@ -26,4 +28,9 @@ public interface BoardMapper {
 	void boardModifyProc(BoardDTO board);
 
 	void boardDeleteProc(int no);
+	
+	// 댓글
+	ArrayList<BoardReplyDTO> replys(@Param("no")String n);
+	
+	
 }

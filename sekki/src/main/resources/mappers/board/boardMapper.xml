@@ -13,6 +13,14 @@
 		<result column="hits" property="hits"/>
 		<result column="file_name" property="fileName"/>
 	</resultMap>
+	
+	<resultMap type="com.care.sekki.board.BoardReplyDTO" id="boardReplyDto">
+		<id column="reply_num" property="replyNum"/>
+		<result column="no" property="no" />
+		<result column="writer" property="writer" />
+		<result column="reply" property="reply" />
+		<result column="write_date" property="writeDate" />
+	</resultMap>
 
 	<select id="count">
 		<choose>
@@ -74,4 +82,11 @@
 	<delete id="boardDeleteProc">	
 		DELETE FROM community_board WHERE no=#{no}
 	</delete>
+	
+	<!-- 댓글 -->
+	<select id="replys" resultMap="boardReplyDto">
+		SELECT rownum as rn, AAA.* FROM 
+		(SELECT * FROM community_reply WHERE no=#{no} ORDER BY write_date DESC)AAA
+	</select>
+	
 </mapper>
