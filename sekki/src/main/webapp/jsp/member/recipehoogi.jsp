@@ -7,6 +7,7 @@
   <title>요리 후기 페이지</title>
   <link rel="stylesheet" type="text/css" href="board.css"> <!-- CSS 파일 경로 설정 -->
 </head>
+
 <style>
 	.header{
 	border-bottom:1px solid #ccc;
@@ -76,15 +77,35 @@
   border-bottom:1px solid #ccc;
   
   }
-  .reviews .review-item{
+  .reviews .reviewContainer{
   	display: flex;
     align-items: center; /* 가로 방향 가운데 정렬 */
     margin-bottom: 10px; /* 각 후기 글 사이 간격 */
   }
+  
   .reviews h2{
   padding:10px;
   border-bottom:1px solid #ccc;
   }
+  
+  #reviewContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 500px;
+        margin: 0 auto;
+    }
+
+    .reviewContent {
+        width: 100%;
+    }
+
+    .buttonContainer {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 5px;
+        width: 100%;
+    }
   
   
 </style>
@@ -168,16 +189,16 @@
     <div class="reviews" style="text-align: center;">
         <!-- 받은 요리 후기 글 -->
         <h2 style="text-align: center;">받은 요리 후기 글</h2>
-        <div class="review-item" >
-            <p>요리 후기 내용1</p>
-            <button class="reply-button">답글 달기</button>
-            <button class="delete-button">삭제</button>
+        <div id="reviewContainer">
+        	<div class = "reviewContent" >
+            	<textarea id="reviewText"></textarea><br>
+            </div>
+            <div class="buttonContainer">
+            <button class="replyButton">답글 달기</button>
+            <button class="deleteButton">삭제</button>
+            </div>
         </div>
-        <div class="review-item" >
-            <p>요리 후기 내용2</p>
-            <button class="reply-button">답글 달기</button>
-            <button class="delete-button">삭제</button>
-        </div>
+      
     </div>
 </div>
 	      
@@ -188,8 +209,90 @@
     <button id="home">홈으로</button>
   </div>
   
-  <script>
-  
+<script>
+
+const reviewContainer = document.getElementById("reviewContainer");
+
+for (let i = 0; i < reviews.length; i++) {
+    const reviewContainerDiv = document.createElement("div");
+    reviewContainerDiv.className = "reviewContainer";
+
+    const reviewContentDiv = document.createElement("div");
+    reviewContentDiv.className = "reviewContent";
+
+    const reviewContentTextarea = document.createElement("textarea");
+    reviewContentTextarea.style.textAlign = "top-left";
+    reviewContentTextarea.style.width = "500px";
+    reviewContentTextarea.style.height = "100px";
+    reviewContentTextarea.value = reviews[i].content;
+
+    reviewContentDiv.appendChild(reviewContentTextarea);
+
+    const buttonContainer = document.createElement("div");
+    buttonContainer.className = "buttonContainer";
+
+    const replyButton = document.createElement("button");
+    replyButton.className = "replyButton";
+    replyButton.textContent = "답글 달기";
+
+    const deleteButton = document.createElement("button");
+    deleteButton.className = "deleteButton";
+    deleteButton.textContent = "삭제";
+
+    buttonContainer.appendChild(replyButton);
+    buttonContainer.appendChild(deleteButton);
+
+    reviewContainerDiv.appendChild(reviewContentDiv);
+    reviewContainerDiv.appendChild(buttonContainer);
+
+    reviewContainer.appendChild(reviewContainerDiv);
+}
+
+const reviewData = {
+		reviewId: reviewId,
+	    content: reviewText,
+	    authorId: authorId
+	};
+document.addEventListener("DOMContentLoaded", function() {
+    const reviewContainer = document.getElementById("reviewContainer");
+
+    reviewContainer.addEventListener('click', function(event) {
+        if (event.target.classList.contains('replyButton')) {
+            const reviewContainer = event.target.closest('.reviewContainer');
+            const reviewText = reviewContainer.querySelector('.reviewContent textarea').value;
+
+            if (reviewText.trim() === '') {
+                alert('후기 내용을 입력해주세요.');
+                return;
+            }
+
+            // 여기서 AJAX 요청을 보내도록 구현
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/addReview', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            const data = {
+                content: reviewText,
+                authorId: authorId // 여기에 사용자 아이디를 넣어주세요
+            };
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        // 성공적으로 데이터를 전송한 경우, 화면 갱신 등 원하는 작업 수행
+                    } else {
+                        // 요청 실패 시 처리
+                        console.error('요청 실패:', xhr.status, xhr.statusText);
+                    }
+                }
+            };
+
+            xhr.send(JSON.stringify(data));
+        }
+    });
+});
+
+
 //페이지 로드 시 구매 버튼들에 클릭 이벤트 리스너 등록
   document.addEventListener('DOMContentLoaded', function () {
     var buyButtons = document.getElementsByClassName('buybutton');
@@ -239,11 +342,13 @@
 	     document.addEventListener('DOMContentLoaded', function() {
 	    showUserAddressOnMap();
 	    
+	    
 	 // 검색 버튼 클릭 이벤트 처리
 	    document.getElementById('searchButton').addEventListener('click', function() {
 	      searchPlace();  
 	  });
 	// 사용자 주소로부터 위도와 경도 가지고오기
+  });  
 	
 	
 	
@@ -259,7 +364,7 @@
 	          var mapContainer = document.getElementById('map');
 	          var options = {
 	            center: new kakao.maps.LatLng(latitude, longitude),
-	            level: 4
+	            level: 3
 	          };
 	          map = new kakao.maps.Map(mapContainer, options);
 	          
@@ -279,7 +384,7 @@
 		  // 주변 마트 검색 요청을 위한 장소 검색 객체 생성
 		  var request = {
 		    location: new kakao.maps.LatLng(latitude, longitude), // 사용자 위치
-		    radius: 3000, // 검색 반경 (미터 단위, 여기서는 3km)
+		    radius: 4000, // 검색 반경 (미터 단위, 여기서는 4km)
 		    keyword: '마트' // 검색 키워드 (이 부분은 마트에 해당하는 키워드로 수정)
 		  };
 
@@ -300,8 +405,12 @@
 		}
 	
 	// 검색 폼의 입력값을 이용하여 장소 검색
+	
 	  function searchPlace() {
-	    var keyword = document.getElementById('searchInput').value;
+	        // 이전에 표시된 마커들을 모두 제거
+	        removeAllMarkers();
+		  
+	   var keyword = document.getElementById('searchInput').value;
 	    			
 
 	    // 장소 검색 서비스 객체 생성
@@ -319,8 +428,6 @@
 	        // 검색된 장소로 지도 이동
 	        map.setCenter(new kakao.maps.LatLng(latitude, longitude));
 
-	        // 이전에 표시된 마커들을 모두 제거
-	        removeAllMarkers();
 
 	        // 검색된 장소에 마커 표시
 	        var marker = new kakao.maps.Marker({
@@ -333,19 +440,21 @@
 	  }
 	
 	// 이전에 표시된 마커들을 모두 제거하는 함수
-	  function removeAllMarkers() {
-	    for (var i = 0; i < markers.length; i++) {
-	      markers[i].setMap(null);
-	    }
-	    markers = [];
-	  }
-
-	  var markers = []; // 마커들을 담을 배열	
+	  
+	function removeAllMarkers() {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+    }
+    markers = [];
+	}
 	
-  });  
 	  
 	/*KAKAO MAP API END*/
 	
+  // 페이지 로드 시 Edamam API 호출
+  document.addEventListener('DOMContentLoaded', function () {
+    getRecipeData();
+  });
 	// Edamam API 호출 함수
   function getRecipeData() {
     var xhr = new XMLHttpRequest();
@@ -394,10 +503,6 @@
     xhr.send();
   }
 
-  // 페이지 로드 시 Edamam API 호출
-  document.addEventListener('DOMContentLoaded', function () {
-    getRecipeData();
-  });
     
 
     // 버튼 요소를 가져옵니다.

@@ -9,13 +9,12 @@ import com.care.sekki.board.BoardDTO;
 
 @Mapper
 public interface centerMapper {
-	ArrayList<BoardDTO> boardForm(@Param("begin")int begin, @Param("end")int end);
+	ArrayList<BoardDTO> boardForm(@Param("begin") int begin, @Param("end") int end);
 
 	void writeAnnouncementProc(centerDTO announceDTO);
 
-	ArrayList<centerDTO> partAnnouncement(
-			@Param("begin")int begin, @Param("end")int end,
-			@Param("search")String search);
+	ArrayList<centerDTO> partAnnouncement(@Param("begin") int begin, @Param("end") int end,
+			@Param("search") String search);
 
 	ArrayList<centerDTO> allAnnouncement(int begin, int end);
 
@@ -34,6 +33,5 @@ public interface centerMapper {
 	void plusHeart(centerDTO announcement);
 
 	void likesPerson(@Param("user_id") String user_id, @Param("announcementNum") int announcement_num);
-
 
 }

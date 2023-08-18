@@ -15,24 +15,24 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class S3UploadService {
 
-    private final AmazonS3 amazonS3;
+	private final AmazonS3 amazonS3;
 
-    @Value("${cloud.aws.s3.bucket}")
-    private String bucket;
+	@Value("${cloud.aws.s3.bucket}")
+	private String bucket;
 
-    // 생성자 추가
-    public S3UploadService(AmazonS3 amazonS3) {
-        this.amazonS3 = amazonS3;
-    }
+	// 생성자 추가
+	public S3UploadService(AmazonS3 amazonS3) {
+		this.amazonS3 = amazonS3;
+	}
 
-    public String saveFile(MultipartFile multipartFile) throws IOException {
-        String originalFilename = multipartFile.getOriginalFilename();
+	public String saveFile(MultipartFile multipartFile) throws IOException {
+		String originalFilename = multipartFile.getOriginalFilename();
 
-        ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentLength(multipartFile.getSize());
-        metadata.setContentType(multipartFile.getContentType());
+		ObjectMetadata metadata = new ObjectMetadata();
+		metadata.setContentLength(multipartFile.getSize());
+		metadata.setContentType(multipartFile.getContentType());
 
-        amazonS3.putObject(bucket, originalFilename, multipartFile.getInputStream(), metadata);
-        return amazonS3.getUrl(bucket, originalFilename).toString();
-    }
+		amazonS3.putObject(bucket, originalFilename, multipartFile.getInputStream(), metadata);
+		return amazonS3.getUrl(bucket, originalFilename).toString();
+	}
 }
