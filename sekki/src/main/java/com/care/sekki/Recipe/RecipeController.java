@@ -8,23 +8,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RecipeController {
 
 	@GetMapping("/recipeBoard")
-    public String recipeBoard() {
-        return "recipe/recipeBoard";
-    }
-	
+	public String recipeBoard() {
+		return "recipe/recipeBoard";
+	}
+
 	@PostMapping("/recipeBoard")
 	public String recipeBoardd() {
 		return "recipe/recipeBoard";
 	}
-	
+
 	@GetMapping("/recipeBoardWrite")
-    public String recipeBoardWrite() {
-        return "recipe/recipeBoardWrite";
-    }
-	
+	public String recipeBoardWrite() {
+		return "recipe/recipeBoardWrite";
+	}
+
 	@PostMapping("/recipeBoardWrite")
 	public String recipeBoardWritee() {
 		return "recipe/recipeBoardWrite";
 	}
-	
+
 }

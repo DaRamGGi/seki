@@ -30,7 +30,7 @@
     <li><a href="/update">회원정보 수정</a></li> 
     <li><a href="/recipehoogi">요리 후기</a></li>
     <li><a href="/../jsp/recipeboard/recipeboardForm.jsp">좋아요 한 글, 댓글</a></li>
-    <li><a href="member/list">구독자 리스트</a></li>
+    <li><a href="member/subscriberList">구독자 리스트</a></li>
   </ul>
 </div>
 

@@ -7,7 +7,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-public class SekkiApplication extends SpringBootServletInitializer{
+public class SekkiApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder createSpringApplicationBuilder() {
