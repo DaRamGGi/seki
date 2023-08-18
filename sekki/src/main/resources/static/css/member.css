@@ -16,6 +16,62 @@
 	color: #fff;
 	font-size: 40px;
 }
+#memberMenu {
+	position: fixed;
+	top: 65%;
+	left: 100px;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	width: 210px;
+}
+
+#memberMenu {
+	position: fixed;
+	top: 65%;
+	left: 130px;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	width: 210px;
+}
+
+#memberMenu ul {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+
+#memberMenu a {
+	text-decoration: none;
+	font-size: 16px;
+	width: 100%;
+	padding: 15px 0px;
+}
+
+#memberMenu ul a:nth-child(1) {
+	background-color: #003566;
+	color: #fff;
+	font-size: 20px;
+	padding: 20px 0px;
+}
+
+#memberMenu a:hover {
+	color: #fff;
+	background-color: #003566;
+}
+
+#memberMenu .selected {
+	background-color: rgb(240, 255, 255);
+}
+
+#memberMenu .selected li {
+	font-weight: 500;
+}
+
+#memberMenu a li {
+	padding: 25px;
+}
 
 .h80{
 	height: 80px;
@@ -432,20 +488,24 @@
 	background-color: rgb(255, 179, 102);
 }
 /*아이디 찾기 결과*/
-.findTable .findIdReultTd{
+.findTable .findIdReultTd,
+.findTable .findPwReultTd{
 	margin-top: 50px;
 	border: 1px solid #ddd;
 	text-align: center;
 }
-.findTable .findIdReultTd h2{
+.findTable .findIdReultTd h2,
+.findTable .findPwReultTd h2{
 	color: rgb(85, 85, 85);
 	padding: 40px 0 30px 0;
 }
-.findTable .findIdReultTd p{
+.findTable .findIdReultTd p,
+.findTable .findPwReultTd p{
 	font-size: 20px;
 	padding: 20px 0 40px 0;
 }
-.findTable .findIdReultTd input[type="button"]{
+.findTable .findIdReultTd input[type="button"],
+.findTable .findPwReultTd input[type="button"]{
 	height: 40px;
 	padding: 5px 0;
 	box-sizing: border-box;
@@ -458,12 +518,13 @@
 	font-weight: bold;
 	margin-bottom: 30px;
 }
-.findTable .findIdReultTd input[type="button"]:hover{
+.findTable .findIdReultTd input[type="button"]:hover,
+.findTable .findPwReultTd input[type="button"]:hover{
 	background-color: rgb(255, 179, 102);
 }
 /*비밀번호 찾기*/
 .findTable h2{
-	padding-bottom: 30px
+	padding-bottom: 30px;
 }
 .findTable .findPwIdInputTd{
 	margin-top: 50px;
@@ -478,20 +539,30 @@
 .findTable .findPwIdInputTd h4{
 	text-align: left;
 	padding: 20px 0 5px 210px;
+	font-size: 20px;
 }
 .findTable .findPwIdInputTd .findPwCheckboxDiv{
 	text-align: left;
-	padding: 0 0 30px 210px;
+	padding: 10px 0 30px 210px;
+	font-size: 18px;
 }
-.findTable .findPwIdInputTd input[type="checkbox"]{
-	width: 20px;
+
+.findTable .findPwIdInputTd input[type="checkbox"] {
+    appearance: none;
+    border: 1px solid #ccc;
+   	width: 20px;
 	height: 20px;
-	margin-right: 15px;
-	cursor: pointer;
+    outline: none;
+    cursor: pointer;
+    margin-right: 5px;
+    position: relative;
+    margin-right: 15px;
 }
-.findTable .findPwIdInputTd input[type="checkbox"]:checked{
-	background-color: #007bff;
+.findTable .findPwIdInputTd input[type="checkbox"]:checked {
+    background-color: rgb(255, 150, 45);
+    border-color: rgb(255, 150, 45);
 }
+
 .findTable .findPwIdInputTd input[type="button"]{
 	height: 40px;
 	padding: 5px 0;
@@ -507,4 +578,7 @@
 }
 .findTable .findPwIdInputTd input[type="button"]:hover{
 	background-color: rgb(255, 179, 102);
+}
+.findTable .findPwReultTd p span{
+	font-weight: bold;
 }
