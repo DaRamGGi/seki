@@ -16,14 +16,6 @@
 	color: #fff;
 	font-size: 40px;
 }
-#memberMenu {
-	position: fixed;
-	top: 65%;
-	left: 100px;
-	background-color: #fff;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	width: 210px;
-}
 
 #memberMenu {
 	position: fixed;
@@ -40,6 +32,7 @@
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
+	text-align: left;
 }
 
 #memberMenu a {
