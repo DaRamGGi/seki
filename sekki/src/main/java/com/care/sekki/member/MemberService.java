@@ -83,10 +83,24 @@ public class MemberService {
 		}
 
 		MemberDTO result = memberMapper.loginProc(member.getId());
+<<<<<<< HEAD
 		if (result == null) {
+=======
+		String memberId = member.getId();
+		if(result == null) {
+>>>>>>> refs/remotes/origin/gyutae
 			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
 			String cryptPassword = bpe.encode(member.getPw());
 			member.setPw(cryptPassword);
+<<<<<<< HEAD
+=======
+			
+			
+			try {
+	            // 프로필 사진을 S3에 업로드하고 해당 URL을 받아옵니다.
+	            String profilePictureUrl = s3UploadService.saveFile(profilePicture, memberId);
+	            member.setProfilePictureUrl(profilePictureUrl); // 회원 정보에 프로필 사진 URL을 설정합니다.
+>>>>>>> refs/remotes/origin/gyutae
 
 			try {
 				// 프로필 사진을 S3에 업로드하고 해당 URL을 받아옵니다.

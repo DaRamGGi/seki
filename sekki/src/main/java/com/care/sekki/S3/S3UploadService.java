@@ -1,5 +1,7 @@
 package com.care.sekki.S3;
 
+
+
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -25,14 +27,28 @@ public class S3UploadService {
 		this.amazonS3 = amazonS3;
 	}
 
+<<<<<<< HEAD
 	public String saveFile(MultipartFile multipartFile) throws IOException {
 		String originalFilename = multipartFile.getOriginalFilename();
+=======
+    public String saveFile(MultipartFile multipartFile, String memberId) throws IOException {
+        String originalFilename = multipartFile.getOriginalFilename();
+        
+        String folderPath = memberId + "/";
+        String objectKey = folderPath + originalFilename;
+>>>>>>> refs/remotes/origin/gyutae
 
 		ObjectMetadata metadata = new ObjectMetadata();
 		metadata.setContentLength(multipartFile.getSize());
 		metadata.setContentType(multipartFile.getContentType());
 
+<<<<<<< HEAD
 		amazonS3.putObject(bucket, originalFilename, multipartFile.getInputStream(), metadata);
 		return amazonS3.getUrl(bucket, originalFilename).toString();
 	}
+=======
+        amazonS3.putObject(bucket, objectKey, multipartFile.getInputStream(), metadata);
+        return amazonS3.getUrl(bucket, objectKey).toString();
+    }
+>>>>>>> refs/remotes/origin/gyutae
 }
