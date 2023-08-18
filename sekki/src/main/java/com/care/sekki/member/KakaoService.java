@@ -29,7 +29,7 @@ public class KakaoService {
 		String reqUrl = "https://kauth.kakao.com/oauth/token";
 		String reqParam = "grant_type=authorization_code";
 		reqParam += "&client_id=2e151bc9c1174ea0e8836b77c28803c3";
-		reqParam += "&redirect_uri="+redirectUri;
+		reqParam += "&redirect_uri=" + redirectUri;
 		reqParam += "&code=" + code;
 
 		HttpURLConnection conn;
@@ -57,7 +57,7 @@ public class KakaoService {
 			accessToken = map.get("access_token");
 			scope = map.get("scope");
 
-			//setNeedsAgreement();
+			// setNeedsAgreement();
 //			System.out.println("access_token : " + map.get("access_token"));
 //			System.out.println("scope : " + map.get("scope"));
 
@@ -78,17 +78,18 @@ public class KakaoService {
 	}
 
 	public void setNeedsAgreement() {
-	/*
-	 * # 추가 항목 동의 받기 #
-	 * https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-code-additional-consent
-	 */
-	//https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=account_email,gender	
+		/*
+		 * # 추가 항목 동의 받기 #
+		 * https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-code-
+		 * additional-consent
+		 */
+		// https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=account_email,gender
 
 		String redirectUri = "http://localhost/kakaoLogin";
 		String reqUrl = "https://kauth.kakao.com/oauth/authorize";
 		String reqParam = "?client_id=2e151bc9c1174ea0e8836b77c28803c3";
-		reqParam += "&redirect_uri="+redirectUri;
-		reqParam += "&response_type=code&scope="+scope;
+		reqParam += "&redirect_uri=" + redirectUri;
+		reqParam += "&response_type=code&scope=" + scope;
 
 		HttpURLConnection conn;
 		try {
@@ -141,8 +142,36 @@ public class KakaoService {
 			System.out.println(kakaoAccount.get("profile").get("nickname").textValue());
 
 			/*
-			 {"id":2916902118,"connected_at":"2023-07-18T02:28:09Z","properties":{"nickname":"김연수","profile_image":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg","thumbnail_image":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg"},"kakao_account":{"profile_nickname_needs_agreement":false,"profile_image_needs_agreement":false,"profile":{"nickname":"김연수","thumbnail_image_url":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg","profile_image_url":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg","is_default_image":true},"has_email":true,"email_needs_agreement":false,"is_email_valid":true,"is_email_verified":true,"email":"kyes0222@gmail.com","has_age_range":true,"age_range_needs_agreement":false,"age_range":"30~39","has_gender":true,"gender_needs_agreement":false,"gender":"male"}}
-			 {"id":2916902118,"connected_at":"2023-07-18T02:28:09Z","properties":{"nickname":"김연수","profile_image":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg","thumbnail_image":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg"},"kakao_account":{"profile_nickname_needs_agreement":false,"profile_image_needs_agreement":false,"profile":{"nickname":"김연수","thumbnail_image_url":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg","profile_image_url":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg","is_default_image":true},"has_email":true,"email_needs_agreement":false,"is_email_valid":true,"is_email_verified":true,"email":"kyes0222@gmail.com","has_age_range":true,"age_range_needs_agreement":false,"age_range":"30~39","has_gender":true,"gender_needs_agreement":false,"gender":"male"}}
+			 * {"id":2916902118,"connected_at":"2023-07-18T02:28:09Z","properties":{
+			 * "nickname":"김연수","profile_image":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg"
+			 * ,"thumbnail_image":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg"
+			 * },"kakao_account":{"profile_nickname_needs_agreement":false,
+			 * "profile_image_needs_agreement":false,"profile":{"nickname":"김연수",
+			 * "thumbnail_image_url":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg"
+			 * ,"profile_image_url":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg"
+			 * ,"is_default_image":true},"has_email":true,"email_needs_agreement":false,
+			 * "is_email_valid":true,"is_email_verified":true,"email":"kyes0222@gmail.com",
+			 * "has_age_range":true,"age_range_needs_agreement":false,"age_range":"30~39",
+			 * "has_gender":true,"gender_needs_agreement":false,"gender":"male"}}
+			 * {"id":2916902118,"connected_at":"2023-07-18T02:28:09Z","properties":{
+			 * "nickname":"김연수","profile_image":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg"
+			 * ,"thumbnail_image":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg"
+			 * },"kakao_account":{"profile_nickname_needs_agreement":false,
+			 * "profile_image_needs_agreement":false,"profile":{"nickname":"김연수",
+			 * "thumbnail_image_url":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg"
+			 * ,"profile_image_url":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg"
+			 * ,"is_default_image":true},"has_email":true,"email_needs_agreement":false,
+			 * "is_email_valid":true,"is_email_verified":true,"email":"kyes0222@gmail.com",
+			 * "has_age_range":true,"age_range_needs_agreement":false,"age_range":"30~39",
+			 * "has_gender":true,"gender_needs_agreement":false,"gender":"male"}}
 			 */
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -157,7 +186,7 @@ public class KakaoService {
 		String reqUrl = "https://kapi.kakao.com/v1/user/unlink";
 		HttpURLConnection conn;
 		try {
-			URL url = new URL(reqUrl); 
+			URL url = new URL(reqUrl);
 			conn = (HttpURLConnection) url.openConnection();
 
 			conn.setRequestMethod("POST");
@@ -174,6 +203,7 @@ public class KakaoService {
 			e.printStackTrace();
 		}
 	}
+
 	public void get() {
 		/*
 		 * 사용자 정보 가져오기
@@ -209,21 +239,40 @@ public class KakaoService {
 			System.out.println(kakaoAccount.get("profile").get("nickname").textValue());
 
 			/*
-			 {"id":2916902118,"connected_at":"2023-07-18T02:28:09Z","properties":{"nickname":"김연수","profile_image":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg","thumbnail_image":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg"},"kakao_account":{"profile_nickname_needs_agreement":false,"profile_image_needs_agreement":false,"profile":{"nickname":"김연수","thumbnail_image_url":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg","profile_image_url":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg","is_default_image":true},"has_email":true,"email_needs_agreement":false,"is_email_valid":true,"is_email_verified":true,"email":"kyes0222@gmail.com","has_age_range":true,"age_range_needs_agreement":false,"age_range":"30~39","has_gender":true,"gender_needs_agreement":false,"gender":"male"}}
-			 {"id":2916902118,"connected_at":"2023-07-18T02:28:09Z","properties":{"nickname":"김연수","profile_image":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg","thumbnail_image":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg"},"kakao_account":{"profile_nickname_needs_agreement":false,"profile_image_needs_agreement":false,"profile":{"nickname":"김연수","thumbnail_image_url":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg","profile_image_url":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg","is_default_image":true},"has_email":true,"email_needs_agreement":false,"is_email_valid":true,"is_email_verified":true,"email":"kyes0222@gmail.com","has_age_range":true,"age_range_needs_agreement":false,"age_range":"30~39","has_gender":true,"gender_needs_agreement":false,"gender":"male"}}
+			 * {"id":2916902118,"connected_at":"2023-07-18T02:28:09Z","properties":{
+			 * "nickname":"김연수","profile_image":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg"
+			 * ,"thumbnail_image":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg"
+			 * },"kakao_account":{"profile_nickname_needs_agreement":false,
+			 * "profile_image_needs_agreement":false,"profile":{"nickname":"김연수",
+			 * "thumbnail_image_url":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg"
+			 * ,"profile_image_url":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg"
+			 * ,"is_default_image":true},"has_email":true,"email_needs_agreement":false,
+			 * "is_email_valid":true,"is_email_verified":true,"email":"kyes0222@gmail.com",
+			 * "has_age_range":true,"age_range_needs_agreement":false,"age_range":"30~39",
+			 * "has_gender":true,"gender_needs_agreement":false,"gender":"male"}}
+			 * {"id":2916902118,"connected_at":"2023-07-18T02:28:09Z","properties":{
+			 * "nickname":"김연수","profile_image":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg"
+			 * ,"thumbnail_image":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg"
+			 * },"kakao_account":{"profile_nickname_needs_agreement":false,
+			 * "profile_image_needs_agreement":false,"profile":{"nickname":"김연수",
+			 * "thumbnail_image_url":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg"
+			 * ,"profile_image_url":
+			 * "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg"
+			 * ,"is_default_image":true},"has_email":true,"email_needs_agreement":false,
+			 * "is_email_valid":true,"is_email_verified":true,"email":"kyes0222@gmail.com",
+			 * "has_age_range":true,"age_range_needs_agreement":false,"age_range":"30~39",
+			 * "has_gender":true,"gender_needs_agreement":false,"gender":"male"}}
 			 */
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 }
-
-
-
-
-
-
-
-
