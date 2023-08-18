@@ -25,8 +25,8 @@
 						</div>
 						<div class="down">
 							<span id="Bcontent">${board.content }</span>
-							<span class="material-symbols-outlined" id="Blikes">thumb_up</span>
-							<span id="Blike">256</span>
+							<span class="material-symbols-outlined" id="thumb">thumb_up</span>
+							<span id="Blikes">${board.likes }</span>
 						</div>
 					</li>
 				</c:forEach>

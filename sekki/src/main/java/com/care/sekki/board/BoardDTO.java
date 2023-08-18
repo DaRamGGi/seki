@@ -21,7 +21,16 @@ public class BoardDTO {
 	private String writeDate;
 	private int hits;
 	private String fileName;
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+	private int likes;
+  
+>>>>>>> refs/remotes/origin/gyutae
+>>>>>>> refs/remotes/origin/gyutae
 	public int getNo() {
 		return no;
 	}
@@ -78,4 +87,16 @@ public class BoardDTO {
 		this.fileName = fileName;
 	}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
+  }
+>>>>>>> refs/remotes/origin/gyutae
+>>>>>>> refs/remotes/origin/gyutae
 }

@@ -5,48 +5,47 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 등록</title>
+<title>답변 등록</title>
 <link href="css/customerCenter.css" rel="stylesheet"/> 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <c:import url="/header"></c:import>
-	<div id="visual">
-		<h1>공지사항</h1>
-	</div>
 	<div id="wrap">
-	<h1>공지사항 등록</h1>
-		<form action="writeAnnouncementProc" method='post' enctype="multipart/form-data" id="f">
+	<div id="centerMenu">
+		<ul>
+			<a href="announcement"><li>고객센터</li></a>
+			<a href="announcement"><li>공지사항</li></a>
+			<a href="inquiry" class="selected"><li>문의하기</li></a>
+		</ul>
+	</div>
+	<h1>답변 등록</h1>
+		<form action="adminReplyProc?num=${inquiry.num}" method='post' id="f">
 		<div>
-			<table class="writeTable">
-			<colgroup>
-				<col width="25%"></col>
-				<col width="*"></col>
-			</colgroup>
+			<table class="adminReplyTable">
 			<tr>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-				<th>제목<label id="titleLabel" class="titleLabel"> (*필수)</label></th>
-				<td><input type="text" name="title" id="title" maxlength="30" oninput="titleCheck()" placeholder="제목(최대 30자)"></td>
+				<th>문의 내역</th>
 			</tr>
 			<tr>
-				<th>내용<label id="contentLabel" class="contentLabel"> (*필수)</label></th>
 				<td>
-					<textarea rows="10" cols="30" name="content" id="content" maxlength="1000" oninput="contentCheck()" placeholder="내용을 입력하세요.(최대 1000자)"></textarea>
+					<p class="contentAreaReply">${inquiry.content }</p>
+					<p>${inquiry.files }</p>
 				</td>
 			</tr>
 			<tr>
-				<th>파일 첨부</th>
-				<td class="upfileStyle">
-					  <label for="upfile">파일수정</label>
-                      <input type="file" id="upfile" name="upfile">
-                      <input class="upload-name" value="첨부파일" placeholder="첨부파일">
+				<th>답변 작성<label id="contentLabel" class="contentLabel"> (*필수)</label></th>
+			</tr>
+			<tr>
+				<td>
+					<textarea rows="10" cols="30" name="replyContent" id="replyContent"  maxlength="1000" oninput="replyContentCheck()" placeholder="내용을 입력하세요.(최대 1000자)"></textarea>
 				</td>
 			</tr>
 		</table>
 		</div>
 	
-		<div class="writebtnDiv">
-			<input type="button" value="글쓰기" onclick="nullCheck()">
-			<input type="button" value="취소" onclick="location.href='announcement'">
+		<div class="writeReplybtnDiv">
+			<input type="submit" value="답변하기">
+			<input type="button" value="취소" onclick="history.back()">
 		</div>
 	</form>
 	</div>

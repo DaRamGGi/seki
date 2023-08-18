@@ -80,7 +80,7 @@ public class BoardService {
 // 업로드 파일 저장 경로
 // ubuntu@ip-172-31-32-35:~$ sudo mkdir /opt/tomcat/tomcat-10/webapps/upload
 // ubuntu@ip-172-31-32-35:~$ sudo chown -RH tomcat: /opt/tomcat/tomcat-10/webapps/upload
-			String fileLocation = "/opt/tomcat/tomcat-10/webapps/upload/";
+			String fileLocation = "C:\\javas\\upload\\";
 			File save = new File(fileLocation + fileName);
 
 			try {
@@ -122,6 +122,10 @@ public class BoardService {
 
 	public void incHit(int no) {
 		boardMapper.incHit(no);
+	}
+	
+	public void incLike(int no) {
+		boardMapper.incLike(no);
 	}
 
 	public boolean boardDownload(String n, HttpServletResponse res) {
@@ -166,7 +170,16 @@ public class BoardService {
 		if (board == null)
 			return null;
 
+<<<<<<< HEAD
 		if (board.getFileName() != null && board.getFileName().isEmpty() == false) {
+=======
+<<<<<<< HEAD
+		if (board.getFileName() != null && board.getFileName().isEmpty() == false) {
+=======
+		//&& board.getFileName().isEmpty() == false
+		if(board.getFileName() != null ) {
+>>>>>>> refs/remotes/origin/gyutae
+>>>>>>> refs/remotes/origin/gyutae
 			String fn = board.getFileName();
 			String[] fileName = fn.split("-", 2);
 			board.setFileName(fileName[1]);
@@ -185,6 +198,8 @@ public class BoardService {
 	public String boardDeleteProc(String n) {
 		String id = (String) session.getAttribute("id");
 		if (id == null || id.isEmpty()) {
+<<<<<<< HEAD
+=======
 			return "로그인";
 		}
 
@@ -211,5 +226,43 @@ public class BoardService {
 		}
 
 		return "게시글 삭제 완료";
+	}
+	
+	public String likeProc(String n) {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.isEmpty()) {
+>>>>>>> refs/remotes/origin/gyutae
+			return "로그인";
+		}
+
+		int no = 0;
+		try {
+			no = Integer.parseInt(n);
+		} catch (Exception e) {
+			return "게시글 번호에 문제가 생겼습니다.";
+		}
+
+		BoardDTO board = boardMapper.boardContent(no);
+		if (board == null)
+			return "게시글 번호에 문제가 생겼습니다.";
+
+<<<<<<< HEAD
+		if (id.equals(board.getId()) == false)
+			return "작성자만 삭제 할 수 있습니다.";
+
+		boardMapper.boardDeleteProc(no);
+
+		String path = "/opt/tomcat/tomcat-10/webapps/upload/" + board.getFileName();
+		File file = new File(path);
+		if (file.exists() == true) {
+			file.delete();
+		}
+
+		return "게시글 삭제 완료";
+=======
+		boardMapper.incLike(no);
+
+		return "좋아요";
+>>>>>>> refs/remotes/origin/gyutae
 	}
 }
