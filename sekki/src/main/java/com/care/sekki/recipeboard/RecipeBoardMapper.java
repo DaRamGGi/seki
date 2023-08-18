@@ -14,21 +14,13 @@ public interface RecipeBoardMapper {
 	String recipeboardWriteProc(RecipeBoardDTO recipeboard);
 
 	RecipeBoardDTO recipeboardContent(int no);
-	
+
 	void incHit(int no);
 
 	String recipeboardDownload(int no);
-	
+
 	String recipeboardModifyProc(RecipeBoardDTO recipeboard);
 
 	String recipeboardDeleteProc(int no);
 
-	
-
-	
-
-	
-
-	
 }
-
