@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -63,9 +65,72 @@ public class MemberService {
 		return "아이디/비밀번호를 확인 후 다시 시도하세요.";
 	}
 
+	public String registerProc(MemberDTO member, String confirm, MultipartFile profilePicture) {
+		if (member.getId() == null || member.getId().isEmpty()) {
+			return "아이디를 입력하세요.";
+		}
+
+		if (member.getPw() == null || member.getPw().isEmpty()) {
+			return "비밀번호를 입력하세요.";
+		}
+
+		if (member.getPw().equals(confirm) == false) {
+			return "두 비밀번호를 일치하여 입력하세요.";
+		}
+
+		if (member.getUserName() == null || member.getUserName().isEmpty()) {
+			return "이름을 입력하세요.";
+		}
+
+		MemberDTO result = memberMapper.loginProc(member.getId());
+		if (result == null) {
+			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+			String cryptPassword = bpe.encode(member.getPw());
+			member.setPw(cryptPassword);
+
+			try {
+				// 프로필 사진을 S3에 업로드하고 해당 URL을 받아옵니다.
+				String profilePictureUrl = s3UploadService.saveFile(profilePicture);
+				member.setProfilePictureUrl(profilePictureUrl); // 회원 정보에 프로필 사진 URL을 설정합니다.
+
+				memberMapper.registerProc(member);
+				return "회원 등록 완료";
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "회원 등록 실패: 프로필 사진 업로드 중 오류가 발생하였습니다.";
+			}
+		}
+
+		return "이미 가입된 아이디 입니다.";
+	}
 	
-	
-	
+	public void subscriberList(String currentPage, String select, String search, Model model) {
+		if (select == null) {
+			select = "";
+		}
+
+		int cp = 1;
+		
+		try {
+			cp = Integer.parseInt(currentPage);
+		} catch (NumberFormatException e) {
+			cp = 1;
+		}
+
+		int pageBlock = 10; // 한 페이지에 보일 데이터의 수
+		int end = pageBlock * cp; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+
+		ArrayList<SubscriberDTO> subscriberList = memberMapper.subscriberList(begin, end, select, search);
+		int totalCount = memberMapper.count(select, search);
+		String url = "subscriberList?select=" + select + "&search=" + search + "&currentPage=";
+		String result = PageService.printPage(url, cp, totalCount, pageBlock);
+
+		model.addAttribute("subscriberList", subscriberList);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+				
+	}
 	
 	private List<ReviewDTO> reviewList = new ArrayList<>();
 	public void addReview(ReviewDTO reviewDTO) {
@@ -88,7 +153,7 @@ public class MemberService {
 		if (sessionId.equals(id) == false && sessionId.equals("admin") == false)
 			return null;
 
-
+//		MemberDTO result = memberMapper.loginProc(id);
 		return memberMapper.loginProc(id);
 	}
 
@@ -133,6 +198,40 @@ public class MemberService {
 		return "비밀번호를 확인 후 다시 시도하세요.";
 	}
 
+	@Autowired
+	private MailService mailService;
+
+	public String sendEmail(String email) {
+		if (email == null || email.isEmpty())
+			return "이메일을 확인 후 다시 입력하세요.";
+		Random r = new Random();
+		// 1,000,000
+		// 100 000 , 001234
+
+		content = String.format("%06d", r.nextInt(1000000));
+		System.out.println("인증번호 : " + content);
+		String msg = mailService.sendMail(email, "인증번호가 도착했습니다", content);
+		if (msg.equals("입력한 이메일에서 인증번호를 확인하세요.") == false) {
+			content = "";
+		}
+		return msg;
+	}
+
+	private String content;
+
+	public String sendAuth(String auth) {
+		if (auth == null || auth.isEmpty())
+			return "인증번호를 입력 후 다시 시도하세요.";
+
+		if (content == null || content.isEmpty())
+			return "인증번호를 입력 후 다시 시도하세요.";
+
+		if (auth.equals(content)) {
+			return "인증 성공";
+		}
+
+		return "인증 실패";
+	}
 
 	/* Edamam.api 코드 */
 
@@ -249,6 +348,12 @@ public class MemberService {
 		return new JSONObject(); // 예외 발생 시 빈 JSONObject 반환
 	}
 
+	
+	
 
+
+
+
+	/* Edamam.api 코드 */
 
 }

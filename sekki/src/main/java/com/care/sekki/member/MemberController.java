@@ -48,7 +48,7 @@ public class MemberController {
 		return "member/mypage";
 	}
 
-	
+	/* 로그인 */
 	@GetMapping("login")
 	public String login() {
 		return "member/login";
@@ -69,7 +69,7 @@ public class MemberController {
 		return "forward:index";
 	}
 
-	
+	/* 회원가입 */
 	@GetMapping("register")
 	public String register() {
 		return "member/register";
@@ -84,7 +84,7 @@ public class MemberController {
 		return "member/register";
 	}
 
-	
+	/* 마이페이지 */
 	@GetMapping("update")
 	public String update() {
 		String id = (String) session.getAttribute("id");
@@ -197,8 +197,19 @@ public class MemberController {
 		return "member/delete";
 	}
 
-	
-	
+	/* email / kakao */
+	@ResponseBody
+	@PostMapping(value = "sendEmail", produces = "text/plain; charset=utf-8")
+	public String sendEmail(@RequestBody(required = false) String email) {
+		return service.sendEmail(email);
+	}
+
+	@ResponseBody
+	@PostMapping(value = "sendAuth", produces = "text/plain; charset=utf-8")
+	public String sendAuth(@RequestBody(required = false) String auth) {
+		// System.out.println("sendAuth()");
+		return service.sendAuth(auth);
+	}
 
 	@Autowired
 	private KakaoService kakao;
