@@ -76,7 +76,8 @@ public class RecipeService {
 			System.out.println("no가 널입니다.");
 			return null;
 		}
-
+		System.out.println("re_no 값들어옴>? : " + recieContent.getRe_no());
+		
 		recieContent.setViews(recieContent.getViews() + 1);
 		reHit(recieContent.getRe_no());
 	
@@ -122,6 +123,31 @@ public class RecipeService {
 	public void reHit(Long re_no) {
 		recipemapper.reHit(re_no);
 	}
+	
+	public String commentProc(CommentDTO commentDto, HttpServletRequest request, HttpServletResponse response) {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.isEmpty()) {
+			return "로그인을 해주세요";
+		}
+		String profile = (String)session.getAttribute("profilePictureUrl");
+		
+		commentDto.setId(id);
+		commentDto.setProfile(profile);
+		Instant currentTime = Instant.now();
+		commentDto.setWritten_time(Timestamp.from(currentTime));
+		Object reNoObject = session.getAttribute("re_no");
+		if (reNoObject instanceof Long) {
+		    Long reNo = (Long) reNoObject;
+		    commentDto.setRe_no(reNo);
+		}
+
+		System.out.println("re_no뜻냐 : " + commentDto.getRe_no());
+		//recipemapper.insertComment(commentDto);
+		return "댓글달기성공";
+	}
+	
+//----------------------------댓글-------------------------------
+	
 //----------------------------레시피 내용------------------------
 	
 //----------------------------

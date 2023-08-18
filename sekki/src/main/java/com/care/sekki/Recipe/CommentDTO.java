@@ -4,24 +4,27 @@ import java.sql.Timestamp;
 
 public class CommentDTO {
 	private Long commnet_no;
-	private String coment;
+
 	private Long re_no;
 	private String id;
 	private String comment_content;
 	private int rating;
 	private Timestamp written_time;
+	private String profile;
+	
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
 	public Long getCommnet_no() {
 		return commnet_no;
 	}
 	public void setCommnet_no(Long commnet_no) {
 		this.commnet_no = commnet_no;
 	}
-	public String getComent() {
-		return coment;
-	}
-	public void setComent(String coment) {
-		this.coment = coment;
-	}
+
 	public Long getRe_no() {
 		return re_no;
 	}

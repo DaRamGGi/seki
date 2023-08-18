@@ -48,7 +48,8 @@ public class RecipeController {
 	}
 	@RequestMapping("recipeBoardContent")
 	public String recipeBoardContent(
-			@RequestParam(value="num", required = false)String n, Model model) {
+			@RequestParam(value="num", required = false)String n, Model model,
+			HttpServletRequest request, HttpServletResponse response) {
 		RecipeBoardDTO reciDto = recipeService.recipeContent(n);
 		
 		if(reciDto == null) 
@@ -65,7 +66,8 @@ public class RecipeController {
 			reciDto.setCategory("중식");
 		}else
 			reciDto.setCategory("양식");
-		
+		System.out.println("re_no 들어가나?  :  " + reciDto.getRe_no());
+		session.setAttribute("re_no",reciDto.getRe_no());
 		
 		//시간 값변환
 		if(reciDto.getTimes().equals("5")) {
@@ -125,7 +127,8 @@ public class RecipeController {
 		return "recipe/recipeBoardContent";
 	}
 	@GetMapping("commentProc")
-	public String commentProc() {
+	public String commentProc(HttpSession session) {
+
 		return "rerer";
 	}
 	

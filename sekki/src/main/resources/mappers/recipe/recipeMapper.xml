@@ -51,7 +51,22 @@
 		UPDATE recipe_board SET VIEWS=VIEWS+1 WHERE re_no=#{re_no}
 	</update>
 
-
+	<insert id="insertComment"
+		parameterType="com.care.sekki.Recipe.CommentDTO"
+		useGeneratedKeys="true" keyProperty="commnet_no">
+		
+		<selectKey keyProperty="commnet_no" resultType="java.lang.Long"
+			order="BEFORE">
+			SELECT NVL(MAX(COMMENT_NO), 0) + 1 FROM RECIPE_COMMENT
+		</selectKey>
+		
+		INSERT INTO RECIPE_COMMENT (COMMENT_NO, RE_NO, ID, COMMENT_CONTENT, RATING,
+		WRITTEN_TIME,PROFILE)
+		VALUES (#{commnet_no}, #{re_no},
+		#{id}, #{comment_content}, #{rating},
+		#{written_time}, #{profile})
+		
+	</insert>
 
 	<insert id="insertRecipe"
 		parameterType="com.care.sekki.Recipe.RecipeBoardDTO"
