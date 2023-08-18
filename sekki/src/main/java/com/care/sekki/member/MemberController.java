@@ -1,7 +1,13 @@
 package com.care.sekki.member;
 
 import java.util.List;
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -16,6 +22,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.care.sekki.customerCenter.centerReplyDTO;
+
+import com.amazonaws.http.HttpResponse;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -45,11 +56,17 @@ public class MemberController {
 		return "default/footer";
 	}
 
+  @RequestMapping("mypage")
+	public String mypage() {
+		return "member/mypage";
+	}
+  
+  /* 로그인 */
 	@GetMapping("login")
 	public String login() {
 		return "member/login";
 	}
-	
+ 
 	@PostMapping("loginProc")
 	public String loginProc(MemberDTO member) {
 		String result = service.loginProc(member);
@@ -59,12 +76,13 @@ public class MemberController {
 		return "member/login";
 	}
 	
-	@RequestMapping("logout")
+  @RequestMapping("logout")
 	public String logout() {
 		session.invalidate();
 		return "forward:login";
 	}
 	
+  /*약관 동의 & 본인 인증*/
 	@GetMapping("agreeCondition")
 	public String agreeCondition() {
 		return "member/agreeCondition";
@@ -94,7 +112,8 @@ public class MemberController {
 	public String checkAuthenticationNumSms(@RequestBody(required = false) String authenticationNum) {
 		return service.checkAuthenticationNumSms(authenticationNum);
 	}
-	
+  
+	/* 회원가입 */
 	@GetMapping("register")
 	public String register() {
 		return "member/register";
@@ -146,6 +165,7 @@ public class MemberController {
 		return "member/register";
 	}
 	
+
 	@GetMapping("findId")
 	public String findId() {
 		return "member/findId";
@@ -178,7 +198,47 @@ public class MemberController {
 	public String findPw() {
 		return "member/findPw";
 	}
-	/*
+  
+	/* 마이페이지                                */
+	@GetMapping("update")
+	public String update() {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.isEmpty()) {
+			return "redirect:login";
+		}
+		return "member/update";
+	}
+  
+	@PostMapping("updateProc")
+	public String updateProc(MemberDTO member, String confirm) {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.isEmpty()) {
+			return "redirect:login";
+		}
+		member.setId(id);
+		String result = service.updateProc(member, confirm);
+		if(result.equals("회원 정보 수정 완료")) {
+			return "forward:logout";
+		}
+		return "member/update";
+	}
+
+	@GetMapping("/recipehoogi")
+	public String recipehoogi(Model model) {
+	    String id = (String) session.getAttribute("id");
+	    if (id == null || id.isEmpty()) {
+	        return "redirect:login";
+	    }
+
+	    model.addAttribute("listofIngredients", service.getIngredients());
+	    model.addAttribute("listofSeasoning", service.getSeasoning());
+
+	    JSONObject recipeData = service.getRecipeData();
+	    model.addAttribute("recipeData", recipeData);
+
+	    return "member/recipehoogi";
+	}
+		
 	@RequestMapping("memberInfo")
 	public String memberInfo(
 			@RequestParam(value="currentPage", required = false)String cp,
@@ -201,28 +261,6 @@ public class MemberController {
 		}
 		model.addAttribute("member", member);
 		return "member/userInfo";
-	}
-	
-	@GetMapping("update")
-	public String update() {
-		String id = (String)session.getAttribute("id");
-		if(id == null || id.isEmpty()) {
-			return "redirect:login";
-		}
-		return "member/update";
-	}
-	@PostMapping("updateProc")
-	public String updateProc(MemberDTO member, String confirm) {
-		String id = (String)session.getAttribute("id");
-		if(id == null || id.isEmpty()) {
-			return "redirect:login";
-		}
-		member.setId(id);
-		String result = service.updateProc(member, confirm);
-		if(result.equals("회원 정보 수정 완료")) {
-			return "forward:logout";
-		}
-		return "member/update";
 	}
 	
 	@GetMapping("delete")
@@ -248,8 +286,21 @@ public class MemberController {
 		}
 		return "member/delete";
 	}
-	*/
 
+	/*email / kakao*/
+	@ResponseBody
+	@PostMapping(value="sendEmail", produces = "text/plain; charset=utf-8")
+	public String sendEmail(@RequestBody(required = false) String email) {
+		return service.sendEmail(email);
+	}
+	
+	@ResponseBody
+	@PostMapping(value="sendAuth", produces = "text/plain; charset=utf-8")
+	public String sendAuth(@RequestBody(required = false) String auth) {
+		//System.out.println("sendAuth()");
+		return service.sendAuth(auth);
+	}
+	
 	@Autowired private KakaoService kakao;
 	@GetMapping("kakaoLogin")
 	public String kakaoLogin(String code) {

@@ -12,6 +12,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">	
 </head>
+	<!-- 
+		# 인가 코드 요청 #
+		https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-code-request
+	 -->
 <body>
 <c:import url="/header"></c:import>
 

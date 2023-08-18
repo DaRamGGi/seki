@@ -81,5 +81,4 @@ public class MemberDTO {
 	 * height) { this.height = height; } public String getWeight() { return weight;
 	 * } public void setWeight(String weight) { this.weight = weight; }
 	 */
-
 }
