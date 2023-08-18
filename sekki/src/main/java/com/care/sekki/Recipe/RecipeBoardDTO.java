@@ -2,31 +2,60 @@ package com.care.sekki.Recipe;
 
 
 import java.sql.Timestamp;
-
+import java.util.Date;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class RecipeBoardDTO {
 	private Long re_no;
 	private String title;
 	private String content;
 	private String id;
+	private String profile;
 
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	
 	private String category;
 	private String cuisine;
+
 	private String times;
 	private String degree;
 	private Timestamp written_time;
 
 	private String tip;
-	private String mainphoto = "";
+	private MultipartFile mainphotoUrl;
+	private String mainphoto;
 
-	
+	private int views;
+	public int getViews() {
+		return views;
+	}
+
+	public void setViews(int views) {
+		this.views = views;
+	}
+
+	public int getStar_rating() {
+		return star_rating;
+	}
+
+	public void setStar_rating(int star_rating) {
+		this.star_rating = star_rating;
+	}
+
+	private int star_rating;
+
 	private List<MaterialDTO> mararials;
 	private List<StepDTO> steps;
 
-	public RecipeBoardDTO() {
-		this.mainphoto = "";
-	}
+	
 	
 
 	
@@ -114,6 +143,15 @@ public class RecipeBoardDTO {
 
 	public void setTip(String tip) {
 		this.tip = tip;
+	}
+
+
+	public MultipartFile getMainphotoUrl() {
+		return mainphotoUrl;
+	}
+
+	public void setMainphotoUrl(MultipartFile mainphotoUrl) {
+		this.mainphotoUrl = mainphotoUrl;
 	}
 
 	public String getMainphoto() {

@@ -58,6 +58,7 @@
 	    }
     }
 </script>
+
 <div align="center" class="main_div">
 	<h3 id="msg"></h3>
 	<h1>회원 등록</h1>

@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		newMaterialDiv.className = 'right_material';
 		newMaterialDiv.innerHTML = `
           <div class="right_boxs">
-            <input type="text" name="materialName" class="form-control materials_css" placeholder="예) 돼지고기">
-            <input type="text" name="materialAmount" class="form-control materials_css" placeholder="예) 100g">
+            <input type="text" name="materialname" class="form-control materials_css" placeholder="예) 돼지고기">
+            <input type="text" name="materialamount" class="form-control materials_css" placeholder="예) 100g">
             <button type="button" class="removeMaterialButton">x</button>
           </div>
         `;
@@ -91,10 +91,10 @@ function previewImage(input, stepIndex) {
         <textarea name="step_text" id="step_text_STEP_${stepCount}" class="form-control step_cont step_text_STEP_css" placeholder="예) 소고기 맛나게 구워드세요"></textarea>
       </div>
       <div id="divStepPhotoBox_STEP_${stepCount}" is_over="0">
-        <label for="step_photoInput_STEP_${stepCount}" class="step_photoLabel">
+        <label for="step_photoholder_STEP_${stepCount}" class="step_photoLabel">
           <img id="stepPhotoHolder_STEP_${stepCount}" class="stepPhotoHolder_STEP_css" src="https://recipe1.ezmember.co.kr/img/pic_none2.gif">
         </label>
-        <input type="file" name="step_photoinput" id="step_photoInput_STEP_${stepCount}" class="step_photoInput" accept="image/*">
+        <input type="file" name="step_photoholder" id="step_photoholder_STEP_${stepCount}" class="step_photoholder" accept="image/*">
       </div>
     `;
     const cokStepElements = document.getElementsByClassName('cok_step');
@@ -102,14 +102,14 @@ function previewImage(input, stepIndex) {
     lastCokStepElement.insertAdjacentElement('afterend', newStepDiv);
 
     // 추가된 스텝의 이미지 입력란에 이벤트 등록
-    const newStepInput = document.getElementById(`step_photoInput_STEP_${stepCount}`);
+    const newStepInput = document.getElementById(`step_photoholder_STEP_${stepCount}`);
     newStepInput.addEventListener('change', function() {
       previewImage(this, stepCount);
     });
   });
 
   // 이미지 선택 시 미리보기 기능
-  const stepPhotoInputs = document.querySelectorAll('.step_photoInput');
+  const stepPhotoInputs = document.querySelectorAll('.step_photoholder');
   stepPhotoInputs.forEach((input, index) => {
     input.addEventListener('change', function() {
       previewImage(this, index + 1);

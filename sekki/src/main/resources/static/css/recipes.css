@@ -282,7 +282,7 @@ width:430px;
 	
 }
 
-.step_photoInput {
+.step_photoholder {
     display: none;
 }
 
@@ -296,7 +296,214 @@ width:430px;
 	align-items: center;
 }
 
+/*====================레시피 게시판==================*/
+.reicpeForm{
+	display: flex;
 
+	flex-wrap: wrap;
+	
+}
+.recipeForm_li{
+	width:30%;
+	
+	
+	
+}
+.recipeForm_li img{
+	width:350px;
+	height: 250px;
+}
+
+.pages {
+	margin-top: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 20px;
+}
+/*====================레시피 게시판==================*/
+/*====================게시판 내부==================*/
+#main_con_info{
+	margin : 0 auto;
+
+	
+	padding-top: 40px;
+	width:760px;
+}
+.user_inffo{
+	
+	display:flex;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+	
+}
+.main_img_con{
+	display: block;
+
+}
+#user_info_con{
+	position: absolute;
+	bottom: -15%;
+	left: 45%;
+	text-align: center;
+}
+
+.user_profile_con{
+	
+	display: block;
+	width:100px;
+	height: 100px;
+	border-radius: 50%;
+}
+.main_img_con{
+	width:80%;
+	height:500px;
+}
+#user_info_con_text{
+	display: block;
+
+}
+
+.main_content{
+	margin : 80px 0 ;
+}
+#cook_info{
+	display: flex;
+	justify-content: center;
+
+}
+
+#cook_info li{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-right: 50px;
+}
+#cook_info li:last-child{
+	margin-right: 0;
+}
+#cook_info li img{
+	display: block;
+	width: 50px;
+}
+/*=================재료==================*/
+.mate_con{
+	display: flex;
+	flex-wrap: wrap;
+	
+}
+
+.mate_con_list {
+  width: 42%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 20px;
+  border-bottom: 1px solid #ececec;
+  align-items: center; /* 세로 중앙 정렬 */
+}
+
+.mate_con_list:last-child {
+  margin-right: 0;
+}
+
+.mate_con_name {
+  margin-right: auto; /* 오른쪽 여백을 최대로 확장하여 오른쪽 정렬 */
+}
+
+.mate_con_alam {
+  margin-left: auto; /* 왼쪽 여백을 최대로 확장하여 오른쪽 정렬 */
+}
+/*=================재료==================*/
+/*=================step=================*/
+.step_con_list{
+	display: flex;
+	flex-direction: row;
+	margin : 20px 0;
+}
+.step_index {
+  display: flex;
+  align-items: center; /* 수직 가운데 정렬 */
+  justify-content: center; /* 수평 가운데 정렬 */
+  width: 40px;
+  height: 40px;
+  background-color: #74b243;
+  border-radius: 50%;
+  color:#fff;
+  margin-right: 0;
+  
+}
+.step_texts{
+	line-height: 40px;
+	margin-left : 20px;
+}
+.step_con_img{
+	display: block;
+	margin-left: auto;
+	width: 300px;
+	height: 280px;
+	border-radius: 10px;
+}
+
+/*=================step=================*/
+/*=====================coment============*/
+.coments{
+	margin-top:20px;
+	display: flex;
+	margin-left : 30px;
+	
+}
+.coment_left{
+	margin-right:20px;	
+	
+}
+.coment_profile_div{
+	display: block;
+}
+.coment_profile{
+	display: block;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	
+}
+
+.coment_star_in{
+	width: 16px;
+	height: 16px;
+}
+.coment_inner{
+	display: flex;
+	flex-direction: column;
+	font-size: 17px;
+}
+.coment_right{
+	width:700px;
+}
+.coment_inner h4{
+	display: flex;
+	margin : 0;
+}
+.coment_content{
+	display: block;
+}
+
+.comnet_written{
+	margin-top:80px;
+	margin-left: 50px;
+}
+
+.comnet_written textarea{
+	width:80%;
+	
+}
+.comnet_written button{
+	height: 100px;
+	margin:0
+}
+/*=====================coment============*/
+
+/*====================게시판 내부==================*/
 
 
 

@@ -8,16 +8,14 @@
 	.main_div{height: 150px; padding-top : 80px;}
 </style>    
 
-<script src="dbQuiz.js">
-
-</script>
+<script src="dbQuiz.js"></script>
 <script src="/js/center.js"></script>
 <link href="css/reset.css" rel="stylesheet" type="text/css" /> 	
 
 <div id="header">
 	<div class="mainLogo">
 		<a href="index">
-			<img src="image/logo.png" alt="logo" />
+		<img src="image/logo.png" alt="logo" />
 		</a>
 	</div>
 	<ul class="nav">
@@ -33,7 +31,7 @@
     <% }%></li>
 		<li><a href="${context }login">로그인</a></li>
 		<li><a href="${context }index">레시피</a></li>
-		<li><a href="${context }recipeBoardWrite">레시피</a></li>
+		<li><a href="${context }recipeBoard">레시피</a></li>
 		<li><a href="${context }register">마이페이지</a></li>
 		<li><a href="${context }boardForm">커뮤니티</a></li>
 		<li><a href="${context }memberInfo">스토어</a></li>

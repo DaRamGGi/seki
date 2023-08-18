@@ -5,7 +5,8 @@ public class StepDTO {
 	
 	private Long re_no;
 	private String step_text;
-	private String step_photoinput;
+	private String step_photoholder;
+
 	
 	public Long getStep_no() {
 		return step_no;
@@ -25,11 +26,11 @@ public class StepDTO {
 	public void setStep_text(String step_text) {
 		this.step_text = step_text;
 	}
-	public String getStep_photoinput() {
-		return step_photoinput;
+	public String getstep_photoholder() {
+		return step_photoholder;
 	}
-	public void setStep_photoinput(String step_photoinput) {
-		this.step_photoinput = step_photoinput;
+	public void setstep_photoholder(String step_photoholder) {
+		this.step_photoholder = step_photoholder;
 	}
 
 }

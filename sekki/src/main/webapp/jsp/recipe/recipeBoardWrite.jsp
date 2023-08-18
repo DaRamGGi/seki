@@ -27,11 +27,11 @@
 						placeholder="기본값은 여기에 적어줍니다."></textarea>
 				</div>
 				<%--요리소개--%>
-				<%-- 
+				
 			<div class="photoBox">
 				<!-- 파일 선택 버튼 (숨겨진 버튼) -->
 				<input type="file" id="fileInput" accept="image/*"
-					style="display: none;" name="mainphoto" onchange="showSelectedImage()">
+					style="display: none;" name="mainphotoUrl" onchange="showSelectedImage()">
 
 				<!-- 이미지를 표시할 img 요소 -->
 				<img id="mainPhotoHolder" onclick="browseMainFile()"
@@ -39,7 +39,7 @@
 					style="width: 250px; height: 250px; cursor: pointer">
 
 			</div>
---%>
+
 				<%--카테고리--%>
 				<div class="content_pdding">
 					<span class="name">카테고리</span> <select class="reci" name="category">
@@ -70,7 +70,7 @@
 						<option value="1">아무나</option>
 						<option value="2">초급</option>
 						<option value="3">중급</option>
-						<option value="4">상급</option>
+						<option value="4">고급</option>
 					</select>
 				</div>
 
@@ -92,9 +92,9 @@
 					<div class="coumngka">
 						<div id="materialContainer">
 							<div class="right_boxs">
-								<input type="text" name="materialName"
+								<input type="text" name="materialname"
 									class="form-control materials_css" placeholder="예) 돼지고기">
-								<input type="text" name="materialAmount"
+								<input type="text" name="materialamount"
 									id="cok_material_amt_1_1" class="form-control materials_css"
 									placeholder="예) 100g">
 							</div>
@@ -136,10 +136,10 @@
         <textarea name="step_text" id="step_text_STEP_1" class="form-control step_cont step_text_STEP_css" placeholder="예) 소고기 맛나게 구워드세요"></textarea>
     </div>
     <div id="divStepPhotoBox_STEP_1">
-        <label for="step_photoInput_STEP_${stepCount}" class="step_photoLabel">
+        <label for="step_photoholder_STEP_${stepCount}" class="step_photoLabel">
             <img id="stepPhotoHolder_STEP_1" class="stepPhotoHolder_STEP_css" src="https://recipe1.ezmember.co.kr/img/pic_none2.gif">
         </label>
-        <input type="file" name="step_photoinput" id="step_photoInput_STEP_${stepCount}" class="step_photoInput" accept="image/*" onchange="previewImage(this, ${stepCount})" multiple>
+        <input type="file" name="step_photoholder" id="step_photoholder_STEP_${stepCount}" class="step_photoholder" accept="image/*" onchange="previewImage(this, ${stepCount})" multiple>
     </div>
 </div>
 				</div>
