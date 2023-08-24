@@ -8,12 +8,15 @@
    .main_div{height: 150px; padding-top : 80px;}
 </style>    
 
+
+
 <script src="/js/center.js"></script>
 <script src="/js/member.js"></script>
 <link href="css/reset.css" rel="stylesheet" type="text/css" />    
 
 
 <div id="header">
+
    <div class="mainLogo">
       <a href="index">
          <img src="image/logo.png" alt="logo" />
@@ -21,6 +24,7 @@
    </div>
    <ul class="nav">
       <li><%-- 세션에서 "profilePictureUrl" 속성 가져오기 --%>
+
     <%
         HttpSession imgurl = request.getSession();
         String profilePictureUrl = (String) session.getAttribute("profilePictureUrl");
@@ -30,6 +34,8 @@
     <% if (profilePictureUrl != null) { %>
         <img src="<%= profilePictureUrl %>" class="profile">
     <% }%></li>
+
+
       <li><a href="${context }login">로그인</a></li>
       <li><a href="${context }index">레시피</a></li>
       <li><a href="${context }recipeBoardWrite">레시피</a></li>
@@ -38,6 +44,7 @@
       <li><a href="${context }memberInfo">스토어</a></li>
       <li><a href="${context }announcement">고객센터</a></li>
    </ul>
+
 </div>
 <hr>
 <c:url var="context" value="/"/>

@@ -6,8 +6,8 @@ public class MaterialDTO {
 	private Long mate_no;
 	
 	private Long re_no;
-	private String materialName;
-    private String materialAmount;
+	private String materialname;
+    private String materialamount;
     
     public MaterialDTO(){
     	
@@ -30,21 +30,21 @@ public class MaterialDTO {
 		this.re_no = re_no;
 	}
 
-	public String getMaterialName() {
-		return materialName;
+	public String getmaterialname() {
+		return materialname;
 	}
-	public void setMaterialName(String materialName) {
-		this.materialName = materialName;
+	public void setmaterialname(String materialname) {
+		this.materialname = materialname;
 	}
-	public String getMaterialAmount() {
-		return materialAmount;
+	public String getmaterialamount() {
+		return materialamount;
 	}
-	public void setMaterialAmount(String materialAmount) {
-		this.materialAmount = materialAmount;
+	public void setmaterialamount(String materialamount) {
+		this.materialamount = materialamount;
 	}
 	
-	public MaterialDTO(String materialName, String materialAmount) {
-		this.materialName = materialName;
-		this.materialAmount = materialAmount;
+	public MaterialDTO(String materialname, String materialamount) {
+		this.materialname = materialname;
+		this.materialamount = materialamount;
 	}
 }
