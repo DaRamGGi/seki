@@ -115,8 +115,30 @@ function previewImage(input, stepIndex) {
       previewImage(this, index + 1);
     });
   });
-
-
-
-
 });
+
+//욧기ㅏ부터
+function openFileSelector(stepIndex) {
+  const fileInput = document.getElementById(`step_photoholder_STEP_${stepIndex}`);
+
+  if (!fileInput.value) { // 이미 파일 선택이 되어 있는 경우에는 무시
+    fileInput.click();
+  }
+}
+
+// 이미지 선택 시 미리보기 기능은 그대로 유지합니다.
+const stepPhotoInputs = document.querySelectorAll('.step_photoholder');
+stepPhotoInputs.forEach((input, index) => {
+  const stepIndex = index + 1; // stepIndex 계산
+  input.addEventListener('change', function() {
+    previewImage2(this, stepIndex); // stepIndex를 전달하여 함수 호출
+  });
+});
+
+//업데이트 삭제
+function deleteRecipe(re_no) {
+	result = confirm('정말로 레시피를 삭제하겠습니까?');
+	if (result == true) {
+		location.href = 'deleteRecipe?re_no=' + re_no;
+	}
+}

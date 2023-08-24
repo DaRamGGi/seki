@@ -47,26 +47,32 @@
 	<select id="recipeSt" parameterType="com.care.sekki.Recipe.StepDTO">
 		SELECT * FROM recipe_step WHERE re_no=#{re_no}
 	</select>
+	<select id="reciment" parameterType="com.care.sekki.Recipe.CommentDTO">
+		SELECT * FROM recipe_comment WHERE re_no=#{re_no}
+	</select>
 	<update id="reHit">
 		UPDATE recipe_board SET VIEWS=VIEWS+1 WHERE re_no=#{re_no}
 	</update>
-
+	<!-- 댓글 -->
 	<insert id="insertComment"
 		parameterType="com.care.sekki.Recipe.CommentDTO"
-		useGeneratedKeys="true" keyProperty="commnet_no">
+		useGeneratedKeys="true" keyProperty="comment_no">
 		
-		<selectKey keyProperty="commnet_no" resultType="java.lang.Long"
+		<selectKey keyProperty="comment_no" resultType="java.lang.Long"
 			order="BEFORE">
 			SELECT NVL(MAX(COMMENT_NO), 0) + 1 FROM RECIPE_COMMENT
 		</selectKey>
 		
 		INSERT INTO RECIPE_COMMENT (COMMENT_NO, RE_NO, ID, COMMENT_CONTENT, RATING,
 		WRITTEN_TIME,PROFILE)
-		VALUES (#{commnet_no}, #{re_no},
+		VALUES (#{comment_no}, #{re_no},
 		#{id}, #{comment_content}, #{rating},
 		#{written_time}, #{profile})
 		
 	</insert>
+	<!-- 댓글 -->
+	
+
 
 	<insert id="insertRecipe"
 		parameterType="com.care.sekki.Recipe.RecipeBoardDTO"
@@ -105,5 +111,45 @@
 		STEP_PHOTOHOLDER)
 		VALUES (#{step_no}, #{re_no}, #{step_text}, #{step_photoholder})
 	</insert>
+	
+	
+	<!--업데이트 -->
+	
+	<!-- 메인 보더 -->
+	<update id="reciUpdata" parameterType="com.care.sekki.Recipe.RecipeBoardDTO">
+		UPDATE RECIPE_BOARD SET title=#{title}, content=#{content}, TIP=#{tip}, mainphoto=#{mainphoto}, category=#{category}, cuisine=#{cuisine}, times=#{times}, degree=#{degree} WHERE re_no=#{re_no}
+	</update>
+	<!-- 메인 보더 -->
+	
+	<!--  재료들 -->
+	<update id="mateUpdata" parameterType="com.care.sekki.Recipe.MaterialDTO">
+		UPDATE RECIPE_MATERIAL SET MATERIALNAME=#{materialname}, MATERIALAMOUNT=#{materialamount} WHERE re_no=#{re_no} AND MATE_NO=#{mate_no}
+	</update>	
+	<!--  재료들 -->
+	
+	<!--  스텝들 -->
+	<update id="stepUpdata" parameterType="com.care.sekki.Recipe.StepDTO">
+		UPDATE RECIPE_STEP SET STEP_TEXT=#{step_text}, STEP_PHOTOHOLDER=#{step_photoholder} WHERE re_no=#{re_no} AND step_no=#{step_no}
+	</update>	
+	
+	<!--  스텝들 -->
+	<!-- 업데이트 -->
+	
+	<!-- 삭제 -->
+	<delete id="reciBoardDel">
+		DELETE FROM RECIPE_BOARD WHERE RE_NO=#{re_no} 
+	</delete>
+	
+	<delete id="reciMateDel">
+	DELETE FROM RECIPE_MATERIAL WHERE RE_NO=#{re_no}
+	</delete>
+	
+	<delete id="reciStepDel">
+	DELETE FROM RECIPE_STEP WHERE RE_NO=#{re_no}
+	</delete>
+	
+	<delete id="reciCommentDel">
+	DELETE FROM RECIPE_COMMENT WHERE RE_NO=#{re_no}
+	</delete>
 
 </mapper>

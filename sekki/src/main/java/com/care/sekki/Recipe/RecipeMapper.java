@@ -26,4 +26,22 @@ public interface RecipeMapper {
 
 	List<StepDTO> recipeSt(long re_no);
 
+	void insertComment(CommentDTO commentDto);
+
+	List<CommentDTO> reciment(long re_no);
+
+	void reciUpdata(RecipeBoardDTO reciDto);
+
+	void mateUpdata(MaterialDTO materialDTO);
+
+	void stepUpdata(StepDTO step);
+
+	void reciBoardDel(long re_no);
+
+	void reciMateDel(long re_no);
+
+	void reciStepDel(long re_no);
+
+	void reciCommentDel(long re_no);
+
 }

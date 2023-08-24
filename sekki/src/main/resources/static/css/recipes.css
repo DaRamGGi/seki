@@ -489,7 +489,7 @@ width:430px;
 }
 
 .comnet_written{
-	margin-top:80px;
+	margin-top: 10px;
 	margin-left: 50px;
 }
 
@@ -501,9 +501,16 @@ width:430px;
 	height: 100px;
 	margin:0
 }
+.reci_up_da{
+	float: right;
+	background-color: #74b243;
+	border: #74b243;
+	margin-right: 50px;
+	margin-bottom: 20px;
+}
 
 /*=====================별점================*/
-.starpoint_wrap{display:inline-block;}
+.starpoint_wrap{display:inline-block; margin-left: 50px;}
 .starpoint_box{position:relative;background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 0 no-repeat;font-size:0;}
 .starpoint_box .starpoint_bg{display:block;position:absolute;top:0;left:0;height:18px;background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 -20px no-repeat;pointer-events:none;}
 .starpoint_box .label_star{display:inline-block;width:10px;height:18px;box-sizing:border-box;}

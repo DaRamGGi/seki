@@ -1,6 +1,7 @@
 package com.care.sekki.Recipe;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class RecipeController {
     public String recipeBoard(@RequestParam(value="currentPage", required = false)String cp,
 			String search, Model model) {
 		recipeService.recipeBoard(cp, search ,model);
+		
         return "recipe/recipeBoard";
     }
 	
@@ -116,6 +118,51 @@ public class RecipeController {
 		    return "redirect:recipeBoard";
 
 		model.addAttribute("reciMa", reciMa);
+		
+		
+		
+		List<CommentDTO> reciment = recipeService.recipeContent_comment(n);
+
+		if (reciment == null) {
+			 model.addAttribute("commentMessage", "아직 작성한 댓글이 없습니다.");
+		    
+		}else {
+		model.addAttribute("reciment", reciment);
+		
+		for (CommentDTO comment : reciment) {
+		    float rating = comment.getRating(); // CommentDTO 객체의 rating 값 가져오기
+
+		    int maxRating = 5;
+		    int intPart = (int) Math.floor(rating);
+		    int fractionalPart = Math.round((rating - intPart) * 2);
+
+		    String fullStarPath = "image/star_green.png";
+		    String halfStarPath = "image/star_green_half.png";
+		    String emptyStarPath = "image/star_no.png";
+
+		    List<String> starTags = new ArrayList<>();
+		    for (int i = 1; i <= maxRating; i++) {
+		        if (i <= intPart) {
+		            starTags.add("<img src='" + fullStarPath + "' alt='Full Star'>");
+		        } else if (i == intPart + 1 && fractionalPart == 1) {
+		            starTags.add("<img src='" + halfStarPath + "' alt='Half Star'>");
+		        } else {
+		            starTags.add("<img src='" + emptyStarPath + "' alt='Empty Star'>");
+		        }
+		    }
+
+		    comment.setStarTags(starTags); // CommentDTO 객체에 starTags 설정
+		}
+		}
+
+		model.addAttribute("reciment", reciment);
+
+
+
+
+
+
+;
 
 		List<StepDTO> reciStepList = recipeService.recipeContent_step(n); // 수정된 부분
 
@@ -126,10 +173,51 @@ public class RecipeController {
 
 		return "recipe/recipeBoardContent";
 	}
-	@GetMapping("commentProc")
-	public String commentProc(HttpSession session) {
+	@PostMapping("commentProc")
+	public String commentProc(HttpSession session, CommentDTO commentDto, Model model) {
+		recipeService.commentProc(commentDto);
 
-		return "rerer";
+		
+		return "redirect:/recipeBoardContent?num=" + commentDto.getRe_no();
 	}
+	@GetMapping("recipeBoardUpdata")
+	public String recipeBoardUpdata(@RequestParam(value="num", required = false)String n, Model model,
+			HttpServletRequest request, HttpServletResponse response) {
+		RecipeBoardDTO recipeContent = recipeService.recipeContent(n);
+        List<MaterialDTO> recipeContentMa = recipeService.recipeContent_ma(n);
+        List<StepDTO> recipeContentStep = recipeService.recipeContent_step(n);
+        session.setAttribute("re_no", recipeContent.getRe_no());
+        System.out.println("re_no 찾기 : " + recipeContent.getRe_no());
+       
+        if (recipeContent == null || recipeContentMa == null || recipeContentStep == null) {
+            // 필요한 데이터가 없으면 예외 처리 또는 에러 페이지로 이동 처리
+        }
+        
+        model.addAttribute("recipeCon", recipeContent);
+        model.addAttribute("reciMa", recipeContentMa);
+        model.addAttribute("reciStepList", recipeContentStep);
+        model.addAttribute("selectedCategory", recipeContent.getCategory());
+        model.addAttribute("selectedCuisine", recipeContent.getCuisine());
+        model.addAttribute("selectedTimes", recipeContent.getTimes());
+        model.addAttribute("selectedDegree", recipeContent.getDegree());
+		return "recipe/recipeBoardUpdata";
+	}
+	
+	@PostMapping("recipeUpdataProc")
+	public String recipeBoardUpdata(RecipeBoardDTO recipeDto,HttpServletRequest request, HttpServletResponse response) {
+		recipeService.recipeUpdata(recipeDto,request, response);
+		
+		return "recipe/recipeBoard";
+	}
+	
+	@RequestMapping("deleteRecipe")
+	public String deleteRecipe(@RequestParam(value="re_no", required = false)String n) {
+		
+		recipeService.reciDelete(n);
+		
+		return "recipe/recipeBoard";
+	}
+	
+	
 	
 }

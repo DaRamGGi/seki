@@ -1,14 +1,21 @@
 package com.care.sekki.Recipe;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class CommentDTO {
-	private Long commnet_no;
-
+	private Long comment_no;
+	private List<String> starTags;
+	public List<String> getStarTags() {
+		return starTags;
+	}
+	public void setStarTags(List<String> starTags) {
+		this.starTags = starTags;
+	}
 	private Long re_no;
 	private String id;
 	private String comment_content;
-	private int rating;
+	private float rating;
 	private Timestamp written_time;
 	private String profile;
 	
@@ -18,11 +25,11 @@ public class CommentDTO {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
-	public Long getCommnet_no() {
-		return commnet_no;
+	public Long getcomment_no() {
+		return comment_no;
 	}
-	public void setCommnet_no(Long commnet_no) {
-		this.commnet_no = commnet_no;
+	public void setcomment_no(Long comment_no) {
+		this.comment_no = comment_no;
 	}
 
 	public Long getRe_no() {
@@ -40,15 +47,16 @@ public class CommentDTO {
 	public String getComment_content() {
 		return comment_content;
 	}
+	public float getRating() {
+		return rating;
+	}
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
 	public void setComment_content(String comment_content) {
 		this.comment_content = comment_content;
 	}
-	public int getRating() {
-		return rating;
-	}
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
+
 	public Timestamp getWritten_time() {
 		return written_time;
 	}

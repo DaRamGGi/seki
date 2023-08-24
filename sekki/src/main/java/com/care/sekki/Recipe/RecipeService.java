@@ -1,5 +1,6 @@
 package com.care.sekki.Recipe;
 
+import java.io.File;
 import java.io.IOException;
 
 import java.sql.Timestamp;
@@ -116,21 +117,40 @@ public class RecipeService {
 	    if (recipeSt == null || recipeSt.isEmpty()) {
 	        return null;
 	    }
+	    
+	    for(StepDTO to : recipeSt) {
+        	System.out.println("step_no : " + to.getStep_no());
+        	System.out.println("re_no : " + to.getRe_no());
+        }
 
 	    return recipeSt; // 모든 결과를 그대로 반환
+	}
+	
+	public List<CommentDTO> recipeContent_comment(String n) {
+	    long re_no = 0;
+	    try {
+	        re_no = Long.parseLong(n);
+	    } catch (Exception e) {
+	        return null;
+	    }
+
+	    List<CommentDTO> reciment = recipemapper.reciment(re_no);
+	    if (reciment == null || reciment.isEmpty()) {
+	        return null;
+	    }
+
+	    return reciment; // 모든 결과를 그대로 반환
 	}
 	
 	public void reHit(Long re_no) {
 		recipemapper.reHit(re_no);
 	}
 	
-	public String commentProc(CommentDTO commentDto, HttpServletRequest request, HttpServletResponse response) {
+	public String commentProc(CommentDTO commentDto) {
 		String id = (String)session.getAttribute("id");
-		if(id == null || id.isEmpty()) {
-			return "로그인을 해주세요";
-		}
+
 		String profile = (String)session.getAttribute("profilePictureUrl");
-		
+
 		commentDto.setId(id);
 		commentDto.setProfile(profile);
 		Instant currentTime = Instant.now();
@@ -140,10 +160,15 @@ public class RecipeService {
 		    Long reNo = (Long) reNoObject;
 		    commentDto.setRe_no(reNo);
 		}
-
+		System.out.println("다람쥐잉 다라주미이" + commentDto.getRating());
 		System.out.println("re_no뜻냐 : " + commentDto.getRe_no());
+		recipemapper.insertComment(commentDto);
+		
+		return "굳";
+
+		
 		//recipemapper.insertComment(commentDto);
-		return "댓글달기성공";
+
 	}
 	
 //----------------------------댓글-------------------------------
@@ -273,7 +298,156 @@ public class RecipeService {
 	    System.out.println("time : " + reciDto.getWritten_time());
 		System.out.println("id : " + id);
 		
-		return "람쥐";
+		return "레시피 작성에 성공했습니다.";
 	}
 //---------------------------레시피 작성------------------------------
+	
+//--------------------------레시피 수정-------------------------------
+	public String recipeUpdata(RecipeBoardDTO reciDto,
+			HttpServletRequest request, HttpServletResponse response) {
+		Long re_no = (Long) session.getAttribute("re_no");
+		RecipeBoardDTO recieContent = recipemapper.recipeContent(re_no);
+		reciDto.setRe_no(re_no);
+		System.out.println("rre_no 찾기 : " + reciDto.getRe_no());
+		System.out.println(reciDto.getRe_no());
+	    System.out.println(reciDto.getTitle());
+	    System.out.println("유알엘 : " + reciDto.getMainphotoUrl());
+	    MultipartFile mainphotoUrl = reciDto.getMainphotoUrl();
+	    try {
+	        if (mainphotoUrl != null && !mainphotoUrl.isEmpty()) {
+	            String mainphoto = s3UploadService.saveFile(mainphotoUrl, reciDto.getId()); // 파일을 업로드하고 URL을 얻음
+	            reciDto.setMainphoto(mainphoto); // 업로드한 파일의 URL을 DTO에 설정
+	        } else {
+	            reciDto.setMainphoto(recieContent.getMainphoto()); // 이미지가 없을 경우 빈 문자열로 설정
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        reciDto.setMainphoto(""); // 예외 발생 시 빈 문자열로 설정하거나 다른 처리를 하세요.
+	    }
+	    System.out.println("유알엘 정보에요오오옹 : " + reciDto.getMainphoto());
+	    
+	    
+	    //업데이트로 바꾸셈
+	    recipemapper.reciUpdata(reciDto);
+	    //업데이트로 바꾸셈
+
+	    String[] materialnames = request.getParameterValues("materialname");
+	    System.out.println("재료 이름  :  " + materialnames);
+	    String[] materialamounts = request.getParameterValues("materialamount");
+	    System.out.println("재료 이름  :  " + materialamounts);
+
+	    // 재료 데이터를 담을 리스트 생성
+	    List<MaterialDTO> recipeMa = recipemapper.recipeMa(reciDto.getRe_no());
+	    List<MaterialDTO> materials = new ArrayList<MaterialDTO>();
+	    
+	    
+
+	    // 재료 데이터 배열을 DTO 리스트로 변환
+	    for (int i = 0; i < recipeMa.size(); i++) {
+	    	MaterialDTO mateDTO = recipeMa.get(i);
+	    	
+	        MaterialDTO materialDTO = new MaterialDTO();
+	        materialDTO.setMate_no(mateDTO.getMate_no());
+	        System.out.println("mate에서 mano찾기 : " + materialDTO.getMate_no());
+	        materialDTO.setRe_no(reciDto.getRe_no());
+	        System.out.println("mate에서 re찾기 : " + materialDTO.getRe_no());
+	        
+	        materialDTO.setmaterialname(materialnames[i]);
+	        System.out.println(materialDTO.getmaterialname());
+	        
+	        materialDTO.setmaterialamount(materialamounts[i]);
+	        System.out.println(materialDTO.getmaterialamount());
+	        materials.add(materialDTO);
+	    }
+	    
+	    
+	    
+	    for (MaterialDTO materialDTO : materials) {
+	    	//업데이트로 바꾸기
+	    	recipemapper.mateUpdata(materialDTO);
+	    	//업데이트로 바꾸기
+	    }
+	    
+	    List<MultipartFile> stepPhotoFiles = ((MultipartHttpServletRequest) request).getFiles("step_photoholder");
+	    List<StepDTO> recipeSt = recipemapper.recipeSt(re_no);
+	    List<StepDTO> Steps = new ArrayList<>();
+
+	    String[] stepTexts = request.getParameterValues("step_text");
+	    
+
+	    for (int i = 0; i < recipeSt.size(); i++) {
+	        StepDTO stepDTO = recipeSt.get(i);
+	        System.out.println("사진이들어갈까요 : " + stepDTO.getstep_photoholder());
+	        StepDTO newStepDTO = new StepDTO();
+	        newStepDTO.setStep_no(stepDTO.getStep_no());
+	        newStepDTO.setRe_no(reciDto.getRe_no());
+
+	        if (i < stepTexts.length) {
+	            newStepDTO.setStep_text(stepTexts[i]);
+	        } else {
+	            newStepDTO.setStep_text(null); // 또는 빈 문자열로 설정하거나 다른 기본값을 선택할 수 있습니다.
+	        } if (stepPhotoFiles != null && stepPhotoFiles.size() > i) {
+	            MultipartFile stepPhotoFile = stepPhotoFiles.get(i);
+
+	            try {
+	                if (!stepPhotoFile.isEmpty()) {
+	                    String stepPhotoUrl = s3UploadService.saveFile(stepPhotoFile, reciDto.getId());
+	                    newStepDTO.setstep_photoholder(stepPhotoUrl);
+	                } else {
+	                	newStepDTO.setstep_photoholder(stepDTO.getstep_photoholder());
+	                }
+	            } catch (IOException e) {
+	                // IOException 발생 시 처리할 내용을 여기에 작성합니다.
+	                e.printStackTrace(); // 예시로 에러 로그를 출력합니다.
+	                newStepDTO.setstep_photoholder(stepDTO.getstep_photoholder()); // 예외 발생 시 빈 문자열로 설정하거나 다른 처리를 하세요.
+	            }
+	        } else {
+	        	newStepDTO.setstep_photoholder(stepDTO.getstep_photoholder());
+	        	System.out.println("사진이들어갈까요 : " + newStepDTO.getstep_photoholder());
+	        }
+	        
+	        Steps.add(newStepDTO);
+	    }
+	    for (StepDTO stepDTO : Steps) {
+	    	System.out.println("stpeno : " + stepDTO.getStep_no());
+	    	System.out.println("re_no : " + stepDTO.getRe_no());
+	        System.out.println("스텝 텍스트 : " + stepDTO.getStep_text());
+	        System.out.println("스탭 포토 : " + stepDTO.getstep_photoholder());
+	    }
+	    for (StepDTO step : Steps) {
+	    	//업데이트로 바꾸기
+	    	recipemapper.stepUpdata(step);
+	    	//업데이트로 바꾸기
+        }
+
+		return "레시피 작성에 성공했습니다.";
+	}
+//--------------------------레시피 수정-------------------------------
+//--------------------------레시피 삭제-------------------------------
+	public void reciDelete(String n) {
+		   long re_no = 0;
+		    try {
+		        re_no = Long.parseLong(n);
+		    } catch (Exception e) {
+		        return;
+		    }
+
+		RecipeBoardDTO recipeDto = recipemapper.recipeContent(re_no);
+		if (recipeDto == null)
+			return;
+
+		
+		
+		recipemapper.reciMateDel(re_no);
+		
+		recipemapper.reciStepDel(re_no);
+		
+		recipemapper.reciCommentDel(re_no);
+		
+		recipemapper.reciBoardDel(re_no);
+
+
+		return;
+	}
+//--------------------------레시피 삭제-------------------------------
 }
