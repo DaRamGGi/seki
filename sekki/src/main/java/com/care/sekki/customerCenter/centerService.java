@@ -25,6 +25,7 @@ import com.care.sekki.board.BoardDTO;
 import com.care.sekki.common.PageService;
 import com.care.sekki.member.MemberDTO;
 import com.care.sekki.member.MemberMapper;
+import com.care.sekki.member.SmsService;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -513,10 +514,6 @@ public class centerService {
 
 		centerReplyDTO adminReply = new centerReplyDTO();
 
-		/*
-		 * String writer = (String)session.getAttribute("id"); if(writer == null ||
-		 * writer.equals("admin") == false) { return "접근이 제한되었습니다."; }
-		 */
 		adminReply.setCenterNum(num);
 		adminReply.setCategory("inquiry");
 		adminReply.setReply(replyContent.replaceAll("\n", "<br>"));
@@ -529,7 +526,6 @@ public class centerService {
 		centerMapper.adminReplyProc(adminReply);
 		centerMapper.incReplys(num);
 		
-		
 		//작성자 전화번호 가져오기
 		centerDTO inquiry = centerMapper.centerContent(num);
 		String writer = inquiry.getWriter();
@@ -539,7 +535,12 @@ public class centerService {
 		
 		return phoneNumber;
 	}
-
+	
+	@Autowired private SmsService smsService;
+	public void sendAdminReply(String phoneNumber){
+		smsService.sendAdminReply(phoneNumber);
+	}
+	
 	public ArrayList<centerReplyDTO> inquiryReplys(String n) {
 		// TODO Auto-generated method stub
 		int center_num = 0;
@@ -688,24 +689,6 @@ public class centerService {
 	public void deleteAdminReply(int replyNum, int centerNum) {
 		centerMapper.deleteReply(replyNum);
 		centerMapper.decReplys(centerNum);
-	}
-	
-	public void sendSms(String phoneNumber){
-		DefaultMessageService messageService =  NurigoApp.INSTANCE.initialize(
-				"api키", "secret-api키", "https://api.coolsms.co.kr");
-		Message message = new Message();
-		message.setFrom("01035056792");
-		message.setTo(phoneNumber);
-		message.setText("(자취세끼) 문의글에 답변이 등록되었습니다. 확인바랍니다.");
-
-		try {
-		  messageService.send(message);
-		} catch (NurigoMessageNotReceivedException exception) {
-		  System.out.println(exception.getFailedMessageList());
-		  System.out.println(exception.getMessage());
-		} catch (Exception exception) {
-		  System.out.println(exception.getMessage());
-		}
 	}
 	
 }

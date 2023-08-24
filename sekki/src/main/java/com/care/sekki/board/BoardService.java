@@ -24,38 +24,36 @@ import jakarta.servlet.http.HttpSession;
 public class BoardService {
 	@Autowired private BoardMapper boardMapper;
 	@Autowired private HttpSession session;
-
-	public void boardForm(String cp, String search ,Model model) {
-		
+	
+	public void boardForm(String cp, Model model) {
 		int currentPage = 1;
 		try{
 			currentPage = Integer.parseInt(cp);
 		}catch(Exception e){
 			currentPage = 1;
 		}
-
-		int pageBlock = 6; // 한 페이지에 보일 데이터의 수 
+		
+		int pageBlock = 3; // 한 페이지에 보일 데이터의 수 
 		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
 		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
-
-		ArrayList<BoardDTO> boards = boardMapper.boardForm(begin, end, search);
-		int totalCount = boardMapper.count(search);
-		String url = "boardForm?&search="+search+"currentPage=";
+	
+		ArrayList<BoardDTO> boards = boardMapper.boardForm(begin, end);
+		int totalCount = boardMapper.count();
+		String url = "boardForm?currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
-
+		
 		model.addAttribute("boards", boards);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
 	}
-	
-	
-	public String boardWriteProc(MultipartHttpServletRequest multi) {
 
+	public String boardWriteProc(MultipartHttpServletRequest multi) {
+		
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.isEmpty()) {
 			return "로그인";
 		}
-
+		
 		BoardDTO board = new BoardDTO();
 		board.setId(id);
 		board.setTitle(multi.getParameter("title"));
@@ -63,11 +61,11 @@ public class BoardService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		board.setWriteDate(sdf.format(new Date()));
 		board.setFileName("");
-
+		
 		if(board.getTitle() == null || board.getTitle().isEmpty()) {
 			return "제목을 입력하세요.";
 		}
-
+		
 		MultipartFile file = multi.getFile("upfile");
 		String fileName = file.getOriginalFilename();
 		if(file.getSize() != 0) {
@@ -76,13 +74,13 @@ public class BoardService {
 			Calendar cal = Calendar.getInstance();
 			fileName = sdf.format(cal.getTime()) + fileName;
 			board.setFileName(fileName);
-
+			
 // 업로드 파일 저장 경로
 // ubuntu@ip-172-31-32-35:~$ sudo mkdir /opt/tomcat/tomcat-10/webapps/upload
 // ubuntu@ip-172-31-32-35:~$ sudo chown -RH tomcat: /opt/tomcat/tomcat-10/webapps/upload
-			String fileLocation = "/opt/tomcat/tomcat-10/webapps/upload/";
+			String fileLocation = "C:\\javas\\upload\\";
 			File save = new File(fileLocation + fileName);
-
+			
 			try {
 				// 서버가 저장한 업로드 파일은 임시저장경로에 있는데 개발자가 원하는 경로로 이동
 				file.transferTo(save);
@@ -90,7 +88,7 @@ public class BoardService {
 				e.printStackTrace();
 			}
 		}
-
+		
 		boardMapper.boardWriteProc(board);
 		return "게시글 작성 완료";
 	}
@@ -102,11 +100,11 @@ public class BoardService {
 		}catch(Exception e){
 			return null;
 		}
-
+		
 		BoardDTO board = boardMapper.boardContent(no);
 		if(board == null)
 			return null;
-
+		
 		board.setHits(board.getHits()+1);
 		incHit(board.getNo());
 
@@ -119,27 +117,31 @@ public class BoardService {
 		}
 		return board;
 	}
-
+	
 	public void incHit(int no) {
 		boardMapper.incHit(no);
+	}
+	
+	public void incLike(int no) {
+		boardMapper.incLike(no);
 	}
 
 	public boolean boardDownload(String n, HttpServletResponse res) {
 		int no = 0;
-
+		
 		try{
 			no = Integer.parseInt(n);
 		}catch(Exception e){
 			return false;
 		}
-
+		
 		String fileName = boardMapper.boardDownload(no);
 		if(fileName == null)
 			return false;
-
+		
 		String location = "/opt/tomcat/tomcat-10/webapps/upload/";
 		File file = new File(location + fileName);
-
+		
 		try {
 			String[] original = fileName.split("-", 2);
 			res.setHeader("Content-Disposition", 
@@ -147,11 +149,11 @@ public class BoardService {
 			FileInputStream fis = new FileInputStream(file);
 			FileCopyUtils.copy(fis, res.getOutputStream());
 			fis.close();
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 		return true;
 	}
 
@@ -162,28 +164,60 @@ public class BoardService {
 		}catch(Exception e){
 			return null;
 		}
-
+		
 		BoardDTO board = boardMapper.boardContent(no);
 		if(board == null)
 			return null;
 
-		if(board.getFileName() != null && board.getFileName().isEmpty() == false) {
+		//&& board.getFileName().isEmpty() == false
+		if(board.getFileName() != null ) {
 			String fn = board.getFileName();
 			String[] fileName = fn.split("-", 2);
 			board.setFileName(fileName[1]);
 		}
 		return board;
 	}
-
+	
 	public String boardModifyProc(BoardDTO board) {
 		if(board.getTitle() == null || board.getTitle().isEmpty())
 			return "제목을 입력하세요.";
-
+		
 		boardMapper.boardModifyProc(board);
 		return "게시글 수정 완료";
 	}
 
 	public String boardDeleteProc(String n) {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.isEmpty()) {
+			return "로그인";
+		}
+		
+		int no = 0;
+		try{
+			no = Integer.parseInt(n);
+		}catch(Exception e){
+			return "게시글 번호에 문제가 생겼습니다.";
+		}
+		
+		BoardDTO board = boardMapper.boardContent(no);
+		if(board == null)
+			return "게시글 번호에 문제가 생겼습니다.";
+		
+		if(id.equals(board.getId()) == false)
+			return "작성자만 삭제 할 수 있습니다.";
+		
+		boardMapper.boardDeleteProc(no);
+		
+		String path = "/opt/tomcat/tomcat-10/webapps/upload/" + board.getFileName();
+		File file = new File(path);
+		if(file.exists() == true) {
+			file.delete();
+		}
+		
+		return "게시글 삭제 완료";
+	}
+	
+	public String likeProc(String n) {
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.isEmpty()) {
 			return "로그인";
@@ -200,17 +234,17 @@ public class BoardService {
 		if(board == null)
 			return "게시글 번호에 문제가 생겼습니다.";
 
-		if(id.equals(board.getId()) == false)
-			return "작성자만 삭제 할 수 있습니다.";
+		boardMapper.incLike(no);
 
-		boardMapper.boardDeleteProc(no);
-
-		String path = "/opt/tomcat/tomcat-10/webapps/upload/" + board.getFileName();
-		File file = new File(path);
-		if(file.exists() == true) {
-			file.delete();
-		}
-
-		return "게시글 삭제 완료";
+		return "좋아요";
 	}
 }
+
+
+
+
+
+
+
+
+

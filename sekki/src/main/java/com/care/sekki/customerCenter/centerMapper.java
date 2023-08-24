@@ -19,7 +19,8 @@ public interface centerMapper {
 	
 	centerDTO centerContent(int num);
 	
-	ArrayList<centerReplyDTO> replys(@Param("center_num") int center_num, @Param("category")String category);
+	ArrayList<centerReplyDTO> replys(@Param("center_num") int center_num, 
+			@Param("category")String category);
 	
 	String fileDownload(int num);
 	

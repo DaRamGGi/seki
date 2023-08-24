@@ -279,7 +279,7 @@ public class centerController {
 			Model model) {
 		String phoneNumber = service.adminReplyProc(n, replyContent);
 		if(phoneNumber != null) {
-			//service.sendSms(phoneNumber);
+			//service.sendAdminReply(phoneNumber);
 			return "redirect:inquiryContent?num="+n;
 		}
 		

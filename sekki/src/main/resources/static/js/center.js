@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 });
 
-function titleCheck() {
+function regIdCheck(){
 	const titleLabel = document.getElementById('titleLabel');
 	const titleInput = document.getElementById('title');
 
