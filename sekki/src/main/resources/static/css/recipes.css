@@ -1,0 +1,302 @@
+/*recipeBoard css입니다람쥐*/
+
+
+ul.cate {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  border: 2px solid lightgreen;
+  border-radius: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+ul.cate li {
+  display: inline-block;
+ border-right: 2px solid lightgreen;
+  padding: 10px 20px;
+  font-size: 25;
+
+}
+
+ul.cate li:last-child {
+  border-right: none;
+}
+
+/*recipeBoardWrite css입니다람쥐*/
+
+.mid_title{
+	font-size: 16px;
+	padding-bottom:20px;
+	line-height: 40px;
+}
+
+.recipe_p{
+	font-size: 13px;
+	color: rgb(94, 94, 94);
+	letter-spacing : -0.5px;
+}
+#full{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color:#f1f1f2;
+	
+}
+/*컨텐츠 기본 크기*/
+#width1200{
+	width: 1200px;
+	background-color: #f8f8f8;
+	font-size: 20px;
+	font-weight: bold;
+
+	margin: 10px auto;
+}
+/*컨텐츠 기본 크기*/
+
+
+/*컨텐츠 css 기본틀*/
+#cok_info{
+	position: relative;
+}
+.title{
+
+	background-color: rgb(209, 209, 209);
+		padding: 14px 18px;
+		border: 1px solid rgb(185, 185, 185);
+}
+.content_borad{
+	border-top: 10px solid #f1f1f2;
+}
+.cont_box{
+	padding: 26px 30px;
+
+border: 1px solid #e1e1e1;
+}
+
+.pd_l_60{
+	padding-left: 35px !important;
+}
+/*컨텐츠 css 기본틀*/
+
+.cok_title {
+  	background: #f5f5f5;
+  	width: 400px;
+    border: 1px solid #e1e1e1;
+    font-size: 16px;
+    padding-left: 15px;
+    height: 70px;
+    vertical-align: middle;
+    margin-top: -1px;
+    border-radius: 8px;
+
+}
+
+.photoBox{
+	position: absolute;
+	top:5%;
+	right: 10%;
+	border: 1px solid #e1e1e1;
+}
+
+input[type="text"]:focus{
+	border-color: rgb(161, 161, 161);
+}
+
+.content_pdding{
+	padding:20px 0px;
+}
+
+.name{
+	display: inline-block;
+	width:100px;
+		margin-right: 15px;
+}
+
+textarea{
+	border-radius: 8px;
+	width: 400px;
+	height: 100px;
+	background: #f5f5f5;
+
+	resize: none;
+}
+
+textarea:focus{
+	border-color: rgb(161, 161, 161);
+}
+
+.reci {
+	width: 200px;
+	background: #f5f5f5 url('../image/expand_more_FILL0_wght400_GRAD0_opsz48.png') no-repeat 95% 50%;
+	background-size: 30px;
+	border: 1px solid #999;
+	border-radius: 8px;
+	appearance: none;
+}
+
+.reci:focus{
+	border-color: rgb(161, 161, 161);
+}
+
+.info_n{
+	padding-right: 10px;
+	font-size: 15px;
+}
+
+.cok {
+	width: 150px;
+	background: #f5f5f5 url('../image/expand_more_FILL0_wght400_GRAD0_opsz48.png') no-repeat 95% 50%;
+	background-size: 30px;
+	border: 1px solid #999;
+	border-radius: 8px;
+	appearance: none;
+	margin-right: 10px;
+}
+
+.reciinfo:focus{
+	border-color: rgb(161, 161, 161);
+}
+
+
+/*컨텐츠 내부 css*/
+
+
+/*재료 추가 css*/
+
+/*합친곳*/
+.material_all{
+	width:100%;
+	display: flex;
+	flex-direction: row;
+	margin-top: 50px;
+}
+
+/*왼쪽*/
+.left_material{
+	width: 30%;
+	display : flex;
+	flex-direction: column;
+}
+
+.all_material_del{
+
+
+	border: 1px solid #e1e1e1;
+	background-color: #ffffff;
+	color: #333;
+	border-radius: 8px;
+	
+}
+
+.lf_material{
+	display: block;
+	width: 220px;
+
+	background-color: #fffdd7;
+	border: 1px solid #e1e1e1;
+	border-radius: 8px;
+}
+
+/*오ㅓ른쪽*/
+
+.coumngka{
+	display: flex;
+	flex-direction: column;
+}
+
+#materialContainer{
+	display: flex;
+	flex-direction: column;
+	margin:0px;
+}
+
+.materials_css{
+	width: 220px;
+	border: 1px solid #e1e1e1;
+	border-radius: 8px;
+	background: #f5f5f5;
+	margin-right: 15px;
+	margin-bottom: 15px;
+}
+.right_btnadd{
+	display: block;
+
+	padding-left : 184px;
+	background-color:transparent;
+	
+}
+.removeMaterialButton{
+	margin-bottom: 15px;
+	margin-top:0px;
+	border: 0px;
+	background: url(//recipe1.ezmember.co.kr/img/btn_del2.gif) center no-repeat;
+}
+
+/*step*/
+.cok_step{
+	margin-top: 50px;
+	margin-left : 50px;
+	display: flex;
+	flex-direction: row;
+}
+.cok_step_p{
+	width:100px;
+}
+.step_text_STEP_css{
+height:160px; 
+width:430px;
+
+}
+
+.stepPhotoHolder_STEP_css{
+
+	width: 160px;
+  height: 160px;
+  cursor: pointer;
+  border: 1px solid #e1e1e1;
+  margin-left: 5px;
+}
+.cok_cute{
+	display:flex;
+	border: 1px solid #e1e1e1;
+	padding: 2px;
+	font-size: 16px;
+	width:60px;
+	justify-content: center;
+	margin-right:20px;
+	margin :5px 5px 5px 5px;
+	
+}
+
+.cok_set_plus{
+	width:310px;
+	display: flex;
+	flex-direction: row;
+	margin-left: 255px;
+	border: 2px solid #74b243;
+	border-radius: 8px;
+	margin-top:10px;
+	
+}
+
+.step_photoInput {
+    display: none;
+}
+
+.step_button{
+	margin-left: 330px;
+}
+/*마지막 div*/
+.last_div{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+
+
+
