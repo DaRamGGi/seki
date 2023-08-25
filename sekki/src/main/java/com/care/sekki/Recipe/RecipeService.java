@@ -8,10 +8,13 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.ui.Model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -450,4 +453,31 @@ public class RecipeService {
 		return;
 	}
 //--------------------------레시피 삭제-------------------------------
+	
+//-----------------------------댓글 수정----------------------------
+	public String commentUpdata(@RequestBody Map<String, Object> requestData, CommentDTO comDto) {
+	    String updatedContent = requestData.get("updatedContent").toString();
+	    Long reno = Long.parseLong(requestData.get("reno").toString());
+	    Long comNo = Long.parseLong(requestData.get("comment_no").toString());
+	    
+	    comDto.setRe_no(reno);
+	    comDto.setComment_content(updatedContent);
+	    comDto.setcomment_no(comNo);
+	    
+	    System.out.println("reno값 : " + comDto.getRe_no());
+	    System.out.println("내용 : " + comDto.getComment_content());
+	    System.out.println("comno : " + comDto.getcomment_no());
+	    
+	    recipemapper.commentUpdata(comDto);
+	    
+		
+		
+		return "수정완료";
+	}
+	
+//-----------------------------댓글 수정----------------------------
+//-----------------------------댓글 삭제----------------------------
+	
+	
+//-----------------------------댓글 삭제----------------------------
 }

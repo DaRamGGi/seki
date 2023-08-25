@@ -133,6 +133,12 @@
 	</update>	
 	
 	<!--  스텝들 -->
+	
+	<!-- 댓글들 -->
+	<update id="commentUpdata" parameterType="com.care.sekki.Recipe.CommentDTO">
+    UPDATE RECIPE_COMMENT SET COMMENT_CONTENT=#{comment_content} WHERE re_no=#{re_no} AND COMMENT_NO=#{comment_no}
+</update>
+	<!-- 댓글들 -->
 	<!-- 업데이트 -->
 	
 	<!-- 삭제 -->
@@ -150,6 +156,10 @@
 	
 	<delete id="reciCommentDel">
 	DELETE FROM RECIPE_COMMENT WHERE RE_NO=#{re_no}
+	</delete>
+	
+	<delete id="CommentDel">
+	DELETE FROM RECIPE_COMMENT WHERE RE_NO=#{re_no} AND comment_no=#{comment_no}
 	</delete>
 
 </mapper>

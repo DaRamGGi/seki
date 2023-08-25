@@ -208,7 +208,7 @@ public class MemberController {
 		}
 		return "member/update";
 	}
-  
+  /*
 	@PostMapping("updateProc")
 	public String updateProc(MemberDTO member, String confirm) {
 		String id = (String)session.getAttribute("id");
@@ -287,13 +287,13 @@ public class MemberController {
 		return "member/delete";
 	}
 
-	/*email / kakao*/
+	email / kakao
 	@ResponseBody
 	@PostMapping(value="sendEmail", produces = "text/plain; charset=utf-8")
 	public String sendEmail(@RequestBody(required = false) String email) {
 		return service.sendEmail(email);
 	}
-	
+	*/
 	@ResponseBody
 	@PostMapping(value="sendAuth", produces = "text/plain; charset=utf-8")
 	public String sendAuth(@RequestBody(required = false) String auth) {

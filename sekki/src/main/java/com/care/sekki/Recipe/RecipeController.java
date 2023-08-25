@@ -3,14 +3,21 @@ package com.care.sekki.Recipe;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.HttpStatus;
 
 
 
@@ -24,7 +31,7 @@ public class RecipeController {
 	@Autowired
 	private RecipeService recipeService;
 	@Autowired private HttpSession session;
-	
+	@Autowired private RecipeMapper recipemapper;
 	@RequestMapping("/recipeBoard")
     public String recipeBoard(@RequestParam(value="currentPage", required = false)String cp,
 			String search, Model model) {
@@ -58,6 +65,7 @@ public class RecipeController {
 			return "redirect:recipeBoard"; 
 		
 		model.addAttribute("recipeCon", reciDto);
+		
 		
 		//카테고리 값변환
 		if(reciDto.getCategory().equals("kor")) {
@@ -218,6 +226,26 @@ public class RecipeController {
 		return "recipe/recipeBoard";
 	}
 	
+	@PostMapping("commentUpdata")
+	public String commentUpdata(@RequestBody Map<String, Object> requestData,  CommentDTO comDto) {
+		
+		recipeService.commentUpdata(requestData, comDto);
+		
+		return "recipe/recipeBoard";
+	}
 	
+	@DeleteMapping("/deleteRecipe/{commentNo}/{reno}") // 경로 변수를 설정해줍니다.
+    public ResponseEntity<String> deleteComment(@PathVariable Long commentNo, @PathVariable Long reno, CommentDTO comDto) {
+        try {
+            System.out.println("commentNo: " + commentNo + ", reno: " + reno); // 값 확인
+            // 여기서 실제로 삭제 작업을 수행하고, 결과에 따라 적절한 ResponseEntity 반환
+            comDto.setcomment_no(commentNo);
+            comDto.setRe_no(reno);
+            recipemapper.CommentDel(comDto);
+            return new ResponseEntity<>("삭제되었습니다.", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("삭제 중 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 	
 }

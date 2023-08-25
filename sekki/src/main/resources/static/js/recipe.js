@@ -142,3 +142,94 @@ function deleteRecipe(re_no) {
 		location.href = 'deleteRecipe?re_no=' + re_no;
 	}
 }
+
+//드롭박스
+$(document).ready(function() {
+    $(".dropdown-icon").click(function() {
+        $(this).next(".dropdown-menu").toggle();
+    });
+});
+
+//댓글 수정
+function editComment(commentId, currentContent, reno, comNo) {
+    var commentElement = document.getElementById(`comment-${commentId}`);
+    var commentText = commentElement.textContent.trim();
+
+    var editInput = document.createElement('textarea');
+    editInput.value = commentText;
+    editInput.className = 'edit-comment-textarea';
+
+    commentElement.innerHTML = '';
+    commentElement.appendChild(editInput);
+
+    var updateButton = document.createElement('button');
+    updateButton.textContent = '저장';
+    updateButton.className = 'update-comment-button';
+    updateButton.onclick = function() {
+        var updatedContent = editInput.value.trim();
+        if (updatedContent !== '') {
+            // 데이터를 JSON 형식으로 정리
+            var data = {
+                commentId: commentId,
+                updatedContent: updatedContent,
+                reno: reno, // 추가된 reno 값
+                comment_no: comNo // 추가된 comment_no 값
+            };
+
+            // AJAX 요청 보내기
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'commentUpdata');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(data));
+            
+            // 서버 응답 처리
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    commentElement.innerHTML = `<p>${updatedContent}</p>`;
+                }
+            };
+        } else {
+            // 내용이 비어있을 경우 처리
+        }
+    };
+
+    var cancelButton = document.createElement('button');
+    cancelButton.textContent = '취소';
+    cancelButton.className = 'cancel-comment-button';
+    cancelButton.onclick = function() {
+        commentElement.innerHTML = `<p>${currentContent}</p>`;
+    };
+
+    commentElement.appendChild(updateButton);
+    commentElement.appendChild(cancelButton);
+}
+
+//삭제
+
+function deleteComment(commentNo, reno, id) {
+    var url = '/deleteRecipe/' + commentNo + '/' + reno;
+    var data = {
+        reno: reno,
+        comment_no: commentNo
+    };
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('DELETE', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                
+
+                // 삭제된 댓글의 DOM 요소를 찾아 제거 또는 숨기기
+                var deletedElement = document.getElementById('comment-' + commentNo);
+
+               deletedElement.remove(); // 해당 li 요소를 직접 삭제
+                console.log('삭제 성공');
+            } else {
+                console.error('삭제 실패');
+            }
+        }
+    };
+    xhr.send(JSON.stringify(data));
+}
