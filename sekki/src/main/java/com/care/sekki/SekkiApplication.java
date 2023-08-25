@@ -1,5 +1,6 @@
 package com.care.sekki;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -11,7 +12,6 @@ public class SekkiApplication extends SpringBootServletInitializer{
 
 	@Override
 	protected SpringApplicationBuilder createSpringApplicationBuilder() {
-
 		return super.createSpringApplicationBuilder();
 	}
 
