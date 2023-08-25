@@ -1,3 +1,4 @@
+
 package com.care.sekki.member;
 
 import java.io.BufferedReader;
@@ -601,5 +602,6 @@ public class MemberService {
 	}
 }
 	/* Edamam.api 코드 */
+
 
 

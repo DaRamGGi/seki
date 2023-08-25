@@ -4,6 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.care.sekki.Recipe.RecipeMapper">
 
+<<<<<<< HEAD
 
 	<select id="count">
 		<choose>
@@ -161,5 +162,35 @@
 	<delete id="CommentDel">
 	DELETE FROM RECIPE_COMMENT WHERE RE_NO=#{re_no} AND comment_no=#{comment_no}
 	</delete>
+=======
+	<insert id="insertRecipe"
+    parameterType="com.care.sekki.Recipe.RecipeBoardDTO" useGeneratedKeys="true" keyProperty="re_no">
+    <selectKey keyProperty="re_no" resultType="java.lang.Long" order="BEFORE">
+        SELECT NVL(MAX(RE_NO), 0) + 1 FROM RECIPE_BOARD
+    </selectKey>
+    INSERT INTO RECIPE_BOARD (RE_NO, TITLE, CONTENT, TIP, MAINPHOTO, CATEGORY, TIMES, DEGREE, WRITTEN_TIME, ID)
+    VALUES (#{re_no}, #{title}, #{content}, #{tip}, #{mainphoto}, #{category}, #{times}, #{degree}, #{written_time}, #{id})
+</insert>
+
+	<insert id="insertMaterial"
+		parameterType="com.care.sekki.Recipe.MaterialDTO">
+		<selectKey keyProperty="mate_no" resultType="java.lang.Long" order="BEFORE">
+        SELECT NVL(MAX(MATE_NO), 0) + 1 FROM RECIPE_MATERIAL
+    </selectKey>
+		INSERT INTO RECIPE_MATERIAL (MATE_NO, RE_NO, MATERIALNAME,
+		MATERIALAMOUNT)
+		VALUES (#{mate_no}, #{re_no}, #{materialName}, #{materialAmount})
+	</insert>
+	
+	<insert id="insertStep"
+		parameterType="com.care.sekki.Recipe.StepDTO">
+		<selectKey keyProperty="step_no" resultType="java.lang.Long" order="BEFORE">
+        SELECT NVL(MAX(STEP_NO), 0) + 1 FROM RECIPE_STEP
+    </selectKey>
+		INSERT INTO RECIPE_STEP (STEP_NO, RE_NO, STEP_TEXT,
+		STEP_PHOTOHOLDER)
+		VALUES (#{step_no}, #{re_no}, #{step_text}, #{step_photoinput})
+	</insert>
+>>>>>>> refs/remotes/origin/main
 
 </mapper>

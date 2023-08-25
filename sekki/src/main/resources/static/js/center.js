@@ -1,3 +1,4 @@
+
 /*공통*/
 /*파일 선택시 input tag에 파일명 표시 (html(modifyAnnouncement.jsp, writeAnnouncement.jsp)에 제이쿼리 사용을 위한 import 추가*/
 document.addEventListener("DOMContentLoaded", function() {

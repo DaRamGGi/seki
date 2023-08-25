@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 @import url('common.css'); 
 @import url('nav.css');
@@ -180,4 +181,3 @@ textarea{width:100%; height:250px; border:1px solid #ddd; padding:20px; font-siz
 .pb_55 {padding-bottom:55px !important;}
 .pb_60 {padding-bottom:60px !important;}
 .pl_0 {padding-left:0px !important;}
-.pl_5 {padding-left:5px !important;}

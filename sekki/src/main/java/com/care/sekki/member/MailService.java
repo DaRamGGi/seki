@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import jakarta.mail.internet.MimeMessage;
 
+
+
 @Service
 public class MailService {
 	@Autowired	private JavaMailSender mailSender;
@@ -55,4 +57,5 @@ public class MailService {
 		}
 		return "* 입력하신 이메일 주소로 임시비밀번호를 전송했습니다.";
 	}
+
 }

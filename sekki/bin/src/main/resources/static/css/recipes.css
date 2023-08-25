@@ -282,6 +282,7 @@ width:430px;
 	
 }
 
+<<<<<<< HEAD
 .step_photoholder {
     display: none;
 }
@@ -561,6 +562,23 @@ width:430px;
 /*=====================coment============*/
 
 /*====================게시판 내부==================*/
+=======
+.step_photoInput {
+    display: none;
+}
+
+.step_button{
+	margin-left: 330px;
+}
+/*마지막 div*/
+.last_div{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+>>>>>>> refs/remotes/origin/main
 
 
 

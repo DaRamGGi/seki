@@ -1,7 +1,7 @@
+
 package com.care.sekki.member;
 
 import org.springframework.stereotype.Service;
-
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
 import net.nurigo.sdk.message.model.Message;
