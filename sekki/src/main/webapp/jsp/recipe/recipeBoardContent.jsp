@@ -116,7 +116,7 @@
 						</c:if>
 						</div>
 						<div class="coment_content">
-							<p id="comment2-${commentId}">${reciment.comment_content}</p>
+							<p id="comment2-${reciment.id}">${reciment.comment_content}</p>
 						</div>
 					</div>
 				</div>

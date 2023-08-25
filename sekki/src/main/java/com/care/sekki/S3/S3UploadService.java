@@ -14,7 +14,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
+
 public class S3UploadService {
 
     private final AmazonS3 amazonS3;
