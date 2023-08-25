@@ -10,6 +10,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script>
+
 $(document).ready(function() {
     $("#profilePicture").on('change', function() {
         var fileName = $(this).val().split('\\').pop();
@@ -109,6 +110,7 @@ $(document).ready(function() {
 
 <!-- 
 <form action="registerProc" method="post" id="f" enctype="multipart/form-data">
+
 		<input type="text" name="id" placeholder="아이디" id="id" class="sub_input"> (*필수 항목) <br>
 		<input type="password" name="pw" placeholder="비밀번호" id="pw" class="sub_input"><br>
 		<input type="password" name="confirm" placeholder="비밀번호 확인 " id="confirm"
