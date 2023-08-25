@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:import url="/header" />
+<<<<<<< HEAD
 <c:url var="context" value="/" />
 <link href="css/recipes.css" rel="stylesheet" />
 <link rel="stylesheet"
@@ -175,6 +176,14 @@
 		</form>
 		<%--요리팁 --%>
 
+=======
+<c:url var="context" value="/"/>
+<link href="css/recipes.css" rel="stylesheet"/> 	
+
+<div id="full">
+	<div id="width1200">
+		레시피 등록
+>>>>>>> refs/remotes/origin/gyutae
 	</div>
 </div>
 

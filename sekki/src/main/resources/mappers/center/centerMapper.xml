@@ -4,6 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <!-- 
+<<<<<<< HEAD
 CREATE TABLE sekki_center_board (
 	    num         NUMBER,
 	    category    VARCHAR2(30),
@@ -225,4 +226,101 @@ CREATE TABLE sekki_center_board (
 	<update id="modifyAdminReply">
 		UPDATE center_reply SET center_num=#{centerNum}, reply=#{reply}, write_date=#{writeDate} WHERE reply_num=#{replyNum}
 	</update>
+=======
+  CREATE TABLE sekki_announcement_board (
+	    num         NUMBER,
+	    category    VARCHAR2(30),
+	    title       VARCHAR2(100),
+	    content     VARCHAR2(3000),
+	    writer      VARCHAR2(30),
+	    write_date  VARCHAR2(50),
+	    write_time  VARCHAR2(50),
+	    files       VARCHAR2(1000),
+	    secret      char(1),
+	    hits        NUMBER,
+	    likes       NUMBER,
+	    PRIMARY KEY(num)
+   );
+   -->
+ <mapper namespace="com.care.sekki.customerCenter.centerMapper">
+ 	<resultMap type="com.care.sekki.customerCenter.centerDTO" id="centerDTO">
+		<id column="num" property="num"/>
+		<result column="category" property="category"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="writer" property="writer"/>
+		<result column="write_time" property="writeTime"/>
+		<result column="write_date" property="writeDate"/>
+		<result column="files" property="files"/>
+		<result column="secret" property="secret"/>
+		<result column="hits" property="hits"/>
+		<result column="likes" property="likes"/>
+	</resultMap>
+	
+	<!-- 공지사항 작성 -->
+	<insert id="writeAnnouncementProc">
+		<selectKey order="BEFORE" keyProperty="num" resultType="int">
+			SELECT nvl(max(num),0) + 1 FROM sekki_announcement_board
+		</selectKey>
+		INSERT INTO sekki_announcement_board (num, category, title, content, writer, write_time, files, secret, hits, likes, write_date)
+		VALUES(#{num}, #{category}, #{title}, #{content}, #{writer}, #{writeTime}, #{files}, 0, 0, 0, #{writeDate})
+	</insert>
+	
+	<!-- 공지사항 목록 보기  -->
+	<select id="allAnnouncement" resultMap="centerDTO">
+		SELECT BBB.* FROM 
+		(SELECT rownum as rn, AAA.* FROM 
+		(SELECT num, title, writer, write_date, hits FROM sekki_announcement_board ORDER BY num DESC)AAA)BBB
+		WHERE BBB.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="partAnnouncement" resultMap="centerDTO">
+        SELECT BBB.* FROM 
+        (SELECT rownum as rn, AAA.* FROM 
+        (SELECT num, title, writer, write_date, hits FROM sekki_announcement_board WHERE title LIKE '%'||#{search}||'%' ORDER BY num DESC) AAA
+		) BBB WHERE BBB.rn BETWEEN #{begin} AND #{end}
+	</select> 
+	
+	<select id="count">
+		<choose>
+	  		<when test="search == ''">
+	  			SELECT count(num) FROM sekki_announcement_board
+	  		</when>
+	  		<otherwise>
+	  			SELECT count(num) FROM sekki_announcement_board WHERE title like '%'||#{search}||'%'
+	  		</otherwise>
+		</choose>
+	</select>
+	
+	<!-- 공지사항 목록에서 제목 클릭  -->
+	<select id="announcementContent" resultMap="centerDTO">
+		SELECT * FROM sekki_announcement_board WHERE num=#{num}
+	</select>
+	
+	<!-- 조회수 증가  -->
+	<update id="incHit">
+		UPDATE sekki_announcement_board SET hits=hits+1 WHERE num=#{num}
+	</update>
+	
+	<select id="announceFileDownload">
+		SELECT files FROM sekki_announcement_board WHERE num=#{num}
+	</select>
+	
+	<update id="modifyAnnouncementProc">
+		UPDATE sekki_announcement_board SET title=#{title}, content=#{content}, files=#{files} WHERE num=#{num}
+	</update>
+	
+	<delete id="deleteAnnouncementProc">	
+		DELETE FROM sekki_announcement_board WHERE num=#{num}
+	</delete>
+	
+	<update id="plusHeart">
+		UPDATE sekki_announcement_board SET likes=#{likes} WHERE num=#{num}
+	</update>
+	
+	<insert id="likesPerson">
+		INSERT INTO likes (user_id, announcement_num)
+		VALUES(#{user_id}, #{announcement_num})
+	</insert>
+>>>>>>> refs/remotes/origin/gyutae
  </mapper>
