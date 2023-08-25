@@ -29,7 +29,6 @@
 			<tr>
 				<td>
 					<p class="contentAreaReply">${inquiry.content }</p>
-					<p>${inquiry.files }</p>
 				</td>
 			</tr>
 			<tr>

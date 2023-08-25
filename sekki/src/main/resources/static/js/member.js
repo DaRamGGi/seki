@@ -13,7 +13,7 @@ function loginCheck() {
 	}
 }
 
-function logout(){
+function logout() {
 	result = confirm('로그아웃 하시겠습니까?');
 	if (result == true) {
 		location.href = 'logout';
@@ -182,24 +182,24 @@ function checkAuthenticationNumSms() {
 	}
 }
 
-function agreeConditionCheck(){
-	
+function agreeConditionCheck() {
+
 	var essentialAgreeCheckbox = document.getElementById('essentialAgree');
 
-    if (essentialAgreeCheckbox.checked) {
-        location.href = 'register'; 
-    } else {
-        alert('필수 내역은 동의해야 합니다.');
-    }
+	if (essentialAgreeCheckbox.checked) {
+		location.href = 'register';
+	} else {
+		alert('필수 내역은 동의해야 합니다.');
+	}
 }
 
 /*회원가입=============================================================================*/
 /*파일 선택시 input tag에 파일명 표시 (register.jsp에 제이쿼리 추가)*/
 $(document).ready(function() {
-    $("#profilePicture").on('change', function() {
-        var fileName = $(this).val().split('\\').pop();
-        $(".upload-name").val(fileName);
-    });
+	$("#profilePicture").on('change', function() {
+		var fileName = $(this).val().split('\\').pop();
+		$(".upload-name").val(fileName);
+	});
 });
 
 function execDaumPostcode() {
@@ -296,7 +296,7 @@ function regEmailCheck() {
 function regEmailSelectCheck() {
 	var emailSelect = document.getElementById("emailSelect");
 	var selectedOption = emailSelect.value;
-	
+
 	xhr = new XMLHttpRequest();
 	xhr.open('post', 'regEmailSelectCheck');
 	var sendData = selectedOption;
@@ -311,66 +311,91 @@ function regEmailSelectCheck() {
 
 function allCheck() {
 	var regIdLabel = document.getElementById('regIdLabel');
-    var regPwLabel = document.getElementById('regPwLabel');
-    var regConfirmLabel = document.getElementById('regConfirmLabel');
-    var regUserNameLabel = document.getElementById('regUserNameLabel');
-    var regMobileLabel = document.getElementById('regMobileLabel');
-    var regEmailLabel = document.getElementById('regEmailLabel');
-    
-    if (regIdLabel.textContent !== '') {
+	var regPwLabel = document.getElementById('regPwLabel');
+	var regConfirmLabel = document.getElementById('regConfirmLabel');
+	var regUserNameLabel = document.getElementById('regUserNameLabel');
+	var regMobileLabel = document.getElementById('regMobileLabel');
+	var regEmailLabel = document.getElementById('regEmailLabel');
+
+	if (regIdLabel.textContent !== '') {
 		alert('아이디 입력을 확인하세요.')
-        return;
-    }
+		return;
+	}
 
-    if (regPwLabel.textContent !== '') {
+	if (regPwLabel.textContent !== '') {
 		alert('비밀번호 입력을 확인하세요.')
-        return;
-    }
+		return;
+	}
 
-    if (regConfirmLabel.textContent !== '') {
+	if (regConfirmLabel.textContent !== '') {
 		alert('비밀번호 입력을 확인하세요.')
-        return;
-    }
+		return;
+	}
 
-    if (regUserNameLabel.textContent !== '') {
+	if (regUserNameLabel.textContent !== '') {
 		alert('이름 입력을 확인하세요.')
-        return;
-    }
+		return;
+	}
 
-    if (regMobileLabel.textContent !== '') {
+	if (regMobileLabel.textContent !== '') {
 		alert('전화번호 입력을 확인하세요.')
-        return;
-    }
+		return;
+	}
 
-    if (regEmailLabel.textContent !== '') {
+	if (regEmailLabel.textContent !== '') {
 		alert('이메일 입력을 확인하세요.')
-        return;
-    }
-    
-   	var f = document.getElementById('f');
+		return;
+	}
+
+	var f = document.getElementById('f');
 	f.submit();
 }
 /*아이디/비밀번호 찾기=============================================================================*/
 function findIdByMobile() {
-    var regMobileLabel = document.getElementById('regMobileLabel');
-    
-    if (regMobileLabel.textContent !== '') {
+	var regMobileLabel = document.getElementById('regMobileLabel');
+
+	if (regMobileLabel.textContent !== '') {
 		alert('전화번호 입력을 확인하세요.')
-        return;
-    }
-	
-    var f = document.getElementById('f');
+		return;
+	}
+
+	var f = document.getElementById('f');
 	f.submit();
 }
 
 function findIdByEmail() {
-    var regEmailLabel = document.getElementById('regEmailLabel');
-    
-    if (regEmailLabel.textContent !== '') {
+	var regEmailLabel = document.getElementById('regEmailLabel');
+
+	if (regEmailLabel.textContent !== '') {
 		alert('이메일 입력을 확인하세요.')
+		return;
+	}
+
+	var ff = document.getElementById('ff');
+	ff.submit();
+}
+
+function fiindPwInputCheck() {
+    var id = document.getElementById('id').value.trim(); 
+	var phoneCheckbox = document.getElementById('phoneCheckbox');
+    var emailCheckbox = document.getElementById('emailCheckbox');
+    
+    if (id === "") { 
+        alert('아이디를 입력하세요.');
+        return;
+    }
+	
+	if (!phoneCheckbox.checked && !emailCheckbox.checked) {
+        alert('발급 방식을 선택하세요.');
         return;
     }
     
-     var ff = document.getElementById('ff');
-	ff.submit();
+    if (phoneCheckbox.checked) {
+        deliveryMethod = "휴대폰";
+    } else if (emailCheckbox.checked) {
+        deliveryMethod = "이메일";
+    }
+    
+    var f = document.getElementById('f');
+	f.submit();
 }

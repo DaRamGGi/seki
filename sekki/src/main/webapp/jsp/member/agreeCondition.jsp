@@ -1,31 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>약관동의</title>
-<link href="css/member.css" rel="stylesheet"/> 
+<link href="css/member.css" rel="stylesheet" />
 <script src="/js/member.js"></script>
 </head>
 <body>
-<c:import url="/header"></c:import>
-<div id="visual">
+	<c:import url="/header"></c:import>
+	<div id="visual">
 		<h1>회원가입</h1>
 	</div>
-<div id="wrap">
-	<form action="register" class="agreeCondition" method="post" id="f" enctype="multipart/form-data">
-		<table class="agreeConditionTable">
-			<thead>
-				<tr><th class="checkbox-container">
-			            <input type="checkbox" id="allAgree">
-			            <label for="allAgree"> 아래 약관을 모두 읽었으며 이에 동의합니다.</label>
-				</th></tr>
-			</thead>	
-			<tbody>
-				<tr><td class="checkbox-container"><input type="checkbox" id="essentialAgree"> (필수)개인정보수집 및 이용동의</td></td><tr>
-				<tr><td><textarea rows="10" cols="50">(주)자취세끼(이하 ‘회사’라 한다)는 개인정보 보호법 제30조에 따라 회사의 서비스를 이용하는 회원(이하 ‘이용자’라 한다) 의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리지침을 수립·공개합니다.
+	<div id="wrap">
+		<div id="memberMenu">
+			<ul>
+				<a href="login"><li>로그인</li></a>
+				<a href="login"><li>로그인</li></a>
+				<a href="agreeCondition" class="selected"><li>회원가입</li></a>
+				<a href="findId"><li>아이디 찾기</li></a>
+				<a href="findPw"><li>비밀번호 찾기</li></a>
+			</ul>
+		</div>
+		<form action="register" class="agreeCondition" method="post" id="f"
+			enctype="multipart/form-data">
+			<table class="agreeConditionTable">
+				<thead>
+					<tr>
+						<th class="checkbox-container"><input type="checkbox"
+							id="allAgree"> <label for="allAgree"> 아래 약관을 모두
+								읽었으며 이에 동의합니다.</label></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="checkbox-container"><input type="checkbox"
+							id="essentialAgree"> (필수)개인정보수집 및 이용동의</td>
+						</td>
+					<tr>
+					<tr>
+						<td><textarea rows="10" cols="50">(주)자취세끼(이하 ‘회사’라 한다)는 개인정보 보호법 제30조에 따라 회사의 서비스를 이용하는 회원(이하 ‘이용자’라 한다) 의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리지침을 수립·공개합니다.
 1. 총칙
 2. 수집하는 개인정보의 항목 및 수집방법
 3. 개인정보 수집에 대한 동의
@@ -55,9 +71,15 @@
 
 4. 개인정보 처리 및 이용 동의를 거부할 권리
 위와 같은 개인정보 처리에 동의를 거부할 권리가 있습니다. 그러나 동의를 거부할 경우 각종 소식 및 이벤트 참여가 제한될 수 있습니다.
-				</textarea><tr>
-				<tr><td class="checkbox-container"><input type="checkbox" id="optionalAgree"> (선택) 수집한 개인정보의 제 3자 정보제공 동의</td></td><tr>
-				<tr><td><textarea rows="5" cols="150">제1조(목적)
+				</textarea>
+					<tr>
+					<tr>
+						<td class="checkbox-container"><input type="checkbox"
+							id="optionalAgree"> (선택) 수집한 개인정보의 제 3자 정보제공 동의</td>
+						</td>
+					<tr>
+					<tr>
+						<td><textarea rows="5" cols="150">제1조(목적)
 이 약관은 "(주)자취세끼"가 운영하는 sekki 온라인 서비스(이하 “사이트”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 사이트과 이용자의 권리?의무 및 책임사항을 규정함을 목적으로 합니다.
 ※ PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다
 
@@ -92,53 +114,58 @@
 
 3. “사이트”이 제공하기로 이용자와 계약을 체결한 서비스의 내용을 재화등의 품절 또는 기술적 사양의 변경 등의 사유로 변경할 경우에는 그 사유를 이용자에게 통지 가능한 주소로 즉시 통지합니다.
 
-4. 전항의 경우 “사이트”은 이로 인하여 이용자가 입은 손해를 배상합니다. 다만, “사이트”이 고의 또는 과실이 없음을 입증하는 경우에는 그러하지 아니합니다.</textarea><tr>
-			</tbody>
-		</table>
-		
-		<div class="h80"></div>
-		
-		<h1>본인인증</h1>
-		<table class="authenticationTable">
-			<colgroup>
-				<col width="50%"></col>
-				<col width="*"></col>
-			</colgroup>
-			<thead>
-				<tr>
-					<th id="emailAuth" class="selected" onclick="emailAuthClick()">이메일 인증</th>
-					<th id="phoneAuth" onclick="phoneAuthClick()">휴대전화 인증</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>	
-					<td colspan="2" style="padding-top:20px; ">
-						<input type="text" id="sendTo" name="sendTo" placeholder="이메일 입력">
-						<input type="button" id="sendAuthenticationNumBtn" value="인증번호 전송" onclick="sendAuthenticationNumEmail()">
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" class="checkAuthenticationTd"><label  id="checkAuthenticationLabel"></label></td>
-				</tr>
-				<tr>
-					<td colspan="2" >
-						<input type="text" id="authenticationNum" name="authenticationNum" placeholder="인증번호 6자리 입력" maxlength="6">
-						<input type="button" id="authenticationNumBtn" value="인증하기" onclick="checkAuthenticationNumEmail()">
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" class="checkAuthenticationTd" ><label id="checkAuthenticationNumLabel"></label></td>
-				</tr>
-			</tbody>
-		</table>
-		
-		<div class="h80"></div>
-		<div class="nextStageDiv" id="nextStageDiv">
-			<input type="button" id="nextStageBtn" name="nextStageBtn" value="다음 단계 >" onclick="agreeConditionCheck()" >
-		</div>
-	</form>
-</div>
+4. 전항의 경우 “사이트”은 이로 인하여 이용자가 입은 손해를 배상합니다. 다만, “사이트”이 고의 또는 과실이 없음을 입증하는 경우에는 그러하지 아니합니다.</textarea>
+					<tr>
+				</tbody>
+			</table>
 
-<c:import url="/footer"/>
+			<div class="h80"></div>
+
+			<h1>본인인증</h1>
+			<table class="authenticationTable">
+				<colgroup>
+					<col width="50%"></col>
+					<col width="*"></col>
+				</colgroup>
+				<thead>
+					<tr>
+						<th id="emailAuth" class="selected" onclick="emailAuthClick()">이메일
+							인증</th>
+						<th id="phoneAuth" onclick="phoneAuthClick()">휴대전화 인증</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="2" style="padding-top: 20px;"><input type="text"
+							id="sendTo" name="sendTo" placeholder="이메일 입력"> <input
+							type="button" id="sendAuthenticationNumBtn" value="인증번호 전송"
+							onclick="sendAuthenticationNumEmail()"></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="checkAuthenticationTd"><label
+							id="checkAuthenticationLabel"></label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="text" id="authenticationNum"
+							name="authenticationNum" placeholder="인증번호 6자리 입력" maxlength="6">
+							<input type="button" id="authenticationNumBtn" value="인증하기"
+							onclick="checkAuthenticationNumEmail()"></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="checkAuthenticationTd"><label
+							id="checkAuthenticationNumLabel"></label></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="h80"></div>
+			<div class="nextStageDiv" id="nextStageDiv">
+				<input type="button" id="nextStageBtn" name="nextStageBtn"
+					value="다음 단계 >" onclick="agreeConditionCheck()">
+			</div>
+		</form>
+	</div>
+
+	<c:import url="/footer" />
 </body>
 </html>

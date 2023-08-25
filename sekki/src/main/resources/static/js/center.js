@@ -18,6 +18,17 @@ function regIdCheck(){
 	}
 }
 
+function titleCheck() {
+	const titleLabel = document.getElementById('titleLabel');
+	const titleInput = document.getElementById('title');
+
+	if (titleInput.value.trim() === '') {
+		titleLabel.style.display = 'inline';
+	} else {
+		titleLabel.style.display = 'none';
+	}
+}
+
 function contentCheck() {
 	const contentLabel = document.getElementById('contentLabel');
 	const contentInput = document.getElementById('content');

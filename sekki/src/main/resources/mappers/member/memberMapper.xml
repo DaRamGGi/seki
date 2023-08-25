@@ -38,7 +38,19 @@
 		VALUES(#{id}, #{pw}, #{userName}, #{address}, #{mobile}, #{profilePictureUrl}, #{email})
 	</insert>
 	
-	<!-- <select id="count">
+	<select id="findIdByMobile">
+		SELECT id FROM sekki_member WHERE user_name=#{userName} AND mobile=#{mobile}
+	</select>
+	
+	<select id="findIdByEmail">
+		SELECT id FROM sekki_member WHERE user_name=#{userName} AND email=#{email}
+	</select>
+	
+	<update id="updateToTempPw">
+		UPDATE sekki_member SET pw=#{pw} WHERE id=#{id} 
+	</update>
+	
+	<select id="count">
 		<choose>
 	  		<when test="select == 'id'">
 	  			SELECT count(id) FROM sekki_member WHERE id like '%'||#{search}||'%'
@@ -83,15 +95,8 @@
 	
 	<delete id="delete">
 		DELETE FROM sekki_member WHERE id=#{id}
-	</delete> -->
+	</delete>
 	
-	<select id="findIdByMobile">
-		SELECT id FROM sekki_member WHERE user_name=#{userName} AND mobile=#{mobile}
-	</select>
-	
-	<select id="findIdByEmail">
-		SELECT id FROM sekki_member WHERE user_name=#{userName} AND email=#{email}
-	</select>
 </mapper>
 
 

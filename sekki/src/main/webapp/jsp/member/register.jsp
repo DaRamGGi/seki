@@ -24,6 +24,15 @@ $(document).ready(function() {
 		<h1>회원가입</h1>
 	</div>
 <div id="wrap">
+<div id="memberMenu">
+			<ul>
+				<a href="login"><li>로그인</li></a>
+				<a href="login"><li>로그인</li></a>
+				<a href="agreeCondition" class="selected"><li>회원가입</li></a>
+				<a href="findId"><li>아이디 찾기</li></a>
+				<a href="findPw"><li>비밀번호 찾기</li></a>
+			</ul>
+		</div>
 	<form action="registerProc" class="registerProc" method="post" id="f" enctype="multipart/form-data">
 		<table class="registerTable">
 			<tr>
@@ -49,7 +58,7 @@ $(document).ready(function() {
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="text" name="userName" id="userName" placeholder="이름/닉네임"  oninput="regUserNameCheck()">
+					<input type="text" name="userName" id="userName" placeholder="이름"  oninput="regUserNameCheck()">
 					<label id="regUserNameLabel">* 이름을 입력하세요.</label>	
 				</td>
 			</tr>
