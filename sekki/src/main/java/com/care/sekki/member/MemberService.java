@@ -214,9 +214,8 @@ public class MemberService {
 		Matcher matcher = pattern.matcher(mobile);
 		if (matcher.matches() == false) {
 			return "* 유효하지 않은 번호입니다. (-)없이 입력하세요.";
-
-		}
-
+	
+	
 		return "";
 	}
 
@@ -247,9 +246,16 @@ public class MemberService {
 		member.setEmail(member.getEmail() + member.getEmailSelect());
 		try {
 			// 프로필 사진을 S3에 업로드하고 해당 URL을 받아옵니다.
-			String profilePictureUrl = s3UploadService.saveFile(profilePicture, memberId);
-			member.setProfilePictureUrl(profilePictureUrl); // 회원 정보에 프로필 사진 URL을 설정합니다.
-
+			if (!profilePicture.isEmpty()) {
+	            // 프로필 사진을 S3에 업로드하고 해당 URL을 받아옵니다.
+	            System.out.println("사진 뜨냐  :  " + profilePicture);
+	            String profilePictureUrl = s3UploadService.saveFile(profilePicture, memberId);
+	            member.setProfilePictureUrl(profilePictureUrl); // 회원 정보에 프로필 사진 URL을 설정합니다.
+			}else {
+				 String standardProfile = "/image/standardProfile.png";
+				// String profilePictureUrl = s3UploadService.saveFile(profilePicture, memberId);
+		            member.setProfilePictureUrl(standardProfile);
+			}
 			memberMapper.registerProc(member);
 			return "회원 가입 완료";
 		} catch (IOException e) {
@@ -495,7 +501,9 @@ public class MemberService {
 	}
 
 	public JSONObject getRecipeData() {
+
 		String url = "https://api.edamam.com/api/recipes/v2?type=public&app_id=" + appId + "&app_key=" + appKey;
+
 
 		try {
 			HttpClient httpClient = HttpClient.newHttpClient();
@@ -528,4 +536,4 @@ public class MemberService {
 
 	/* Edamam.api 코드 */
 
-}
+

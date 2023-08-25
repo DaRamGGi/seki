@@ -44,4 +44,8 @@ public interface RecipeMapper {
 
 	void reciCommentDel(long re_no);
 
+	void commentUpdata(CommentDTO comDto);
+
+	void CommentDel(CommentDTO comDto);
+
 }
