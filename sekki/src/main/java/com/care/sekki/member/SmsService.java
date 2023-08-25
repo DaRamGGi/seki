@@ -11,7 +11,7 @@ import net.nurigo.sdk.message.service.DefaultMessageService;
 public class SmsService {
 
 	public String sendAuthenticationNumSms(String sendTo, String auth) {
-		DefaultMessageService messageService = NurigoApp.INSTANCE.initialize("api키", "secret-api키",
+		DefaultMessageService messageService = NurigoApp.INSTANCE.initialize("api키", "api-secret키",
 				"https://api.coolsms.co.kr");
 		Message message = new Message();
 		message.setFrom("01035056792");

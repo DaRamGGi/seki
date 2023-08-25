@@ -57,7 +57,7 @@ $(document).ready(function() {
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="text" name="userName" id="userName" placeholder="이름/닉네임"  oninput="regUserNameCheck()">
+					<input type="text" name="userName" id="userName" placeholder="이름"  oninput="regUserNameCheck()">
 					<label id="regUserNameLabel">* 이름을 입력하세요.</label>	
 				</td>
 			</tr>
