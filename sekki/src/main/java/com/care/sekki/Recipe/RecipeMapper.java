@@ -29,6 +29,7 @@ public interface RecipeMapper {
 	void insertComment(CommentDTO commentDto);
 
 	List<CommentDTO> reciment(long re_no);
+	
 
 	void reciUpdata(RecipeBoardDTO reciDto);
 
