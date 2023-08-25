@@ -5,6 +5,10 @@
 <c:import url="/header" />
 <c:url var="context" value="/" />
 <link href="css/recipes.css" rel="stylesheet" />
+ <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+  />
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script src="/js/recipe.js"></script>
@@ -77,8 +81,8 @@
 			<c:choose>
 			<c:when test="${not empty reciment}">
 			<c:forEach var="reciment" items="${reciment}">
-			<ul>
-			<li><div class="coments">
+			<ul id="comment-${reciment.comment_no}">
+			<li ><div class="coments" id="coment">
 				<div class="coment_left">
 					<div class="coment_profile_div">
 						<img class="coment_profile" src="${reciment.profile }">
@@ -93,9 +97,26 @@
      						   ${starTag}
    							 </c:forEach>
     						 </span>
+    						   <c:if test="${sessionScope.id eq reciment.id}">
+    						 <div class="comment_drop">
+						    <i class="fas fa-ellipsis-h dropdown-icon"></i>
+						    <ul class="dropdown-menu">
+						      <li>
+						                 <button onclick="editComment('${reciment.id}', '${reciment.comment_content}', '${recipeCon.re_no}', '${reciment.comment_no}')">
+수정</button>
+
+						            </li>
+						            <li>
+						                <button type="button" onclick="deleteComment(${reciment.comment_no}, ${recipeCon.re_no})">삭제</button>
+						            </li>
+						            
+						        
+						    </ul>
+						</div>
+						</c:if>
 						</div>
 						<div class="coment_content">
-							<p>${reciment.comment_content }</p>
+							<p >${reciment.comment_content}</p>
 						</div>
 					</div>
 				</div>

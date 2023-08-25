@@ -228,7 +228,7 @@ public class MemberController {
 		}
 		return "member/update";
 	}
-  
+  /*
 	@PostMapping("updateProc")
 	public String updateProc(MemberDTO member, String confirm) {
 		String id = (String)session.getAttribute("id");

@@ -537,6 +537,27 @@ width:430px;
 .starpoint_box .star_radio:nth-of-type(10):checked ~ .starpoint_bg{width:100%;}
 
 .blind{position:absolute;clip:rect(0 0 0 0);margin:-1px;width:1px;height: 1px;overflow:hidden;}
+
+.comment_drop{
+	float: right;
+}
+
+.dropdown-icon {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    list-style: none;
+}
+
+.dropdown-menu li {
+    margin: 5px 0;
+}
 /*=====================coment============*/
 
 /*====================게시판 내부==================*/
