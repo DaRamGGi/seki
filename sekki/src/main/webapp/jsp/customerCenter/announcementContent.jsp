@@ -26,20 +26,27 @@
 			</ul>
 		</div>
 		<h1>${announcement.title }</h1>
-		<c:if test="${sessionScope.id == 'admin'}">
-			<p class="settingBox">
-				<span class="material-symbols-outlined">account_circle</span>
+		
+		<c:choose>
+			<c:when test="${sessionScope.id == 'admin'}">
+				<p class="settingBox">
+					<span class="material-symbols-outlined">account_circle</span>
+					<span>${announcement.writer }</span>
+					<a href="#" id="settings"><span class="material-symbols-sharp">settings</span></a>
+				</p>
+			</c:when>
+			<c:otherwise>
+				<span style="font-weight:bold;">작성자</span>
 				<span>${announcement.writer }</span>
-				<a href="#" id="settings"><span class="material-symbols-sharp">settings</span></a>
-			</p>
-		</c:if>
+			</c:otherwise>
+		</c:choose>
 		<ul class="clickSetting">
 			<li onclick="location.href='modifyAnnouncement?num=${announcement.num }'">수정</li>
 			<li>|</li>
 			<li onclick="deleteAnnouncementProc(${announcement.num})">삭제</li>
 		</ul>
 		<p>${announcement.writeDate } ${announcement.writeTime }</p>
-		<p>조회수 ${announcement.hits }</p>
+		<p><span style="font-weight:bold;">조회수</span> ${announcement.hits }</p>
 		<hr>
 		<p class="contentArea">${announcement.content }</p>
 		<hr>

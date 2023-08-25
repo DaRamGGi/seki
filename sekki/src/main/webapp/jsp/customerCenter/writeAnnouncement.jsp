@@ -36,7 +36,7 @@
 			<tr>
 				<th>파일 첨부</th>
 				<td class="upfileStyle">
-					  <label for="upfile">파일수정</label>
+					  <label for="upfile">파일첨부</label>
                       <input type="file" id="upfile" name="upfile">
                       <input class="upload-name" value="첨부파일" placeholder="첨부파일">
 				</td>

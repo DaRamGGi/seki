@@ -14,7 +14,7 @@ public interface MemberMapper {
 	
 	void registerProc(MemberDTO member);
 
-	/*
+	
 	ArrayList<MemberDTO> memberInfo(
 			@Param("begin")int begin, @Param("end")int end, 
 			@Param("select")String select, @Param("search")String search);
@@ -25,13 +25,13 @@ public interface MemberMapper {
 	int updateProc(MemberDTO member); 
 
 	void delete(String id);
-	*/
+	
 
 	String findIdByMobile(@Param("userName")String userName, 
 			@Param("mobile")String mobile);
 	
 	String findIdByEmail(@Param("userName")String userName, 
 			@Param("email")String email);
-	
 
+	void updateToTempPw(MemberDTO member);
 }
