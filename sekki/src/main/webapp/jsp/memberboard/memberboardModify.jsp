@@ -3,37 +3,37 @@
 <c:import url="/header" /> 
 
 <div align="center" class="main_div">
-<form action="recipeboardModifyProc" method="post">
-	<input type="hidden" name="no" value="${recipeboard.no }" />
+<form action="memberboardModifyProc" method="Post">
+	<input type="hidden" name="no" value="${memberboard.no }" />
 	<h1>글 수정</h1>
 	<table border='1'>
 		<tr>
 			<th width="100">작성자</th>
-			<td width="200">${recipeboard.id }</td>
+			<td width="200">${memberboard.id }</td>
 			<th width="100">조회수</th>
-			<td width="200">${recipeboard.hits }</td>
+			<td width="200">${memberboard.hits }</td>
 		</tr>
 		<tr>
 			<th>작성일</th>
-			<td>${recipeboard.writeDate }</td>
+			<td>${memberboard.writeDate }</td>
 			<th>다운로드</th>
-			<td>${recipeboard.fileName }</td>
+			<td>${memberboard.fileName }</td>
 		</tr>
 		<tr>
 			<th>제목</th>
 			<td colspan="3">
-				<input style="width:100%;" type="text" name="title" value="${recipeboard.title }" />
+				<input style="width:100%;" type="text" name="title" value="${memberboard.title }" />
 			</td>
 		</tr>
 		<tr>
 			<th>문서내용 수정</th>
 			<td colspan="3">
-				<textarea rows="10" cols="30" style="width:100%" name="content">${recipeboard.content }</textarea>
+				<textarea rows="10" cols="30" style="width:100%" name="content">${memberboard.content }</textarea>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4">
-				<button type="button" onclick="location.href='recipeboardForm.jsp'">목록</button>
+				<button type="button" onclick="location.href='memberboardForm'">목록</button>
 				<input type="submit" value="수정" class="btn">
 				<button type="button" onclick="history.back()">이전</button> 
 			</td>

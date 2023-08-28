@@ -11,18 +11,18 @@
 	String fileName = request.getParameter("fileName");
 	
 	if(id == null || id.isEmpty()){
-		response.sendRedirect("recipeboardContent.jsp?no="+no);
+		response.sendRedirect("memberboardContent?no="+no);
 		return;
 	}	
 	if(fileName == null || fileName.isEmpty()){
-		response.sendRedirect("recipeboardContent.jsp?no="+no);
+		response.sendRedirect("memberboardContent?no="+no);
 		return;
 	}
 	
 	String saveDir = "C:\\javas\\upload\\" + id + "\\" + fileName;
 	File f = new File(saveDir);
 	if(f.exists() == false){
-		response.sendRedirect("recipeboardContent.jsp?no="+no);
+		response.sendRedirect("memberboardContent?no="+no);
 		return;
 	}
 	

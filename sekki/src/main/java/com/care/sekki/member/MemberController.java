@@ -208,7 +208,7 @@ public class MemberController {
 		}
 		return "member/update";
 	}
-  /*
+ 
 	@PostMapping("updateProc")
 	public String updateProc(MemberDTO member, String confirm) {
 		String id = (String)session.getAttribute("id");
@@ -238,14 +238,31 @@ public class MemberController {
 
 	    return "member/recipehoogi";
 	}
+	
+	@RequestMapping("subscriberList")
+	public String subscriberList(
+	    @RequestParam(value = "currentPage", required = false) String cp,
+	    String select, String search, Model model) {
+		 
+			
+	    service.subscriberList(cp, select, search, model);
+	    
+	    return "member/subscriberList";
+	}
+	
+	@RequestMapping("/updateSubscription")
+    public void updateSubscription(@RequestParam String subscriberId, 
+    							@RequestParam String action) {
+        service.updateSubscription(subscriberId, action);
+    }
 		
-	@RequestMapping("memberInfo")
+	/*@RequestMapping("memberInfo")
 	public String memberInfo(
 			@RequestParam(value="currentPage", required = false)String cp,
 			String select, String search, Model model) {
 		service.memberInfo(cp, select, search, model);
 		return "member/memberInfo";
-	}
+	}*/
 	
 	@RequestMapping("userInfo")
 	public String userInfo(String id, 
@@ -257,7 +274,7 @@ public class MemberController {
 		}
 		MemberDTO member = service.userInfo(id);
 		if(member == null) {
-			return "redirect:memberInfo?currentPage="+cp;
+			return "redirect:subscriberList?currentPage="+cp;
 		}
 		model.addAttribute("member", member);
 		return "member/userInfo";
@@ -272,7 +289,7 @@ public class MemberController {
 		return "member/delete";
 	}
 	
-	@PostMapping("deleteProc")
+	/*@PostMapping("deleteProc")
 	public String deleteProc(String pw, String confirmPw, Model model) {
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.isEmpty()) {
@@ -285,9 +302,9 @@ public class MemberController {
 			return "forward:logout";
 		}
 		return "member/delete";
-	}
+	}*/
 
-	email / kakao
+	/*email / kakao
 	@ResponseBody
 	@PostMapping(value="sendEmail", produces = "text/plain; charset=utf-8")
 	public String sendEmail(@RequestBody(required = false) String email) {

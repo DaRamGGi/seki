@@ -14,7 +14,7 @@ public interface MemberMapper {
 	
 	void registerProc(MemberDTO member);
 
-	/*
+	
 	ArrayList<MemberDTO> memberInfo(
 			@Param("begin")int begin, @Param("end")int end, 
 			@Param("select")String select, @Param("search")String search);
@@ -23,7 +23,7 @@ public interface MemberMapper {
 	int count(@Param("select")String select, @Param("search")String search);
 
 	int updateProc(MemberDTO member); 
-
+/*
 	void delete(String id);
 	*/
 
@@ -32,6 +32,18 @@ public interface MemberMapper {
 	
 	String findIdByEmail(@Param("userName")String userName, 
 			@Param("email")String email);
+
+	ArrayList<SubscriberDTO> subscriberList(@Param("begin")int begin,  @Param("end") int end, 
+			@Param("select")String select, @Param("search")String search);
+
+	
+	SubscriberDTO findById(String subscriberId);
+
+	void updateSubscription(SubscriberDTO subscriber);
+
+	int findSubscriberCountById(String memberId);
+
+	
 	
 
 }
