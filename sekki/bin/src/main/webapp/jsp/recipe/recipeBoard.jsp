@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:import url="/header" />
 
-<link href="css/recipes.css" rel="stylesheet" />
+<link href="/boot/css/recipes.css" rel="stylesheet" />
 
 <div align="center">
 	<ul class="cate">
