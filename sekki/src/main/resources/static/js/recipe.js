@@ -152,7 +152,7 @@ $(document).ready(function() {
 
 //댓글 수정
 function editComment(commentId, currentContent, reno, comNo) {
-    var commentElement = document.getElementById(`comment-${commentId}`);
+    var commentElement = document.getElementById(`comment2-${commentId}`);
     var commentText = commentElement.textContent.trim();
 
     var editInput = document.createElement('textarea');
