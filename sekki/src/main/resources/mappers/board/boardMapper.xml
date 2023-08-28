@@ -15,40 +15,63 @@
 	</resultMap>
 
 	<select id="count">
-	  	SELECT count(no) FROM session_board
+		<choose>
+	  		<when test="search != null">
+	  			SELECT count(no) FROM community_board WHERE content like '%'||#{search}||'%'
+	  		</when>
+	  		<otherwise>
+	  			SELECT count(no) FROM community_board 
+	  		</otherwise>
+		</choose>
 	</select>
 
 	<select id="boardForm" resultMap="boardDto">
-		SELECT BBB.* FROM 
-		(SELECT rownum as rn, AAA.* FROM 
-		(SELECT no, title, id, write_date, hits FROM session_board ORDER BY no DESC)AAA)BBB
-		WHERE BBB.rn BETWEEN #{begin} AND #{end}
+		<choose>
+			<when test="search != null">
+				SELECT BBB.* FROM 
+				(SELECT rownum as rn, AAA.* FROM 
+				(SELECT * FROM community_board WHERE content like '%'||#{search}||'%'
+				 ORDER BY no DESC)AAA)BBB
+				WHERE BBB.rn BETWEEN #{begin} AND #{end}
+			</when>
+			<otherwise>
+				SELECT BBB.* FROM 
+				(SELECT rownum as rn, AAA.* FROM 
+				(SELECT * FROM community_board ORDER BY no DESC)AAA)BBB
+				WHERE BBB.rn BETWEEN #{begin} AND #{end}
+			</otherwise>
+		</choose>
 	</select>
 
+	
 	<insert id="boardWriteProc">
 		<selectKey order="BEFORE" keyProperty="no" resultType="int">
-			SELECT nvl(max(no),0) + 1 FROM session_board
+			SELECT nvl(max(no),0) + 1 FROM community_board
 		</selectKey>
-		INSERT INTO session_board VALUES(#{no}, #{title}, #{content}, #{id}, #{writeDate}, 0, #{fileName} )
+		INSERT INTO community_board VALUES(#{no}, #{title}, #{content}, #{id}, #{writeDate}, 0, #{fileName}, 0 )
 	</insert>
 
 	<select id="boardContent" resultMap="boardDto">
-		SELECT * FROM session_board WHERE no=#{no}
+		SELECT * FROM community_board WHERE no=#{no}
 	</select>
 
 	<update id="incHit">
-		UPDATE session_board SET hits=hits+1 WHERE no=#{no}
+		UPDATE community_board SET hits=hits+1 WHERE no=#{no}
+	</update>
+	
+	<update id="incLike">
+		UPDATE community_board SET likes=likes+1 WHERE no=#{no}
 	</update>
 
 	<select id="boardDownload">
-		SELECT file_name FROM session_board WHERE no=#{no}
+		SELECT file_name FROM community_board WHERE no=#{no}
 	</select>
 
 	<update id="boardModifyProc">
-		UPDATE session_board SET title=#{title}, content=#{content} WHERE no=#{no}
+		UPDATE community_board SET title=#{title}, content=#{content} WHERE no=#{no}
 	</update>
 
 	<delete id="boardDeleteProc">	
-		DELETE FROM session_board WHERE no=#{no}
+		DELETE FROM community_board WHERE no=#{no}
 	</delete>
 </mapper>

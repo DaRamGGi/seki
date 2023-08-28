@@ -15,12 +15,15 @@ public interface BoardMapper {
 	void boardWriteProc(BoardDTO board);
 
 	BoardDTO boardContent(int no);
-
+	
 	void incHit(int no);
+	
+	void incLike(int no);
 
 	String boardDownload(int no);
-
+	
 	void boardModifyProc(BoardDTO board);
 
 	void boardDeleteProc(int no);
 }
+
