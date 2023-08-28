@@ -70,6 +70,7 @@
   }
   .MAPS {
   border-right:1px solid #ccc;
+  
   }
      
   .MAPS h2{
@@ -181,7 +182,7 @@
         <h2 style="text-align: center;">KAKAO 지도</h2>
         <input type="text" id="searchInput" placeholder="검색할 지역을 입력하세요">
   		<button id="searchButton">검색</button>
-        <div id="map" style="width: 600px; height: 400px; margin-right:20px; margin-top:20px;"></div>
+        <div id="map" style="width: 400px; height: 400px; margin-right:20px; margin-top:20px;"></div>
         
       </div>
     </div>
