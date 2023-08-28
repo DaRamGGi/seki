@@ -8,10 +8,10 @@
 	<select id="count">
 		<choose>
 			<when test="search != null">
-				SELECT count(re_no) FROM recipe_board WHERE content like '%'||#{search}||'%'
+				SELECT count(re_no) FROM RECIPE_BOARD WHERE content like CONCAT('%', #{search}, '%')
 			</when>
 			<otherwise>
-				SELECT count(re_no) FROM recipe_board
+				SELECT count(re_no) FROM RECIPE_BOARD
 			</otherwise>
 		</choose>
 	</select>
@@ -20,16 +20,16 @@
 		<choose>
 			<when test="search != null">
 				SELECT BBB.* FROM
-				(SELECT rownum as rn, AAA.* FROM
-				(SELECT * FROM recipe_board WHERE content like '%'||#{search}||'%'
+				(SELECT ROWNUM() as rn, AAA.* FROM
+				(SELECT * FROM RECIPE_BOARD WHERE content like CONCAT('%', #{search}, '%')
 				ORDER BY re_no DESC)AAA)BBB
 				WHERE BBB.rn BETWEEN #{begin} AND #{end}
 			</when>
 			<otherwise>
 				SELECT BBB.* FROM
-				(SELECT rownum as rn, AAA.* FROM
+				(SELECT ROWNUM() as rn, AAA.* FROM
 				(SELECT *
-				FROM recipe_board ORDER BY re_no DESC)AAA)BBB
+				FROM RECIPE_BOARD ORDER BY re_no DESC)AAA)BBB
 				WHERE BBB.rn BETWEEN
 				#{begin} AND #{end}
 			</otherwise>
@@ -37,21 +37,21 @@
 	</select>
 	
 	<select id="recipeContent" parameterType="com.care.sekki.Recipe.RecipeBoardDTO">
-		SELECT * FROM recipe_board WHERE re_no=#{re_no}
+		SELECT * FROM RECIPE_BOARD WHERE re_no=#{re_no}
 	</select>
 	
 	<select id="recipeMa" parameterType="com.care.sekki.Recipe.MaterialDTO">
-		SELECT * FROM recipe_material WHERE re_no=#{re_no}
+		SELECT * FROM RECIPE_MATERIAL WHERE re_no=#{re_no}
 	</select>
 	
 	<select id="recipeSt" parameterType="com.care.sekki.Recipe.StepDTO">
-		SELECT * FROM recipe_step WHERE re_no=#{re_no}
+		SELECT * FROM RECIPE_STEP WHERE re_no=#{re_no}
 	</select>
 	<select id="reciment" parameterType="com.care.sekki.Recipe.CommentDTO">
 		SELECT * FROM recipe_comment WHERE re_no=#{re_no}
 	</select>
 	<update id="reHit">
-		UPDATE recipe_board SET VIEWS=VIEWS+1 WHERE re_no=#{re_no}
+		UPDATE RECIPE_BOARD SET VIEWS=VIEWS+1 WHERE re_no=#{re_no}
 	</update>
 	<!-- 댓글 -->
 	<insert id="insertComment"
@@ -60,10 +60,10 @@
 		
 		<selectKey keyProperty="comment_no" resultType="java.lang.Long"
 			order="BEFORE">
-			SELECT NVL(MAX(COMMENT_NO), 0) + 1 FROM RECIPE_COMMENT
+			SELECT NVL(MAX(COMMENT_NO), 0) + 1 FROM recipe_comment
 		</selectKey>
 		
-		INSERT INTO RECIPE_COMMENT (COMMENT_NO, RE_NO, ID, COMMENT_CONTENT, RATING,
+		INSERT INTO recipe_comment (COMMENT_NO, RE_NO, ID, COMMENT_CONTENT, RATING,
 		WRITTEN_TIME,PROFILE)
 		VALUES (#{comment_no}, #{re_no},
 		#{id}, #{comment_content}, #{rating},
@@ -136,7 +136,7 @@
 	
 	<!-- 댓글들 -->
 	<update id="commentUpdata" parameterType="com.care.sekki.Recipe.CommentDTO">
-    UPDATE RECIPE_COMMENT SET COMMENT_CONTENT=#{comment_content} WHERE re_no=#{re_no} AND COMMENT_NO=#{comment_no}
+    UPDATE recipe_comment SET COMMENT_CONTENT=#{comment_content} WHERE re_no=#{re_no} AND COMMENT_NO=#{comment_no}
 </update>
 	<!-- 댓글들 -->
 	<!-- 업데이트 -->
@@ -155,11 +155,11 @@
 	</delete>
 	
 	<delete id="reciCommentDel">
-	DELETE FROM RECIPE_COMMENT WHERE RE_NO=#{re_no}
+	DELETE FROM recipe_comment WHERE RE_NO=#{re_no}
 	</delete>
 	
 	<delete id="CommentDel">
-	DELETE FROM RECIPE_COMMENT WHERE RE_NO=#{re_no} AND comment_no=#{comment_no}
+	DELETE FROM recipe_comment WHERE RE_NO=#{re_no} AND comment_no=#{comment_no}
 	</delete>
 
 </mapper>

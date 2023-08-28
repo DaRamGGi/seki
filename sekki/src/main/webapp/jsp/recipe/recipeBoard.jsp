@@ -18,15 +18,21 @@
 <div id="width1200">
 
 	<ul class="reicpeForm">
-		<c:forEach var="recipe" items="${recipes}">
-			<li class="recipeForm_li" onclick="location.href='recipeBoardContent?num=${recipe.re_no }'">
-			<img src="${recipe.mainphoto}">
-				<div class="content_2">
-					<p class="reci_title">${recipe.title}</p>
-					<p class="reci_user">${recipe.id}</p>
-					<p class="reci_time">${recipe.written_time}</p>
-				</div></li>
-		</c:forEach>
+
+		<c:if test="${empty recipes }">
+			<h3>등록된 데이터가 없습니다.</h3>
+		</c:if>
+		<c:if test="${not empty recipes }">
+			<c:forEach var="recipe" items="${recipes}">
+				<li class="recipeForm_li" onclick="location.href='recipeBoardContent?num=${recipe.re_no }'">
+				<img src="${recipe.mainphoto}">
+					<div class="content_2">
+						<p class="reci_title">${recipe.title}</p>
+						<p class="reci_user">${recipe.id}</p>
+						<p class="reci_time">${recipe.written_time}</p>
+					</div></li>
+			</c:forEach>
+		</c:if>
 	</ul>
 
 

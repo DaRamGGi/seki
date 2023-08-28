@@ -46,7 +46,8 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=2e151bc9c1174ea0e8836b77c28803c3&redirect_uri=http://localhost/kakaoLogin">
+							<!--  <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=2e151bc9c1174ea0e8836b77c28803c3&redirect_uri=http://localhost/kakaoLogin">-->
+							<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=2e151bc9c1174ea0e8836b77c28803c3&redirect_uri=http://http://ec2-54-180-116-1.ap-northeast-2.compute.amazonaws.com:8888/boot/kakaoLogin">	
 								<img src="https://t1.daumcdn.net/cfile/tistory/99BEE8465C3D7D1214"/>
 							</a>
 						</td>
