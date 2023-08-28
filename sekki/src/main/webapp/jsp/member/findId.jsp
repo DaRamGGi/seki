@@ -16,15 +16,6 @@
 		<h1>회원정보 찾기</h1>
 	</div>
 <div id="wrap">
-<div id="memberMenu">
-			<ul>
-				<a href="login"><li>로그인</li></a>
-				<a href="login"><li>로그인</li></a>
-				<a href="agreeCondition" ><li>회원가입</li></a>
-				<a href="findId" class="selected"><li>아이디 찾기</li></a>
-				<a href="findPw"><li>비밀번호 찾기</li></a>
-			</ul>
-		</div>
 	<table class="findTable">
 		<tr>
 			<td>

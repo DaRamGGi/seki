@@ -7,47 +7,52 @@
 <link href="css/recipes.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+	<script>const loopIndex = ${loop.index + 1};</script>
 <script src="/js/recipe.js"></script>
 <div id="full">
 	<div id="width1200">
-		<form action="recipeProc" method="post" id="reci"
+		<form action="recipeUpdataProc" method="post" id="reci"
 			enctype="multipart/form-data">
-			<div class="title">레시피 등록</div>
+			<div class="title">레시피 수정</div>
 			<%--cont_box 1--%>
 			<div id="cok_info" class="cont_box pd_l_60">
 
 				<div class="content_pdding">
 					<span class="name">레시피 제목</span> <input type="text"
-						class="cok_title" name="title" placeholder="예)스테이크 굽는법">
+						class="cok_title" name="title" placeholder="예)스테이크 굽는법"
+						value="${recipeCon.title }">
 				</div>
 				<%--요리소개--%>
 				<div>
 					<span class="name">요리소개</span>
 					<textarea rows="2" cols="5" name="content"
-						placeholder="기본값은 여기에 적어줍니다."></textarea>
+						placeholder="기본값은 여기에 적어줍니다.">${recipeCon.content}</textarea>
 				</div>
 				<%--요리소개--%>
-				
-			<div class="photoBox">
-				<!-- 파일 선택 버튼 (숨겨진 버튼) -->
-				<input type="file" id="fileInput" accept="image/*"
-					style="display: none;" name="mainphotoUrl" onchange="showSelectedImage()">
 
-				<!-- 이미지를 표시할 img 요소 -->
-				<img id="mainPhotoHolder" onclick="browseMainFile()"
-					src="https://recipe1.ezmember.co.kr/img/pic_none4.gif"
-					style="width: 250px; height: 250px; cursor: pointer">
+				<div class="photoBox">
+					<!-- 파일 선택 버튼 (숨겨진 버튼) -->
+					<input type="file" id="fileInput" accept="image/*"
+						style="display: none;" name="mainphotoUrl"
+						onchange="showSelectedImage()">
 
-			</div>
+					<!-- 이미지를 표시할 img 요소 -->
+					<img id="mainPhotoHolder" onclick="browseMainFile()"
+						src="${recipeCon.mainphoto }"
+						style="width: 250px; height: 250px; cursor: pointer">
+
+				</div>
 
 				<%--카테고리--%>
 				<div class="content_pdding">
 					<span class="name">카테고리</span> <select class="reci" name="category">
 						<option value="nomal">요리를 선택하세요</option>
-						<option value="kor">한식</option>
-						<option value="chi">중식</option>
-						<option value="jap">일식</option>
-						<option value="skeki">양식</option>
+						<option value="kor" ${selectedCategory == 'kor' ? 'selected' : ''}>한식</option>
+						<option value="chi" ${selectedCategory == 'chi' ? 'selected' : ''}>중식</option>
+						<option value="jap" ${selectedCategory == 'jap' ? 'selected' : ''}>일식</option>
+						<option value="skeki"
+							${selectedCategory == 'skeki' ? 'selected' : ''}>양식</option>
 					</select>
 				</div>
 				<%--카테고리--%>
@@ -56,21 +61,25 @@
 					<span class="name">요리정보</span> <span class="info_n">인원</span> <select
 						class="cok" name="cuisine">
 						<option>인원</option>
-						<option value="1">1인분</option>
-						<option value="2">2인분</option>
-						<option value="3">3인분</option>
+						<option value="1" ${selectedCuisine == 1 ? 'selected' : ''}>1인분</option>
+						<option value="2" ${selectedCuisine == 2 ? 'selected' : ''}>2인분</option>
+						<option value="3" ${selectedCuisine == 3 ? 'selected' : ''}>3인분</option>
 					</select> <span class="info_n">시간</span> <select class="cok" name="times">
 						<option>시간</option>
-						<option value="5">5분 이내</option>
-						<option value="30">30분 이내</option>
-						<option value="60">1시간 이내</option>
-						<option value="over">2시간 이상</option>
+						<option value="5" ${selectedTimes == 5 ? 'selected' : ''}>5분
+							이내</option>
+						<option value="30" ${selectedTimes == 30 ? 'selected' : ''}>30분
+							이내</option>
+						<option value="60" ${selectedTimes == 60 ? 'selected' : ''}>1시간
+							이내</option>
+						<option value="over" ${selectedTimes == 'over' ? 'selected' : ''}>2시간
+							이상</option>
 					</select> <span class="info_n">난이도</span> <select class="cok" name="degree">
 						<option>난이도</option>
-						<option value="1">아무나</option>
-						<option value="2">초급</option>
-						<option value="3">중급</option>
-						<option value="4">고급</option>
+						<option value="1" ${selectedDegree == 1 ? 'selected' : ''}>아무나</option>
+						<option value="2" ${selectedDegree == 2 ? 'selected' : ''}>초급</option>
+						<option value="3" ${selectedDegree == 3 ? 'selected' : ''}>중급</option>
+						<option value="4" ${selectedDegree == 4 ? 'selected' : ''}>고급</option>
 					</select>
 				</div>
 
@@ -91,14 +100,16 @@
 
 					<div class="coumngka">
 						<div id="materialContainer">
-							<div class="right_boxs">
-								<input type="text" name="materialname"
-									class="form-control materials_css" placeholder="예) 돼지고기">
-								<input type="text" name="materialamount"
-									id="cok_material_amt_1_1" class="form-control materials_css"
-									placeholder="예) 100g">
-							</div>
-
+							<c:forEach var="reciMa" items="${reciMa}" >
+								<div class="right_boxs">
+									<input type="text" name="materialname"
+										class="form-control materials_css" placeholder="예) 돼지고기"
+										value="${reciMa.materialname}"> <input type="text"
+										name="materialamount" id="cok_material_amt_1_1"
+										class="form-control materials_css" placeholder="예) 100g"
+										value="${reciMa.materialamount}">
+								</div>
+							</c:forEach>
 						</div>
 						<div class="right_btnadd">
 							<button type="button" id="addMaterialButton">추가</button>
@@ -130,18 +141,31 @@
 				<!-- 여러 Step들을 감싸는 부모 요소 -->
 				<div id="stepContainer">
 					<!-- Step 1 -->
-					<div class="cok_step">
-    <p class="cok_step_p">Step1</p>
+<c:forEach var="reciStepList" items="${reciStepList}" varStatus="loop">
+  <c:set var="stepIndex" value="${loop.index + 1}" scope="request"/>
+  <div class="cok_step">
+    <p class="cok_step_p">Step${stepIndex}</p>
     <div id="cok_step_box">
-        <textarea name="step_text" id="step_text_STEP_1" class="form-control step_cont step_text_STEP_css" placeholder="예) 소고기 맛나게 구워드세요"></textarea>
+      <textarea name="step_text" id="step_text_STEP_${stepIndex}"
+                class="form-control step_cont step_text_STEP_css"
+                placeholder="예) 소고기 맛나게 구워드세요">${reciStepList.step_text}</textarea>
     </div>
-    <div id="divStepPhotoBox_STEP_1">
-        <label for="step_photoholder_STEP_${stepCount}" class="step_photoLabel">
-            <img id="stepPhotoHolder_STEP_1" class="stepPhotoHolder_STEP_css" src="https://recipe1.ezmember.co.kr/img/pic_none2.gif">
-        </label>
-        <input type="file" name="step_photoholder" id="step_photoholder_STEP_${stepCount}" class="step_photoholder" accept="image/*" onchange="previewImage(this, ${stepCount})" multiple>
+    <div id="divStepPhotoBox_STEP_${stepIndex}">
+      <label class="step_photoLabel">
+        <img id="stepPhotoHolder_STEP_${stepIndex}" class="stepPhotoHolder_STEP_css"
+             src="${reciStepList.step_photoholder}" >
+        <input type="file" name="step_photoholder"
+               id="step_photoholder_STEP_${stepIndex}" class="step_photoholder"
+               accept="image/*" style="display: none;">
+      </label>
     </div>
-</div>
+  </div>
+</c:forEach>
+
+
+
+
+
 				</div>
 
 				<!-- 스텝 추가 버튼 -->
@@ -166,7 +190,7 @@
 
 			<div class="cont_box pd_l_60 content_borad">
 				요리팁
-				<textarea rows="3" cols="3" name="tip"></textarea>
+				<textarea rows="3" cols="3" name="tip">${recipeCon.tip }</textarea>
 			</div>
 
 			<div class="cont_box pd_l_60 content_borad last_div">

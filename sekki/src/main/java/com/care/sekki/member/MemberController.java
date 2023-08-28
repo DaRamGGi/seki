@@ -199,26 +199,6 @@ public class MemberController {
 		return "member/findPw";
 	}
   
-	@PostMapping("findPwProc")
-    public String findPwProc(@RequestParam String id, 
-    		@RequestParam String deliveryMethod, RedirectAttributes ra) {
-      
-	   if(deliveryMethod.equals("toMobile")) {
-		   service.findPwByMobile(id);
-	   }else {
-		   service.findPwByEmail(id);
-	   }
-	   
-	   ra.addFlashAttribute("id", id);
-	   ra.addFlashAttribute("deliveryMethod", deliveryMethod);
-	   
-       return "redirect:findPwResult";
-    }
-	
-	@GetMapping("findPwResult")
-	public String findPwResult() {
-		return "member/findPwResult";
-	}
 	/* 마이페이지                                */
 	@GetMapping("update")
 	public String update() {
@@ -307,6 +287,20 @@ public class MemberController {
 		return "member/delete";
 	}
 
+	email / kakao
+	@ResponseBody
+	@PostMapping(value="sendEmail", produces = "text/plain; charset=utf-8")
+	public String sendEmail(@RequestBody(required = false) String email) {
+		return service.sendEmail(email);
+	}
+	*/
+	@ResponseBody
+	@PostMapping(value="sendAuth", produces = "text/plain; charset=utf-8")
+	public String sendAuth(@RequestBody(required = false) String auth) {
+		//System.out.println("sendAuth()");
+		return service.sendAuth(auth);
+	}
+	
 	@Autowired private KakaoService kakao;
 	@GetMapping("kakaoLogin")
 	public String kakaoLogin(String code) {
