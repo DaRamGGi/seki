@@ -85,12 +85,21 @@
 		DELETE FROM sekki_member WHERE id=#{id}
 	</delete> 
 	
-	<select id="findIdByMobile">
+		<select id="findIdByMobile">
 		SELECT id FROM sekki_member WHERE user_name=#{userName} AND mobile=#{mobile}
 	</select>
 	
 	<select id="findIdByEmail">
 		SELECT id FROM sekki_member WHERE user_name=#{userName} AND email=#{email}
+	</select>
+	
+
+    <select id="subscriberList" resultType="com.care.sekki.member.SubscriberDTO">
+	   SELECT id, registration_Date, subscriber_Count, is_Subscribed, member_id FROM subscribers
+    </select>
+
+	<select id="findById" resultMap="memberDto">
+    	SELECT * FROM sekki_member WHERE id=#{id}
 	</select>
 	
 </mapper>
