@@ -206,8 +206,8 @@ function editComment(commentId, currentContent, reno, comNo) {
 
 //삭제
 
-function deleteComment(commentNo, reno, id) {
-    var url = '/deleteRecipe/' + commentNo + '/' + reno;
+function deleteComment(commentNo, reno) {
+    var url = 'http://ec2-15-165-161-47.ap-northeast-2.compute.amazonaws.com:8888/boot/deleteRecipe/' + commentNo + '/' + reno;
     var data = {
         reno: reno,
         comment_no: commentNo

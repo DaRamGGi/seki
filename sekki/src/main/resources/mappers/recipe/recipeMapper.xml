@@ -155,7 +155,7 @@
 	</delete>
 	
 	<delete id="reciCommentDel">
-	DELETE FROM recipe_comment WHERE RE_NO=#{re_no}
+	DELETE FROM recipe_comment WHERE re_no=#{re_no}
 	</delete>
 	
 	<delete id="CommentDel">
