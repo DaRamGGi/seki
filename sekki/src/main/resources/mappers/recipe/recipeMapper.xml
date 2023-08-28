@@ -8,7 +8,8 @@
 	<select id="count">
 		<choose>
 			<when test="search != null">
-				SELECT count(re_no) FROM recipe_board WHERE content like '%'||#{search}||'%'
+				SELECT count(re_no) FROM recipe_board WHERE content
+				like '%'||#{search}||'%'
 			</when>
 			<otherwise>
 				SELECT count(re_no) FROM recipe_board
@@ -16,7 +17,8 @@
 		</choose>
 	</select>
 
-	<select id="recipeBoard" parameterType="com.care.sekki.Recipe.RecipeBoardDTO">
+	<select id="recipeBoard"
+		parameterType="com.care.sekki.Recipe.RecipeBoardDTO">
 		<choose>
 			<when test="search != null">
 				SELECT BBB.* FROM
@@ -35,43 +37,51 @@
 			</otherwise>
 		</choose>
 	</select>
-	
-	<select id="recipeContent" parameterType="com.care.sekki.Recipe.RecipeBoardDTO">
+
+	<select id="recipeContent"
+		parameterType="com.care.sekki.Recipe.RecipeBoardDTO">
 		SELECT * FROM recipe_board WHERE re_no=#{re_no}
 	</select>
-	
-	<select id="recipeMa" parameterType="com.care.sekki.Recipe.MaterialDTO">
+
+	<select id="recipeMa"
+		parameterType="com.care.sekki.Recipe.MaterialDTO">
 		SELECT * FROM recipe_material WHERE re_no=#{re_no}
 	</select>
-	
-	<select id="recipeSt" parameterType="com.care.sekki.Recipe.StepDTO">
+
+	<select id="recipeSt"
+		parameterType="com.care.sekki.Recipe.StepDTO">
 		SELECT * FROM recipe_step WHERE re_no=#{re_no}
 	</select>
-	<select id="reciment" parameterType="com.care.sekki.Recipe.CommentDTO">
+	<select id="reciment"
+		parameterType="com.care.sekki.Recipe.CommentDTO">
 		SELECT * FROM recipe_comment WHERE re_no=#{re_no}
 	</select>
 	<update id="reHit">
-		UPDATE recipe_board SET VIEWS=VIEWS+1 WHERE re_no=#{re_no}
+		UPDATE recipe_board SET VIEWS=VIEWS+1 WHERE
+		re_no=#{re_no}
 	</update>
 	<!-- 댓글 -->
 	<insert id="insertComment"
 		parameterType="com.care.sekki.Recipe.CommentDTO"
 		useGeneratedKeys="true" keyProperty="comment_no">
-		
-		<selectKey keyProperty="comment_no" resultType="java.lang.Long"
-			order="BEFORE">
-			SELECT NVL(MAX(COMMENT_NO), 0) + 1 FROM RECIPE_COMMENT
+
+		<selectKey keyProperty="comment_no"
+			resultType="java.lang.Long" order="BEFORE">
+			SELECT NVL(MAX(COMMENT_NO), 0) + 1
+			FROM RECIPE_COMMENT
 		</selectKey>
-		
-		INSERT INTO RECIPE_COMMENT (COMMENT_NO, RE_NO, ID, COMMENT_CONTENT, RATING,
+
+		INSERT INTO RECIPE_COMMENT (COMMENT_NO, RE_NO, ID, COMMENT_CONTENT,
+		RATING,
 		WRITTEN_TIME,PROFILE)
 		VALUES (#{comment_no}, #{re_no},
-		#{id}, #{comment_content}, #{rating},
+		#{id},
+		#{comment_content}, #{rating},
 		#{written_time}, #{profile})
-		
+
 	</insert>
 	<!-- 댓글 -->
-	
+
 
 
 	<insert id="insertRecipe"
@@ -83,9 +93,11 @@
 		</selectKey>
 		INSERT INTO RECIPE_BOARD (RE_NO, TITLE, CONTENT, TIP, MAINPHOTO,
 		CATEGORY,CUISINE, TIMES, DEGREE, WRITTEN_TIME, ID, PROFILE)
-		VALUES (#{re_no}, #{title},
+		VALUES
+		(#{re_no}, #{title},
 		#{content}, #{tip}, #{mainphoto},
-		#{category}, #{cuisine}, #{times}, #{degree},
+		#{category},
+		#{cuisine}, #{times}, #{degree},
 		#{written_time}, #{id}, #{profile})
 	</insert>
 
@@ -111,55 +123,67 @@
 		STEP_PHOTOHOLDER)
 		VALUES (#{step_no}, #{re_no}, #{step_text}, #{step_photoholder})
 	</insert>
-	
-	
+
+
 	<!--업데이트 -->
-	
+
 	<!-- 메인 보더 -->
-	<update id="reciUpdata" parameterType="com.care.sekki.Recipe.RecipeBoardDTO">
-		UPDATE RECIPE_BOARD SET title=#{title}, content=#{content}, TIP=#{tip}, mainphoto=#{mainphoto}, category=#{category}, cuisine=#{cuisine}, times=#{times}, degree=#{degree} WHERE re_no=#{re_no}
+	<update id="reciUpdata"
+		parameterType="com.care.sekki.Recipe.RecipeBoardDTO">
+		UPDATE RECIPE_BOARD SET title=#{title},
+		content=#{content}, TIP=#{tip}, mainphoto=#{mainphoto},
+		category=#{category}, cuisine=#{cuisine}, times=#{times},
+		degree=#{degree} WHERE re_no=#{re_no}
 	</update>
 	<!-- 메인 보더 -->
-	
-	<!--  재료들 -->
-	<update id="mateUpdata" parameterType="com.care.sekki.Recipe.MaterialDTO">
-		UPDATE RECIPE_MATERIAL SET MATERIALNAME=#{materialname}, MATERIALAMOUNT=#{materialamount} WHERE re_no=#{re_no} AND MATE_NO=#{mate_no}
-	</update>	
-	<!--  재료들 -->
-	
-	<!--  스텝들 -->
-	<update id="stepUpdata" parameterType="com.care.sekki.Recipe.StepDTO">
-		UPDATE RECIPE_STEP SET STEP_TEXT=#{step_text}, STEP_PHOTOHOLDER=#{step_photoholder} WHERE re_no=#{re_no} AND step_no=#{step_no}
-	</update>	
-	
-	<!--  스텝들 -->
-	
+
+	<!-- 재료들 -->
+	<update id="mateUpdata"
+		parameterType="com.care.sekki.Recipe.MaterialDTO">
+		UPDATE RECIPE_MATERIAL SET MATERIALNAME=#{materialname},
+		MATERIALAMOUNT=#{materialamount} WHERE re_no=#{re_no} AND
+		MATE_NO=#{mate_no}
+	</update>
+	<!-- 재료들 -->
+
+	<!-- 스텝들 -->
+	<update id="stepUpdata"
+		parameterType="com.care.sekki.Recipe.StepDTO">
+		UPDATE RECIPE_STEP SET STEP_TEXT=#{step_text},
+		STEP_PHOTOHOLDER=#{step_photoholder} WHERE re_no=#{re_no} AND
+		step_no=#{step_no}
+	</update>
+
+	<!-- 스텝들 -->
+
 	<!-- 댓글들 -->
-	<update id="commentUpdata" parameterType="com.care.sekki.Recipe.CommentDTO">
-    UPDATE RECIPE_COMMENT SET COMMENT_CONTENT=#{comment_content} WHERE re_no=#{re_no} AND COMMENT_NO=#{comment_no}
-</update>
+	<update id="commentUpdata"
+		parameterType="com.care.sekki.Recipe.CommentDTO">
+		UPDATE RECIPE_COMMENT SET COMMENT_CONTENT=#{comment_content} WHERE
+		re_no=#{re_no} AND COMMENT_NO=#{comment_no}
+	</update>
 	<!-- 댓글들 -->
 	<!-- 업데이트 -->
-	
+
 	<!-- 삭제 -->
 	<delete id="reciBoardDel">
-		DELETE FROM RECIPE_BOARD WHERE RE_NO=#{re_no} 
+		DELETE FROM RECIPE_BOARD WHERE RE_NO=#{re_no}
 	</delete>
-	
+
 	<delete id="reciMateDel">
-	DELETE FROM RECIPE_MATERIAL WHERE RE_NO=#{re_no}
+		DELETE FROM RECIPE_MATERIAL WHERE RE_NO=#{re_no}
 	</delete>
-	
+
 	<delete id="reciStepDel">
-	DELETE FROM RECIPE_STEP WHERE RE_NO=#{re_no}
+		DELETE FROM RECIPE_STEP WHERE RE_NO=#{re_no}
 	</delete>
-	
+
 	<delete id="reciCommentDel">
-	DELETE FROM RECIPE_COMMENT WHERE RE_NO=#{re_no}
+		DELETE FROM RECIPE_COMMENT WHERE RE_NO=#{re_no}
 	</delete>
-	
+
 	<delete id="CommentDel">
-	DELETE FROM RECIPE_COMMENT WHERE RE_NO=#{re_no} AND comment_no=#{comment_no}
+		DELETE FROM RECIPE_COMMENT WHERE RE_NO=#{re_no} AND comment_no=#{comment_no}
 	</delete>
 
 </mapper>

@@ -283,6 +283,7 @@ public class MemberController {
     							@RequestParam String action) {
         service.updateSubscription(subscriberId, action);
     }
+	
 	@RequestMapping("userInfo")
 	public String userInfo(String id, 
 			@RequestParam(value="currentPage", required = false)String cp, 

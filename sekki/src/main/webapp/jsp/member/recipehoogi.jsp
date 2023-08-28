@@ -1,215 +1,224 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:import url="/header" />
 <html>
 <head>
-  <title>요리 후기 페이지</title>
-  <link rel="stylesheet" type="text/css" href="board.css"> <!-- CSS 파일 경로 설정 -->
+<title>요리 후기 페이지</title>
+<link rel="stylesheet" type="text/css" href="board.css">
+<!-- CSS 파일 경로 설정 -->
 </head>
 
 <style>
-	.header{
-	border-bottom:1px solid #ccc;
-	padding-bottom:30px;
-	}
-	.content {
-	border-bottom:1px solid #ccc;
-	padding-bottom:30px;
-	}
-	.footer{
-	padding-bottom:30px;
-	}
-  /* h2 재료, 양념 */	
-  .content .ingredients h2 {
-    border-bottom: 1px solid #ccc;
-    padding: 30px;
-  }
+.header {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 30px;
+}
 
-  /* 공통 스타일을 정의합니다. */
-  .ingredients ul li div {
-    border-bottom: 1px solid #ccc;
-    border-right:1px solid #ccc;
-    padding: 16px;
-    box-sizing: border-box; /* 올바른 box-sizing 값으로 수정 */
-  }
-  
-  .ingredients ul li div span {
-    color: #ccc;
-    padding-top: 16px;
-  }
+.content {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 30px;
+}
 
-  /* 구매 버튼에 추가 스타일을 정의합니다. */
-  .buybutton {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-    border-radius: 32px;
-  }
-  
-  .content2 {
-    display: flex;
-    border-bottom:1px solid #ccc;
-    padding-bottom:30px;
-    align-items: center;
-    flex-wrap: wrap;
-    margin:20px;
-    
-  }
-  
- 
-  .MAPS,.reviews{
-  	flex: 1;
-  	display: flex;
-    flex-direction: column;
-    align-items: center; /* 세로 방향 가운데 정렬 */
-    margin: 10px; /* 각 섹션 간격을 위한 마진 */
-  
-  }
-  .MAPS {
-  border-right:1px solid #ccc;
-  }
-     
-  .MAPS h2{
-  padding:10px;
-  border-bottom:1px solid #ccc;
-  
-  }
-  .reviews .reviewContainer{
-  	display: flex;
-    align-items: center; /* 가로 방향 가운데 정렬 */
-    margin-bottom: 10px; /* 각 후기 글 사이 간격 */
-  }
-  
-  .reviews h2{
-  padding:10px;
-  border-bottom:1px solid #ccc;
-  }
-  
-  #reviewContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        width: 500px;
-        margin: 0 auto;
-    }
+.footer {
+	padding-bottom: 30px;
+}
+/* h2 재료, 양념 */
+.content .ingredients h2 {
+	border-bottom: 1px solid #ccc;
+	padding: 30px;
+}
 
-    .reviewContent {
-        width: 100%;
-    }
+/* 공통 스타일을 정의합니다. */
+.ingredients ul li div {
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	padding: 16px;
+	box-sizing: border-box; /* 올바른 box-sizing 값으로 수정 */
+}
 
-    .buttonContainer {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 5px;
-        width: 100%;
-    }
-  
-  
+.ingredients ul li div span {
+	color: #ccc;
+	padding-top: 16px;
+}
+
+/* 구매 버튼에 추가 스타일을 정의합니다. */
+.buybutton {
+	background-color: #007BFF;
+	color: white;
+	border: none;
+	padding: 8px 16px;
+	cursor: pointer;
+	border-radius: 32px;
+}
+
+.content2 {
+	display: flex;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 30px;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: 20px;
+}
+
+.MAPS, .reviews {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center; /* 세로 방향 가운데 정렬 */
+	margin: 10px; /* 각 섹션 간격을 위한 마진 */
+}
+
+.MAPS {
+	border-right: 1px solid #ccc;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center; /* 세로 방향 가운데 정렬 */
+	margin: 10px; /* 각 섹션 간격을 위한 마진 */
+}
+
+.MAPS h2 {
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.reviews .reviewContainer {
+	display: flex;
+	align-items: center; /* 가로 방향 가운데 정렬 */
+	margin-bottom: 10px; /* 각 후기 글 사이 간격 */
+}
+
+.reviews h2 {
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+#reviewContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 500px;
+	margin: 0 auto;
+}
+
+.reviewContent {
+	width: 100%;
+}
+
+.buttonContainer {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 5px;
+	width: 100%;
+}
 </style>
 
 <body>
 
 
-  
-
-  <div class="header" style="text-align: center;">
-    <!-- 이미지를 표시할 부분 -->
-    <img src="src/main/resources/static/image/logo.png" alt="이미지">
-    <h1>[후기]</h1>
-    <textarea id="reviewText" rows="5" cols="50" placeholder="글쓴이 후기를 작성해주세요"></textarea>
-    
-  </div>
 
 
-  <div class="content" style="display: flex; justify-content: center;">
-    <div class="ingredients" style="flex: 1;">
-      <!-- 사용자 입력 폼을 통해 선택한 재료를 받아오는 예시 -->
-    <!-- 재료 목록 -->
-    <h2 style="text-align: center;">[재료]</h2>
-    	<ul class="ingredientList">
-    	<c:forEach items="${listofIngredients}" var="ingredient">
-        <li>
-          <div style="display: flex; justify-content: space-between; ">
-            <span>${ingredient}</span>
-            <div>
-              <select id="martSelect">
-                <option value="emart">E-Mart</option>
-                <option value="homeplus">Home-Plus</option>
-                <option value="wholesalemart">식자재 왕 도매마트</option>
-                <option value="lottemart">롯데마트</option>
-              </select>
-              <button class="buybutton" data-ingredient="${ingredient}">구매</button>
-            </div>
-          </div>
-        </li>
-      </c:forEach>	      
-	    </ul>
-	  </div>
-	<div class="ingredients" style="flex: 1;">
-	    <!-- 양념 목록 -->	    
-	  <h2 style="text-align: center;">[양념]</h2>
-	  <ul class="seasoningList">
-              <!-- 반복문으로 양념 목록 생성 -->
-	    	<c:forEach items="${listofSeasoning}" var="seasoning">
-	        <li>
-	          <div style="display: flex; justify-content: space-between; ">
-	            <span>${seasoning}</span>
-	            <div>
-	              <select id="martSelect">
-	                <option value="emart">E-Mart</option>
-	                <option value="homeplus">Home-Plus</option>
-	                <option value="wholesalemart">식자재 왕 도매마트</option>
-	                <option value="lottemart">롯데마트</option>
-	              </select>
-	              <button class="buybutton" data-ingredient="${seasoning}">구매</button>
-	            </div>
-	          </div>
-	        </li>
-	      </c:forEach>	      
-	   </ul>
-	   	  
-		
- 	 </div>
-  	
- </div>
+	<div class="header" style="text-align: center;">
+		<!-- 이미지를 표시할 부분 -->
+		<img src="src/main/resources/static/image/logo.png" alt="이미지">
+		<h1>[후기]</h1>
+		<textarea id="reviewText" rows="5" cols="50"
+			placeholder="글쓴이 후기를 작성해주세요"></textarea>
+
+	</div>
+
+
+	<div class="content" style="display: flex; justify-content: center;">
+		<div class="ingredients" style="flex: 1;">
+			<!-- 사용자 입력 폼을 통해 선택한 재료를 받아오는 예시 -->
+			<!-- 재료 목록 -->
+			<h2 style="text-align: center;">[재료]</h2>
+			<ul class="ingredientList">
+				<c:forEach items="${listofIngredients}" var="ingredient">
+					<li>
+						<div style="display: flex; justify-content: space-between;">
+							<span>${ingredient}</span>
+							<div>
+								<select id="martSelect">
+									<option value="emart">E-Mart</option>
+									<option value="homeplus">Home-Plus</option>
+									<option value="wholesalemart">식자재 왕 도매마트</option>
+									<option value="lottemart">롯데마트</option>
+								</select>
+								<button class="buybutton" data-ingredient="${ingredient}">구매</button>
+							</div>
+						</div>
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
+		<div class="ingredients" style="flex: 1;">
+			<!-- 양념 목록 -->
+			<h2 style="text-align: center;">[양념]</h2>
+			<ul class="seasoningList">
+				<!-- 반복문으로 양념 목록 생성 -->
+				<c:forEach items="${listofSeasoning}" var="seasoning">
+					<li>
+						<div style="display: flex; justify-content: space-between;">
+							<span>${seasoning}</span>
+							<div>
+								<select id="martSelect">
+									<option value="emart">E-Mart</option>
+									<option value="homeplus">Home-Plus</option>
+									<option value="wholesalemart">식자재 왕 도매마트</option>
+									<option value="lottemart">롯데마트</option>
+								</select>
+								<button class="buybutton" data-ingredient="${seasoning}">구매</button>
+							</div>
+						</div>
+					</li>
+				</c:forEach>
+			</ul>
+
+
+		</div>
+
+	</div>
 	<div class="content2" style="display: flex; justify-content: center;">
-    <div class="MAPS">
-      <div style="display: flex; flex-direction: column; align-items: center;">
-        <h2 style="text-align: center;">KAKAO 지도</h2>
-        <input type="text" id="searchInput" placeholder="검색할 지역을 입력하세요">
-  		<button id="searchButton">검색</button>
-        <div id="map" style="width: 600px; height: 400px; margin-right:20px; margin-top:20px;"></div>
-        
-      </div>
-    </div>
+		<div class="MAPS">
+			<div
+				style="display: flex; flex-direction: column; align-items: center;">
+				<h2 style="text-align: center;">KAKAO 지도</h2>
+				<input type="text" id="searchInput" placeholder="검색할 지역을 입력하세요">
+				<button id="searchButton">검색</button>
+				<div id="map"
+					style="width: 600px; height: 400px; margin-right: 20px; margin-top: 20px;"></div>
 
-    <div class="reviews" style="text-align: center;">
-        <!-- 받은 요리 후기 글 -->
-        <h2 style="text-align: center;">받은 요리 후기 글</h2>
-        <div id="reviewContainer">
-        	<div class = "reviewContent" >
-            	<textarea id="reviewText"></textarea><br>
-            </div>
-            <div class="buttonContainer">
-            <button class="replyButton">답글 달기</button>
-            <button class="deleteButton">삭제</button>
-            </div>
-        </div>
-      
-    </div>
-</div>
-	      
-	
+			</div>
+		</div>
 
- <div class="footer" style="text-align: center;">
-    <!-- 푸터 부분 -->
-    <button id="home">홈으로</button>
-  </div>
-  
-<script>
+		<div class="reviews" style="text-align: center;">
+			<!-- 받은 요리 후기 글 -->
+			<h2 style="text-align: center;">받은 요리 후기 글</h2>
+			<div id="reviewContainer">
+				<div class="reviewContent">
+					<textarea id="reviewText"></textarea>
+					<br>
+				</div>
+				<div class="buttonContainer">
+					<button class="replyButton">답글 달기</button>
+					<button class="deleteButton">삭제</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+	<div class="footer" style="text-align: center;">
+		<!-- 푸터 부분 -->
+		<button id="home">홈으로</button>
+	</div>
+
+	<script>
 
 const reviewContainer = document.getElementById("reviewContainer");
 
@@ -332,7 +341,8 @@ document.addEventListener("DOMContentLoaded", function() {
   
   
   	<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=47ccec590c1f3b7c282f048e546230c2&autoload=false"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47ccec590c1f3b7c282f048e546230c2&libraries=services,clusterer,drawing"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47ccec590c1f3b7c282f048e546230c2&libraries=services,clusterer,drawing"></script>
 	<script>
 	var id = '<%=session.getAttribute("id")%>';
 	var address = '<%=session.getAttribute("address")%>';

@@ -27,18 +27,19 @@
 						placeholder="기본값은 여기에 적어줍니다."></textarea>
 				</div>
 				<%--요리소개--%>
-				
-			<div class="photoBox">
-				<!-- 파일 선택 버튼 (숨겨진 버튼) -->
-				<input type="file" id="fileInput" accept="image/*"
-					style="display: none;" name="mainphotoUrl" onchange="showSelectedImage()">
 
-				<!-- 이미지를 표시할 img 요소 -->
-				<img id="mainPhotoHolder" onclick="browseMainFile()"
-					src="https://recipe1.ezmember.co.kr/img/pic_none4.gif"
-					style="width: 250px; height: 250px; cursor: pointer">
+				<div class="photoBox">
+					<!-- 파일 선택 버튼 (숨겨진 버튼) -->
+					<input type="file" id="fileInput" accept="image/*"
+						style="display: none;" name="mainphotoUrl"
+						onchange="showSelectedImage()">
 
-			</div>
+					<!-- 이미지를 표시할 img 요소 -->
+					<img id="mainPhotoHolder" onclick="browseMainFile()"
+						src="https://recipe1.ezmember.co.kr/img/pic_none4.gif"
+						style="width: 250px; height: 250px; cursor: pointer">
+
+				</div>
 
 				<%--카테고리--%>
 				<div class="content_pdding">
@@ -131,17 +132,23 @@
 				<div id="stepContainer">
 					<!-- Step 1 -->
 					<div class="cok_step">
-    <p class="cok_step_p">Step1</p>
-    <div id="cok_step_box">
-        <textarea name="step_text" id="step_text_STEP_1" class="form-control step_cont step_text_STEP_css" placeholder="예) 소고기 맛나게 구워드세요"></textarea>
-    </div>
-    <div id="divStepPhotoBox_STEP_1">
-        <label for="step_photoholder_STEP_${stepCount}" class="step_photoLabel">
-            <img id="stepPhotoHolder_STEP_1" class="stepPhotoHolder_STEP_css" src="https://recipe1.ezmember.co.kr/img/pic_none2.gif">
-        </label>
-        <input type="file" name="step_photoholder" id="step_photoholder_STEP_${stepCount}" class="step_photoholder" accept="image/*" onchange="previewImage(this, ${stepCount})" multiple>
-    </div>
-</div>
+						<p class="cok_step_p">Step1</p>
+						<div id="cok_step_box">
+							<textarea name="step_text" id="step_text_STEP_1"
+								class="form-control step_cont step_text_STEP_css"
+								placeholder="예) 소고기 맛나게 구워드세요"></textarea>
+						</div>
+						<div id="divStepPhotoBox_STEP_1">
+							<label for="step_photoholder_STEP_${stepCount}"
+								class="step_photoLabel"> <img
+								id="stepPhotoHolder_STEP_1" class="stepPhotoHolder_STEP_css"
+								src="https://recipe1.ezmember.co.kr/img/pic_none2.gif">
+							</label> <input type="file" name="step_photoholder"
+								id="step_photoholder_STEP_${stepCount}" class="step_photoholder"
+								accept="image/*" onchange="previewImage(this, ${stepCount})"
+								multiple>
+						</div>
+					</div>
 				</div>
 
 				<!-- 스텝 추가 버튼 -->

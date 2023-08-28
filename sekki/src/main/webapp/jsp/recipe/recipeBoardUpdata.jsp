@@ -8,7 +8,7 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-	<script>const loopIndex = ${loop.index + 1};</script>
+<script>const loopIndex = ${loop.index + 1};</script>
 <script src="/js/recipe.js"></script>
 <div id="full">
 	<div id="width1200">
@@ -100,7 +100,7 @@
 
 					<div class="coumngka">
 						<div id="materialContainer">
-							<c:forEach var="reciMa" items="${reciMa}" >
+							<c:forEach var="reciMa" items="${reciMa}">
 								<div class="right_boxs">
 									<input type="text" name="materialname"
 										class="form-control materials_css" placeholder="예) 돼지고기"
@@ -141,26 +141,29 @@
 				<!-- 여러 Step들을 감싸는 부모 요소 -->
 				<div id="stepContainer">
 					<!-- Step 1 -->
-<c:forEach var="reciStepList" items="${reciStepList}" varStatus="loop">
-  <c:set var="stepIndex" value="${loop.index + 1}" scope="request"/>
-  <div class="cok_step">
-    <p class="cok_step_p">Step${stepIndex}</p>
-    <div id="cok_step_box">
-      <textarea name="step_text" id="step_text_STEP_${stepIndex}"
-                class="form-control step_cont step_text_STEP_css"
-                placeholder="예) 소고기 맛나게 구워드세요">${reciStepList.step_text}</textarea>
-    </div>
-    <div id="divStepPhotoBox_STEP_${stepIndex}">
-      <label class="step_photoLabel">
-        <img id="stepPhotoHolder_STEP_${stepIndex}" class="stepPhotoHolder_STEP_css"
-             src="${reciStepList.step_photoholder}" >
-        <input type="file" name="step_photoholder"
-               id="step_photoholder_STEP_${stepIndex}" class="step_photoholder"
-               accept="image/*" style="display: none;">
-      </label>
-    </div>
-  </div>
-</c:forEach>
+					<c:forEach var="reciStepList" items="${reciStepList}"
+						varStatus="loop">
+						<c:set var="stepIndex" value="${loop.index + 1}" scope="request" />
+						<div class="cok_step">
+							<p class="cok_step_p">Step${stepIndex}</p>
+							<div id="cok_step_box">
+								<textarea name="step_text" id="step_text_STEP_${stepIndex}"
+									class="form-control step_cont step_text_STEP_css"
+									placeholder="예) 소고기 맛나게 구워드세요">${reciStepList.step_text}</textarea>
+							</div>
+							<div id="divStepPhotoBox_STEP_${stepIndex}">
+								<label class="step_photoLabel"> <img
+									id="stepPhotoHolder_STEP_${stepIndex}"
+									class="stepPhotoHolder_STEP_css"
+									src="${reciStepList.step_photoholder}"> <input
+									type="file" name="step_photoholder"
+									id="step_photoholder_STEP_${stepIndex}"
+									class="step_photoholder" accept="image/*"
+									style="display: none;">
+								</label>
+							</div>
+						</div>
+					</c:forEach>
 
 
 

@@ -1,4 +1,4 @@
-package memberboard;
+package com.care.sekki.memberboard;
 
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;

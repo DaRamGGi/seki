@@ -19,25 +19,26 @@
 
 	<ul class="reicpeForm">
 		<c:forEach var="recipe" items="${recipes}">
-			<li class="recipeForm_li" onclick="location.href='recipeBoardContent?num=${recipe.re_no }'">
-			<img src="${recipe.mainphoto}">
+			<li class="recipeForm_li"
+				onclick="location.href='recipeBoardContent?num=${recipe.re_no }'">
+				<img src="${recipe.mainphoto}">
 				<div class="content_2">
 					<p class="reci_title">${recipe.title}</p>
 					<p class="reci_user">${recipe.id}</p>
 					<p class="reci_time">${recipe.written_time}</p>
-				</div></li>
+				</div>
+			</li>
 		</c:forEach>
 	</ul>
 
 
 	<ul>
-		<li>
-		<a href="${context }recipeBoardWrite"> 
-		<span>글 작성하기</span>
+		<li><a href="${context }recipeBoardWrite"> <span>글
+					작성하기</span>
 		</a></li>
 	</ul>
-	
-	<div class="pages"> ${result } </div>
+
+	<div class="pages">${result }</div>
 </div>
 
 <c:import url="/footer" />

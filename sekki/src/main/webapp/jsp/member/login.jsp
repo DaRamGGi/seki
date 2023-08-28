@@ -44,8 +44,7 @@
 						</colgroup>
 						<tr>
 							<td><h2>
-									반갑습니다.<br>
-									<span class="titleSpan">자취세끼</span>입니다.
+									반갑습니다.<br> <span class="titleSpan">자취세끼</span>입니다.
 								</h2></td>
 						</tr>
 						<tr>

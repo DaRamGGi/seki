@@ -1,4 +1,4 @@
-package memberboard;
+package com.care.sekki.memberboard;
 
 import java.io.File;
 import java.io.FileInputStream;

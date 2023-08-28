@@ -1,8 +1,10 @@
-<%@ page import="java.io.OutputStream"%> 
-<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.io.OutputStream"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
 <c:import url="/header" />
 
@@ -42,14 +44,10 @@
 <div align="center" class="sub_div">
 	<table class="boardContent">
 		<tr>
-			<td>
-				<span class="material-symbols-outlined">menu</span>
+			<td><span class="material-symbols-outlined">menu</span></td>
+			<td><span class="material-symbols-outlined" id="wifi">wifi</span>
 			</td>
-			<td>
-				<span class="material-symbols-outlined" id="wifi">wifi</span>
-			</td>
-			<td>
-				<span class="material-symbols-outlined" id="battery">battery_horiz_050</span>
+			<td><span class="material-symbols-outlined" id="battery">battery_horiz_050</span>
 			</td>
 		</tr>
 		<tr>
@@ -68,8 +66,7 @@
 				</c:when>
 				<c:otherwise>
 					<td onclick="location.href='boardDownload?no=${board.no }'">
-						${board.fileName }
-					</td>
+						${board.fileName }</td>
 				</c:otherwise>
 			</c:choose>
 		</tr>
@@ -84,22 +81,24 @@
 			<td>${board.likes }</td>
 		</tr>
 	</table>
-		<div>
-			<c:choose>
-   				 <c:when test="${not empty id && (id eq (author) || id eq 'admin' )}">
-       				<button type="button" onclick="location.href='boardForm'">목록</button>
-					<button type="button" onclick="location.href='boardModify?no=${board.no }'" id="modifyBtn">수정</button>
-					<button type="button" onclick="deleteCheck()" id="deleteBtn">삭제</button> 
-    			</c:when>
-    			<c:otherwise>
-		       		<button type="button" onclick="location.href='boardForm'">목록</button>
-			    </c:otherwise>
-			</c:choose>
+	<div>
+		<c:choose>
+			<c:when test="${not empty id && (id eq (author) || id eq 'admin' )}">
+				<button type="button" onclick="location.href='boardForm'">목록</button>
+				<button type="button"
+					onclick="location.href='boardModify?no=${board.no }'"
+					id="modifyBtn">수정</button>
+				<button type="button" onclick="deleteCheck()" id="deleteBtn">삭제</button>
+			</c:when>
+			<c:otherwise>
+				<button type="button" onclick="location.href='boardForm'">목록</button>
+			</c:otherwise>
+		</c:choose>
+	</div>
+	<div class="phone">
+		<div class="screen">
+			<!-- 내용을 이곳에 넣으세요 -->
 		</div>
-		<div class="phone">
-	        <div class="screen">
-	            <!-- 내용을 이곳에 넣으세요 -->
-	        </div>
-  		</div>
+	</div>
 </div>
 <c:import url="/footer" />

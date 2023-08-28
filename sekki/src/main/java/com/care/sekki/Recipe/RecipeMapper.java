@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.care.sekki.board.BoardDTO;
-
 @Mapper
 public interface RecipeMapper {
 	ArrayList<RecipeBoardDTO> recipeBoard(@Param("begin")int begin, @Param("end")int end, 

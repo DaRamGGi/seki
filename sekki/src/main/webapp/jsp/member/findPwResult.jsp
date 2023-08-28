@@ -20,8 +20,8 @@
 			<ul>
 				<a href="login"><li>로그인</li></a>
 				<a href="login"><li>로그인</li></a>
-				<a href="agreeCondition" ><li>회원가입</li></a>
-				<a href="findId" ><li>아이디 찾기</li></a>
+				<a href="agreeCondition"><li>회원가입</li></a>
+				<a href="findId"><li>아이디 찾기</li></a>
 				<a href="findPw" class="selected"><li>비밀번호 찾기</li></a>
 			</ul>
 		</div>
@@ -29,8 +29,7 @@
 			<tr>
 				<td>
 					<ul>
-						<li class="findIdTab" onclick="location.href='findId'">아이디
-							찾기</li>
+						<li class="findIdTab" onclick="location.href='findId'">아이디 찾기</li>
 						<li class="findPwTab selected" onclick="location.href='findPw'">비밀번호
 							찾기</li>
 					</ul>
@@ -38,18 +37,18 @@
 			<tr>
 			<tr>
 				<td class="findPwReultTd">
-					<h2>임시 비밀번호를 발급했습니다.</h2>
-					<c:choose>
+					<h2>임시 비밀번호를 발급했습니다.</h2> <c:choose>
 						<c:when test="${deliveryMethod == 'toEmail'}">
-							<p><span>${id }</span> 님의 <span>이메일</span>로 임시비밀번호를 발송했습니다.</p> 
+							<p>
+								<span>${id }</span> 님의 <span>이메일</span>로 임시비밀번호를 발송했습니다.
+							</p>
 						</c:when>
 						<c:otherwise>
-							<p><span>${id }</span>님의 <span>휴대폰</span>으로 임시비밀번호를 발송했습니다.</p> 
+							<p>
+								<span>${id }</span>님의 <span>휴대폰</span>으로 임시비밀번호를 발송했습니다.
+							</p>
 						</c:otherwise>
-					</c:choose>
-					
-					<input type="button"
-					value="로그인" onclick="location.href='login'">
+					</c:choose> <input type="button" value="로그인" onclick="location.href='login'">
 				</td>
 			</tr>
 

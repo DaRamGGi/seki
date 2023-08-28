@@ -43,6 +43,6 @@ public interface MemberMapper {
 
 	void updateSubscription(SubscriberDTO subscriber);
 
-	int findSubscriberCountById(String memberId);
+	int findSubscriberCountById(String member_id);
 
 }

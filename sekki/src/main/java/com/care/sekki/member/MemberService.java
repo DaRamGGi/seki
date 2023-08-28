@@ -213,12 +213,10 @@ public class MemberService {
 
 		Pattern pattern = Pattern.compile("^(01[016789])([1-9]\\d{2,3})(\\d{4})$");
 		Matcher matcher = pattern.matcher(mobile);
-		if (matcher.matches() == false) {
+		if (matcher.matches() == false) 
 			return "* 유효하지 않은 번호입니다. (-)없이 입력하세요.";
-	
-	
+		
 		return "";
-		}
 	}
 
 	

@@ -1,6 +1,7 @@
 <%@ page import="java.io.OutputStream"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:import url="/header" />
 
 <script>
@@ -29,9 +30,9 @@
 					<td></td>
 				</c:when>
 				<c:otherwise>
-					<td onclick="location.href='memberboardDownload?no=${memberboard.no }'">
-						${memberboard.fileName }
-					</td>
+					<td
+						onclick="location.href='memberboardDownload?no=${memberboard.no }'">
+						${memberboard.fileName }</td>
 				</c:otherwise>
 			</c:choose>
 		</tr>
@@ -46,8 +47,9 @@
 		<tr>
 			<td colspan="4">
 				<button type="button" onclick="location.href='memberboardForm'">목록</button>
-				<button type="button" onclick="location.href='memberboardModify?no=${memberboard.no }'">수정</button>
-				<button type="button" onclick="deleteCheck()">삭제</button> 
+				<button type="button"
+					onclick="location.href='memberboardModify?no=${memberboard.no }'">수정</button>
+				<button type="button" onclick="deleteCheck()">삭제</button>
 			</td>
 		</tr>
 	</table>

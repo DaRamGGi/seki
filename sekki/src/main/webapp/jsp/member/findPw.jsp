@@ -30,12 +30,12 @@
 		<h1>회원정보 찾기</h1>
 	</div>
 	<div id="wrap">
-	<div id="memberMenu">
+		<div id="memberMenu">
 			<ul>
 				<a href="login"><li>로그인</li></a>
 				<a href="login"><li>로그인</li></a>
-				<a href="agreeCondition" ><li>회원가입</li></a>
-				<a href="findId" ><li>아이디 찾기</li></a>
+				<a href="agreeCondition"><li>회원가입</li></a>
+				<a href="findId"><li>아이디 찾기</li></a>
 				<a href="findPw" class="selected"><li>비밀번호 찾기</li></a>
 			</ul>
 		</div>
@@ -44,7 +44,8 @@
 				<tr>
 					<td>
 						<ul>
-							<li class="findIdTab" onclick="location.href='findId'">아이디 찾기</li>
+							<li class="findIdTab" onclick="location.href='findId'">아이디
+								찾기</li>
 							<li class="findPwTab selected">비밀번호 찾기</li>
 						</ul>
 					</td>
@@ -55,16 +56,19 @@
 				<tr>
 					<td class="findPwIdInputTd">
 						<p>* 임시 비밀번호는 가입시 입력하신 휴대폰/이메일로 전송됩니다.</p>
-						<h4>✓&nbsp;&nbsp;아이디</h4> <input type="text" id="id" name="id" placeholder="아이디 입력">
+						<h4>✓&nbsp;&nbsp;아이디</h4> <input type="text" id="id" name="id"
+						placeholder="아이디 입력">
 						<h4>✓&nbsp;&nbsp;임시비밀번호 받으실 곳</h4>
 						<div class="findPwCheckboxDiv">
-							<input type="checkbox" id="phoneCheckbox" name="deliveryMethod" value="toMobile">휴대폰으로 받기<br> 
-							<input type="checkbox" id="emailCheckbox" name="deliveryMethod" value="toEmail">이메일로 받기<br>
+							<input type="checkbox" id="phoneCheckbox" name="deliveryMethod"
+								value="toMobile">휴대폰으로 받기<br> <input
+								type="checkbox" id="emailCheckbox" name="deliveryMethod"
+								value="toEmail">이메일로 받기<br>
 						</div> <input type="button" value="임시비밀 번호 발급"
 						onclick="fiindPwInputCheck()">
 					</td>
 				</tr>
-	
+
 			</table>
 		</form>
 	</div>

@@ -32,6 +32,7 @@ public class RecipeController {
 	private RecipeService recipeService;
 	@Autowired private HttpSession session;
 	@Autowired private RecipeMapper recipemapper;
+	
 	@RequestMapping("/recipeBoard")
     public String recipeBoard(@RequestParam(value="currentPage", required = false)String cp,
 			String search, Model model) {
@@ -167,11 +168,6 @@ public class RecipeController {
 
 
 
-
-
-
-;
-
 		List<StepDTO> reciStepList = recipeService.recipeContent_step(n); // 수정된 부분
 
 		if (reciStepList == null || reciStepList.isEmpty())
@@ -181,6 +177,7 @@ public class RecipeController {
 
 		return "recipe/recipeBoardContent";
 	}
+	
 	@PostMapping("commentProc")
 	public String commentProc(HttpSession session, CommentDTO commentDto, Model model) {
 		recipeService.commentProc(commentDto);

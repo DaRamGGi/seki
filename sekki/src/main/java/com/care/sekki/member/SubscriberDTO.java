@@ -8,7 +8,7 @@ public class SubscriberDTO {
 	private int subscriber_Count;
 	private boolean is_Subscribed;
 	
-	private MemberDTO member;
+	private MemberDTO member_id;
 	
 		
 	public String getRegistration_Date() {
@@ -31,6 +31,9 @@ public class SubscriberDTO {
 	}
 
 
+	
+
+
 	public boolean isIs_Subscribed() {
 		return is_Subscribed;
 	}
@@ -51,15 +54,19 @@ public class SubscriberDTO {
 	}
 
 
+	public MemberDTO getMember_id() {
+		return member_id;
+	}
+
+
+	public void setMember_id(MemberDTO member_id) {
+		this.member_id = member_id;
+	}
+
+
 
 	
-	public MemberDTO getMember() {
-		return member;
-	}
 	
-	public void setMember(MemberDTO member) {
-		this.member = member;
-	}
 
 	
 
