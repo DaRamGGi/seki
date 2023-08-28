@@ -269,6 +269,66 @@ public class MemberService {
 		}
 	}
 	
+	public void subscriberList(String cp, String select, String search, Model model) {
+		if (select == null) {
+			select = "";
+		}
+
+		int currentPage = 1;
+		
+		try {
+			currentPage = Integer.parseInt(cp);
+		} catch (Exception e) {
+			currentPage = 1;
+		}
+
+		int pageBlock = 10; // 한 페이지에 보일 데이터의 수
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+
+		ArrayList<SubscriberDTO> subscriberList = memberMapper.subscriberList(begin, end, select, search);
+		int totalCount = memberMapper.count(select, search);
+		String url = "subscriberList?select=" + select + "&search=" + search + "&currentPage=";
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+
+		model.addAttribute("subscriberList", subscriberList);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+				
+	}
+	
+	public void updateSubscription(String subscriberId, String action) {
+	    SubscriberDTO subscriber = memberMapper.findById(subscriberId);
+	    
+	    if (subscriber == null) {
+	        // 구독자 정보를 찾을 수 없음
+	        return;
+	    }
+	    
+	    if ("subscribe".equals(action)) {
+	        subscriber.setIs_Subscribed(true); // 구독 상태 업데이트
+	    } else if ("unsubscribe".equals(action)) {
+	        subscriber.setIs_Subscribed(false); // 구독 상태 업데이트
+	    }
+	    
+	    memberMapper.updateSubscription(subscriber); // 변경 내용 업데이트
+	}
+	
+	
+	
+	
+	
+	private List<ReviewDTO> reviewList = new ArrayList<>();
+	public void addReview(ReviewDTO reviewDTO) {
+		reviewList.add(reviewDTO);
+		
+	}
+   
+	
+    public List<ReviewDTO> getAllReviews() {
+        return reviewList;
+    }
+	
 	/*
 	public void memberInfo(String cp, String select, String search, Model model) {
 		if (select == null) {
@@ -294,7 +354,7 @@ public class MemberService {
 		model.addAttribute("members", members);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
-	}
+	}*/
 
 	public MemberDTO userInfo(String id) {
 		if (id == null || id.isEmpty()) {
@@ -333,7 +393,7 @@ public class MemberService {
 	}
 	
 
-	public String deleteProc(String id, String pw, String confirmPw) {
+	/*public String deleteProc(String id, String pw, String confirmPw) {
 		if (pw == null || pw.isEmpty()) {
 			return "비밀번호를 입력하세요.";
 		}

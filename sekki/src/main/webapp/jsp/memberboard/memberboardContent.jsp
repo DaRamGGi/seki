@@ -7,7 +7,7 @@
 	function deleteCheck(){
 		result = confirm('진짜로 삭제하겠습니까?');
 		if(result == true){
-			location.href='recipeboardDeleteProc?no=${board.no}'
+			location.href='memberboardDeleteProc?no=${memberboard.no}'
 		}
 	}
 </script>
@@ -16,37 +16,37 @@
 	<table border='1'>
 		<tr>
 			<th width="100">작성자</th>
-			<td width="200">${recipeboard.id }</td>
+			<td width="200">${memberboard.id }</td>
 			<th width="100">조회수</th>
-			<td width="200">${recipeboard.hits }</td>
+			<td width="200">${memberboard.hits }</td>
 		</tr>
 		<tr>
 			<th>작성일</th>
-			<td>${recipeboard.writeDate }</td>
+			<td>${memberboard.writeDate }</td>
 			<th>다운로드</th>
 			<c:choose>
-				<c:when test="${empty recipeboard.fileName }">
+				<c:when test="${empty memberboard.fileName }">
 					<td></td>
 				</c:when>
 				<c:otherwise>
-					<td onclick="location.href='recipeboardDownload.jsp?no=${recipeboard.no }'">
-						${recipeboard.fileName }
+					<td onclick="location.href='memberboardDownload?no=${memberboard.no }'">
+						${memberboard.fileName }
 					</td>
 				</c:otherwise>
 			</c:choose>
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td colspan="3">${recipeboard.title }</td>
+			<td colspan="3">${memberboard.title }</td>
 		</tr>
 		<tr>
 			<th>문서내용</th>
-			<td colspan="3">${recipeboard.content }</td>
+			<td colspan="3">${memberboard.content }</td>
 		</tr>
 		<tr>
 			<td colspan="4">
-				<button type="button" onclick="location.href='recipeboardForm.jsp'">목록</button>
-				<button type="button" onclick="location.href='recipeboardModify.jsp?no=${recipeboard.no }'">수정</button>
+				<button type="button" onclick="location.href='memberboardForm'">목록</button>
+				<button type="button" onclick="location.href='memberboardModify?no=${memberboard.no }'">수정</button>
 				<button type="button" onclick="deleteCheck()">삭제</button> 
 			</td>
 		</tr>

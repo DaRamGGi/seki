@@ -3,7 +3,7 @@
 <c:import url="/header" />
 
 <div align="center" class="main_div">
-	<form action="recipeboardWriteProc" method='post' enctype="multipart/form-data">
+	<form action="memberboardWriteProc" method='Post' enctype="multipart/form-data">
 		<table>
 			<caption>
 				<font size="5"><b>게시글 등록</b></font>
@@ -25,12 +25,14 @@
 			<tr>
 				<td colspan="2" align="center">
 					<input type="submit" value="글쓰기" class="btn"> 
-					<input type="button" value="목록" onclick="location.href='recipeboardForm.jsp'" class="btn">
+					<input type="button" value="목록" onclick="location.href='memberboardForm'" class="btn">
 				</td>
 			</tr>
 		</table>
 	</form>
 </div>
+
+
 <c:import url="/footer" />
 
 

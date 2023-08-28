@@ -1,6 +1,6 @@
-package com.care.sekki.recipeboard;
+package com.care.sekki.memberboard;
 
-public class RecipeBoardDTO {
+public class MemberBoardDTO {
 	private int no;
 	private String title;
 	private String content;
