@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:url var="root" value="/" />
 <html>
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-<script src="/js/member.js"></script>
-<link href="css/member.css" rel="stylesheet"/> 
+<script src="${root }js/member.js"></script>
+<link href="${root }css/member.css" rel="stylesheet"/> 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">	
@@ -46,7 +47,8 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=2e151bc9c1174ea0e8836b77c28803c3&redirect_uri=http://localhost/kakaoLogin">
+							<!--  <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=2e151bc9c1174ea0e8836b77c28803c3&redirect_uri=http://localhost/kakaoLogin">-->
+								<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=2e151bc9c1174ea0e8836b77c28803c3&redirect_uri=http://http://ec2-54-180-116-1.ap-northeast-2.compute.amazonaws.com:8888/boot/kakaoLogin">	
 								<img src="https://t1.daumcdn.net/cfile/tistory/99BEE8465C3D7D1214"/>
 							</a>
 						</td>

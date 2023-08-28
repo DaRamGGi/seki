@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>약관동의</title>
 <link href="css/member.css" rel="stylesheet"/> 
-<script src="/js/member.js"></script>
+<script src="/boot/js/member.js"></script>
 </head>
 <body>
 <c:import url="/header"></c:import>

@@ -11,7 +11,7 @@
   />
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<script src="/js/recipe.js"></script>
+<script src="/boot/js/recipe.js"></script>
 <div id="full">
 	<div id="width1200">
 		<%--메인 인포 --%>
