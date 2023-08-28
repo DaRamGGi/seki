@@ -4,12 +4,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:import url="/header" />
 <c:url var="context" value="/" />
-<link href="css/recipes.css" rel="stylesheet" />
+<link href="/boot/css/recipes.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 	<script>const loopIndex = ${loop.index + 1};</script>
-<script src="/js/recipe.js"></script>
+<script src="/boot/js/recipe.js"></script>
 <div id="full">
 	<div id="width1200">
 		<form action="recipeUpdataProc" method="post" id="reci"
