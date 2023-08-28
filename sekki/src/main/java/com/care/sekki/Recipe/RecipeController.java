@@ -53,7 +53,7 @@ public class RecipeController {
 	public String recipeProc(RecipeBoardDTO recipeDto,HttpServletRequest request, HttpServletResponse response) {
 		recipeService.recipeProc(recipeDto,request, response);
 		
-		return "recipe/recipeBoardWrite";
+		return "redirect:/recipeBoard";
 	}
 	@RequestMapping("recipeBoardContent")
 	public String recipeBoardContent(
@@ -189,7 +189,7 @@ public class RecipeController {
 		return "redirect:/recipeBoardContent?num=" + commentDto.getRe_no();
 	}
 	@GetMapping("recipeBoardUpdata")
-	public String recipeBoardUpdata(@RequestParam(value="num", required = false)String n, Model model,
+	public String recipeBoardUpdata(@RequestParam(value="re_no", required = false)String n, Model model,
 			HttpServletRequest request, HttpServletResponse response) {
 		RecipeBoardDTO recipeContent = recipeService.recipeContent(n);
         List<MaterialDTO> recipeContentMa = recipeService.recipeContent_ma(n);
@@ -215,7 +215,7 @@ public class RecipeController {
 	public String recipeBoardUpdata(RecipeBoardDTO recipeDto,HttpServletRequest request, HttpServletResponse response) {
 		recipeService.recipeUpdata(recipeDto,request, response);
 		
-		return "recipe/recipeBoard";
+		return "redirect:/recipeBoardContent?num=" + session.getAttribute("re_no");
 	}
 	
 	@RequestMapping("deleteRecipe")
@@ -223,7 +223,7 @@ public class RecipeController {
 		
 		recipeService.reciDelete(n);
 		
-		return "recipe/recipeBoard";
+		return "redirect:/recipeBoard";
 	}
 	
 	@PostMapping("commentUpdata")

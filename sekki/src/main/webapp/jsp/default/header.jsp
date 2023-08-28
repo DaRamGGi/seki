@@ -35,12 +35,11 @@
         <img src="<%= profilePictureUrl %>" class="profile">
     <% }%></li>
 
-
+	<c:if test="${empty sessionScope.id}">
       <li><a href="${context }login">로그인</a></li>
-      <li><a href="${context }index">레시피</a></li>
+    </c:if>
 
       <li><a href="${context }recipeBoard">레시피</a></li>
-      <li><a href="${context }mypage">마이페이지</a></li>
 
       <li><a href="${context }boardForm">커뮤니티</a></li>
       <li><a href="${context }memberInfo">스토어</a></li>
