@@ -23,7 +23,7 @@
   
 	<select id="recipeboardForm" resultMap="recipeboardDto">
 		SELECT BBB.* FROM 
-		(SELECT rownum as rn, AAA.* FROM 
+		(SELECT ROWNUM() as rn, AAA.* FROM 
 		(SELECT no, title, id, write_date, hits FROM sekki_board ORDER BY no DESC)AAA)BBB
 		WHERE BBB.rn BETWEEN #{begin} AND #{end}
 	</select>

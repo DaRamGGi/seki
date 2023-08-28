@@ -9,9 +9,9 @@
 </style>    
 
 
-
-<script src="/js/center.js"></script>
-<script src="/js/member.js"></script>
+<c:url var="root" value="/" />
+<script src="${root }js/center.js"></script>
+<script src="${root }js/member.js"></script>
 <link href="css/reset.css" rel="stylesheet" type="text/css" />    
 
 

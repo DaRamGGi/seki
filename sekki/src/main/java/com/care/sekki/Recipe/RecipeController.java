@@ -32,7 +32,8 @@ public class RecipeController {
 	private RecipeService recipeService;
 	@Autowired private HttpSession session;
 	@Autowired private RecipeMapper recipemapper;
-	@RequestMapping("/recipeBoard")
+	
+	@RequestMapping("recipeBoard")
     public String recipeBoard(@RequestParam(value="currentPage", required = false)String cp,
 			String search, Model model) {
 		recipeService.recipeBoard(cp, search ,model);

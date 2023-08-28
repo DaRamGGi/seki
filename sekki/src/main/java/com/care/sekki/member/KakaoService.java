@@ -25,7 +25,7 @@ public class KakaoService {
 		 * https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-token
 		 * -sample
 		 */
-		String redirectUri = "http://localhost/kakaoLogin";
+		String redirectUri = "http://http://ec2-54-180-116-1.ap-northeast-2.compute.amazonaws.com:8888/boot/kakaoLogin";
 		String reqUrl = "https://kauth.kakao.com/oauth/token";
 		String reqParam = "grant_type=authorization_code";
 		reqParam += "&client_id=2e151bc9c1174ea0e8836b77c28803c3";
@@ -84,7 +84,7 @@ public class KakaoService {
 	 */
 	//https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=account_email,gender	
 
-		String redirectUri = "http://localhost/kakaoLogin";
+		String redirectUri = "http://http://ec2-54-180-116-1.ap-northeast-2.compute.amazonaws.com:8888/boot/kakaoLogin";
 		String reqUrl = "https://kauth.kakao.com/oauth/authorize";
 		String reqParam = "?client_id=2e151bc9c1174ea0e8836b77c28803c3";
 		reqParam += "&redirect_uri="+redirectUri;
