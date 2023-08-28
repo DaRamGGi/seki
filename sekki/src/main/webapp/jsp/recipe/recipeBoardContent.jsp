@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:import url="/header" />
 <c:url var="context" value="/" />
-<link href="css/recipes.css" rel="stylesheet" />
+<link href="/boot/css/recipes.css" rel="stylesheet" />
  <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
@@ -18,7 +18,7 @@
 		<div id="main_con_info">
 			<div class="main_photo">
 				<img src="">
-			</div>
+			</div> 
 			<div class="user_inffo">
 				<img src="${recipeCon.mainphoto }" class="main_img_con">
 				<div id="user_info_con">

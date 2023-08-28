@@ -5,7 +5,7 @@
 <div align="center" class="main_div">
 	<h1>게시글 목록</h1>
 		<c:choose>
-			<c:when test="${empty recipeboards }">
+			<c:when test="${empty memberboards }">
 				<h1> 등록된 데이터가 존재하지 않습니다. </h1>
 			</c:when>
 			<c:otherwise>
@@ -18,27 +18,33 @@
 						<th width="60">조회수</th>
 					</tr>
 					
-					<c:forEach var="recipeboard" items="${ recipeboards}">
+					<c:forEach var="memberboard" items="${memberboards}">
 						<tr>
-							<td>${recipeboard.no }</td>
-							<td onclick="location.href='recipeboardContent.jsp?no=${recipeboard.no }'">
-								${recipeboard.title }
+							<td>${memberboard.no}</td>
+							<td onclick="location.href='memberboardContent?no=${memberboard.no}'">
+								${memberboard.title}
 							</td>
-							<td>${recipeboard.id }</td>
-							<td>${recipeboard.writeDate }</td>
-							<td>${recipeboard.hits }</td>
+							<td>${memberboard.id}</td>
+							<td>${memberboard.writeDate}</td>
+							<td>${memberboard.hits}</td>
 						</tr>
 					</c:forEach>
 					<tr>
-						<td colspan="4">
-							${result }
+									
+						<td colspan="10">
+							${result}
 						</td>
-						<td><button type="button" onclick="location.href='recipeboardWrite.jsp'">글쓰기</button></td>
+						<td><button type="button" onclick="location.href='memberboardWrite'">글쓰기</button></td>
 					</tr>
 				</table>
 		</c:otherwise>
 	</c:choose>
 </div>
+
+
+
+
+
 <c:import url="/footer" />
 
 

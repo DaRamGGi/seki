@@ -1,4 +1,4 @@
-package com.care.sekki.recipeboard;
+package com.care.sekki.memberboard;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,12 +21,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Service
-public class RecipeBoardService {
-	@Autowired private RecipeBoardMapper recipeboardMapper;
+public class MemberBoardService {
+	@Autowired private MemberBoardMapper memberboardMapper;
 	@Autowired private HttpSession session;
 	
-	public void recipeboardForm(String cp, Model model) {
-		
+	public void memberboardForm(String cp, Model model) {
 		int currentPage = 1;
 		try{
 			currentPage = Integer.parseInt(cp);
@@ -34,54 +33,55 @@ public class RecipeBoardService {
 			currentPage = 1;
 		}
 		
-		int pageBlock = 3; // 한 페이지에 보일 데이터의 수 
+		int pageBlock = 10; // 한 페이지에 보일 데이터의 수 
 		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
 		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
 	
-		ArrayList<RecipeBoardDTO> boards = recipeboardMapper.recipeboardForm(begin, end);
-		int totalCount = recipeboardMapper.count();
-		String url = "recipeboardForm.jsp?currentPage=";
+		ArrayList<MemberBoardDTO> memberboard = memberboardMapper.memberboardForm(begin, end);
+		int totalCount = memberboardMapper.count();
+		String url = "memberboardForm?currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		
-		model.addAttribute("boards", boards);
+		
+		model.addAttribute("memberboard", memberboard);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
 	}
 
-	public String recipeboardWriteProc(MultipartHttpServletRequest multi) {
-		
-		String id = (String)session.getAttribute("id");
-		if(id == null || id.isEmpty()) {
+	
+	
+	public String memberboardWriteProc(MultipartHttpServletRequest multi) {
+
+		String id = (String) session.getAttribute("id");
+		if (id == null || id.isEmpty()) {
 			return "로그인";
 		}
-		
-		RecipeBoardDTO recipeboard = new RecipeBoardDTO();
-		recipeboard.setId(id);
-		recipeboard.setTitle(multi.getParameter("title"));
-		recipeboard.setContent(multi.getParameter("content"));
+
+		MemberBoardDTO memberboard = new MemberBoardDTO();
+		memberboard.setId(id);
+		memberboard.setTitle(multi.getParameter("title"));
+		memberboard.setContent(multi.getParameter("content"));
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		recipeboard.setWriteDate(sdf.format(new Date()));
-		recipeboard.setFileName("");
-		
-		if(recipeboard.getTitle() == null || recipeboard.getTitle().isEmpty()) {
+		memberboard.setWriteDate(sdf.format(new Date()));
+		memberboard.setFileName("");
+
+		if (memberboard.getTitle() == null || memberboard.getTitle().isEmpty()) {
 			return "제목을 입력하세요.";
 		}
-		
+
 		MultipartFile file = multi.getFile("upfile");
 		String fileName = file.getOriginalFilename();
-		if(file.getSize() != 0) {
+		if (file.getSize() != 0) {
 			// 파일의 중복을 해결하기 위해 시간의 데이터를 파일이름으로 구성함.
 			sdf = new SimpleDateFormat("yyyyMMddHHmmss-");
 			Calendar cal = Calendar.getInstance();
 			fileName = sdf.format(cal.getTime()) + fileName;
-			recipeboard.setFileName(fileName);
-			
-// 업로드 파일 저장 경로
-// ubuntu@ip-172-31-32-35:~$ sudo mkdir /opt/tomcat/tomcat-10/webapps/upload
-// ubuntu@ip-172-31-32-35:~$ sudo chown -RH tomcat: /opt/tomcat/tomcat-10/webapps/upload
-			String fileLocation = "/opt/tomcat/tomcat-10/webapps/upload/";
+			memberboard.setFileName(fileName); 
+
+
+			String fileLocation = "C:\\javas\\upload\\";
 			File save = new File(fileLocation + fileName);
-			
+
 			try {
 				// 서버가 저장한 업로드 파일은 임시저장경로에 있는데 개발자가 원하는 경로로 이동
 				file.transferTo(save);
@@ -89,12 +89,14 @@ public class RecipeBoardService {
 				e.printStackTrace();
 			}
 		}
-		
-		recipeboardMapper.recipeboardWriteProc(recipeboard);
+
+		memberboardMapper.memberboardWriteProc(memberboard);
 		return "게시글 작성 완료";
 	}
 
-	public RecipeBoardDTO recipeboardContent(String n) {
+	
+	
+	public MemberBoardDTO memberboardContent(String n) {
 		int no = 0;
 		try{
 			no = Integer.parseInt(n);
@@ -102,28 +104,31 @@ public class RecipeBoardService {
 			return null;
 		}
 		
-		RecipeBoardDTO recipeboard = recipeboardMapper.recipeboardContent(no);
-		if(recipeboard == null)
+		MemberBoardDTO memberboard = memberboardMapper.memberboardContent(no);
+		if(memberboard == null)
 			return null;
 		
-		recipeboard.setHits(recipeboard.getHits()+1);
-		incHit(recipeboard.getNo());
+		memberboard.setHits(memberboard.getHits()+1);
+		incHit(memberboard.getNo());
 
-		System.out.println("board.getFileName() : " + recipeboard.getFileName());
-		System.out.println("board.getFileName() : " + recipeboard.getFileName().isEmpty());
-		if(recipeboard.getFileName() != null && recipeboard.getFileName().isEmpty() == false) {
-			String fn = recipeboard.getFileName();
+		System.out.println("memberboard.getFileName() : " + memberboard.getFileName());
+		System.out.println("memberboard.getFileName() : " + memberboard.getFileName().isEmpty());
+		if(memberboard.getFileName() != null && memberboard.getFileName().isEmpty() == false) {
+			String fn = memberboard.getFileName();
 			String[] fileName = fn.split("-", 2);
-			recipeboard.setFileName(fileName[1]);
+			memberboard.setFileName(fileName[1]);
 		}
-		return recipeboard;
+		return memberboard;
 	}
 	
+	
 	public void incHit(int no) {
-		recipeboardMapper.incHit(no);
+		memberboardMapper.incHit(no);
 	}
 
-	public boolean recipeboardDownload(String n, HttpServletResponse res) {
+	
+	
+	public boolean memberboardDownload(String n, HttpServletResponse res) {
 		int no = 0;
 		
 		try{
@@ -132,11 +137,11 @@ public class RecipeBoardService {
 			return false;
 		}
 		
-		String fileName = recipeboardMapper.recipeboardDownload(no);
+		String fileName = memberboardMapper.memberboardDownload(no);
 		if(fileName == null)
 			return false;
 		
-		String location = "/opt/tomcat/tomcat-10/webapps/upload/";
+		String location = "C:\\javas\\upload\\";
 		File file = new File(location + fileName);
 		
 		try {
@@ -154,7 +159,9 @@ public class RecipeBoardService {
 		return true;
 	}
 
-	public RecipeBoardDTO recipeboardModify(String n) {
+	
+	
+	public MemberBoardDTO memberboardModify(String n) {
 		int no = 0;
 		try{
 			no = Integer.parseInt(n);
@@ -162,27 +169,34 @@ public class RecipeBoardService {
 			return null;
 		}
 		
-		RecipeBoardDTO recipeboard = recipeboardMapper.recipeboardContent(no);
-		if(recipeboard == null)
+		MemberBoardDTO memberboard = memberboardMapper.memberboardContent(no);
+		if(memberboard == null)
 			return null;
 
-		if(recipeboard.getFileName() != null && recipeboard.getFileName().isEmpty() == false) {
-			String fn = recipeboard.getFileName();
+		if(memberboard.getFileName() != null && memberboard.getFileName().isEmpty() == false) {
+			String fn = memberboard.getFileName();
 			String[] fileName = fn.split("-", 2);
-			recipeboard.setFileName(fileName[1]);
+			memberboard.setFileName(fileName[1]);
 		}
-		return recipeboard;
+		return memberboard;
 	}
 	
-	public String recipeboardModifyProc(RecipeBoardDTO recipeboard) {
-		if(recipeboard.getTitle() == null || recipeboard.getTitle().isEmpty())
+	
+	
+	
+	public String memberboardModifyProc(MemberBoardDTO memberboard) {
+		if(memberboard.getTitle() == null || memberboard.getTitle().isEmpty())
 			return "제목을 입력하세요.";
 		
-		recipeboardMapper.recipeboardModifyProc(recipeboard);
+		memberboardMapper.memberboardModifyProc(memberboard);
 		return "게시글 수정 완료";
 	}
 
-	public String recipeboardDeleteProc(String n) {
+	
+	
+	
+	
+	public String memberboardDeleteProc(String n) {
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.isEmpty()) {
 			return "로그인";
@@ -195,16 +209,16 @@ public class RecipeBoardService {
 			return "게시글 번호에 문제가 생겼습니다.";
 		}
 		
-		RecipeBoardDTO recipeboard = recipeboardMapper.recipeboardContent(no);
-		if(recipeboard == null)
+		MemberBoardDTO memberboard = memberboardMapper.memberboardContent(no);
+		if(memberboard == null)
 			return "게시글 번호에 문제가 생겼습니다.";
 		
-		if(id.equals(recipeboard.getId()) == false)
+		if(id.equals(memberboard.getId()) == false)
 			return "작성자만 삭제 할 수 있습니다.";
 		
-		recipeboardMapper.recipeboardDeleteProc(no);
+		memberboardMapper.memberboardDeleteProc(no);
 		
-		String path = "/opt/tomcat/tomcat-10/webapps/upload/" + recipeboard.getFileName();
+		String path = "C:\\javas\\upload\\" + memberboard.getFileName();
 		File file = new File(path);
 		if(file.exists() == true) {
 			file.delete();
