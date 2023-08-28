@@ -249,4 +249,22 @@ public class RecipeController {
         }
     }
 	
+/*	@DeleteMapping("/deleteRecipe/{reno}") // 경로 변수를 설정해줍니다.
+    public ResponseEntity<String> deleteRecipe(@PathVariable Long commentNo, @PathVariable Long reno, RecipeBoardDTO reciDto) {
+        try {
+            System.out.println("reno: " + reno); // 값 확인
+            // 여기서 실제로 삭제 작업을 수행하고, 결과에 따라 적절한 ResponseEntity 반환
+
+            reciDto.setRe_no(reno);
+            recipemapper.CommentDel(reciDto);
+            return new ResponseEntity<>("삭제되었습니다.", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("삭제 중 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }*/
+	
+	
+	
+	
+	
 }
