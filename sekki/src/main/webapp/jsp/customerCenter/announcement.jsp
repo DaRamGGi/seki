@@ -7,8 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항</title>
-<script src="js/center.js"></script>
-<link href="css/customerCenter.css" rel="stylesheet"/> 	
+<c:url var="root" value="/" />
+<script src="${root }js/center.js"></script>
+<link href="${root }css/customerCenter.css" rel="stylesheet"/> 	
 </head>
 <body>
 <c:import url="/header"></c:import>

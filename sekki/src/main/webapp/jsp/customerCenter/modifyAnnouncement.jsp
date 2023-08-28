@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 수정</title>
+<c:url var="root" value="/" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="css/customerCenter.css" rel="stylesheet"/> 
 </head>

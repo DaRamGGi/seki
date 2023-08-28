@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>문의 작성</title>
-<link href="css/customerCenter.css" rel="stylesheet"/> 
+<c:url var="root" value="/" />
+<link href="${root }css/customerCenter.css" rel="stylesheet"/> 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>

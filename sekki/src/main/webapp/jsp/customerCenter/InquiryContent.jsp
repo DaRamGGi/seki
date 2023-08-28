@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>문의내역</title>
-<link href="css/customerCenter.css" rel="stylesheet"/>
+<c:url var="root" value="/" />
+<link href="${root }css/customerCenter.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
