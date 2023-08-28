@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>문의하기</title>
-<link href="css/customerCenter.css" rel="stylesheet"/> 	
+<c:url var="root" value="/" />
+<link href="${root }css/customerCenter.css" rel="stylesheet"/> 	
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
 </head>
 <body>
