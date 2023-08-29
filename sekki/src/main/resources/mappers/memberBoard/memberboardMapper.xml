@@ -3,11 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
-
-  
-<mapper namespace="com.care.sekki.recipeboard.RecipeBoardMapper">
-	<resultMap type="com.care.sekki.recipeboard.RecipeBoardDTO" id="recipeboardDto">
+ 
+<mapper namespace="com.care.sekki.memberboard.MemberBoardMapper">
+	<resultMap type="com.care.sekki.memberboard.MemberBoardDTO" id="memberboardDto">
 		<id column="no" property="no"/>
 		<result column="title" property="title"/>
 		<result column="content" property="content"/>
@@ -21,21 +19,21 @@
 	  	SELECT count(no) FROM sekki_board
 	</select>
   
-	<select id="recipeboardForm" resultMap="recipeboardDto">
+	<select id="memberboardForm" resultMap="memberboardDto">
 		SELECT BBB.* FROM 
-		(SELECT ROWNUM() as rn, AAA.* FROM 
+		(SELECT rownum as rn, AAA.* FROM 
 		(SELECT no, title, id, write_date, hits FROM sekki_board ORDER BY no DESC)AAA)BBB
-		WHERE BBB.rn BETWEEN #{begin} AND #{end}
+		WHERE BBB.rn BETWEEN #{begin} AND #{end} 
 	</select>
 	
-	<insert id="recipeboardWriteProc">
+	<insert id="memberboardWriteProc">
 		<selectKey order="BEFORE" keyProperty="no" resultType="int">
 			SELECT nvl(max(no),0) + 1 FROM sekki_board
 		</selectKey>
 		INSERT INTO sekki_board VALUES(#{no}, #{title}, #{content}, #{id}, #{writeDate}, 0, #{fileName} )
 	</insert>
 	
-	<select id="recipeboardContent" resultMap="recipeboardDto">
+	<select id="memberboardContent" resultMap="memberboardDto">
 		SELECT * FROM sekki_board WHERE no=#{no}
 	</select>
 	
@@ -43,15 +41,15 @@
 		UPDATE sekki_board SET hits=hits+1 WHERE no=#{no}
 	</update>
 	
-	<select id="recipeboardDownload">
+	<select id="memberboardDownload">
 		SELECT file_name FROM sekki_board WHERE no=#{no}
 	</select>
 	
-	<update id="recipeboardModifyProc">
+	<update id="memberboardModifyProc">
 		UPDATE sekki_board SET title=#{title}, content=#{content} WHERE no=#{no}
 	</update>
 	
-	<delete id="recipeboardDeleteProc">	
+	<delete id="memberboardDeleteProc">	
 		DELETE FROM sekki_board WHERE no=#{no}
 	</delete>
 </mapper>

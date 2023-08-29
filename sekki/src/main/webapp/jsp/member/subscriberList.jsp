@@ -81,7 +81,7 @@ h2{
         <tbody>
             <c:forEach var="subscriber" items="${subscriberList}" >
                 <tr align="center" >
-                    <td onclick="location.href='userInfo?id=${member.id }&currentPage=${currentPage }'">${subscriber.id}</td>
+                    <td onclick="location.href='userInfo?id=${subscriber.id }&currentPage=${currentPage }'">${subscriber.id}</td>
                     <td>${subscriber.registration_Date}</td>
                     <td>${subscriber.subscriber_Count}명</td>
                     <td>
@@ -92,7 +92,7 @@ h2{
 		              onclick="toggleSubscription(this)">&#x2764;</span>
 			    </c:when>
 			    <c:otherwise>
-		        <!-- 구독하지 않은 경우 -->
+		<!-- 구독하지 않은 경우 -->
 		        <span class="subscription-btn" data-subscriber-id="${subscriber.id}" data-action="subscribe"
 		              onclick="toggleSubscription(this)">&#x2661;</span>
 		   	 	</c:otherwise>

@@ -44,6 +44,10 @@ public interface MemberMapper {
 	int findSubscriberCountById(String memberId);
 
 	
+
+	
+
+	
 	
 
 }

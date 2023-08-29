@@ -159,6 +159,7 @@ public class MemberController {
 	public String registerProc(MemberDTO member, MultipartFile profilePicture) {
 		System.out.println("profilePicture : " + profilePicture);
 		String result = service.registerProc(member, profilePicture);
+		
 		if(result.equals("회원 가입 완료")) {
 			return "redirect:index";
 		}
@@ -250,7 +251,7 @@ public class MemberController {
 	    return "member/subscriberList";
 	}
 	
-	@RequestMapping("/updateSubscription")
+	@PostMapping("/updateSubscription")
     public void updateSubscription(@RequestParam String subscriberId, 
     							@RequestParam String action) {
         service.updateSubscription(subscriberId, action);

@@ -51,7 +51,7 @@
 	  		</otherwise>
 		</choose>
 	</select>
-  
+<!--   
 	<select id="memberInfo" resultMap="memberDto">
 		<choose>
 			<when test="select == 'id'">
@@ -74,7 +74,7 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+ -->	
 	<update id="updateProc" parameterType="com.care.sekki.member.MemberDTO">
 		UPDATE sekki_member 
 		SET pw=#{pw}, user_name=#{userName}, address=#{address}, mobile=#{mobile} 
@@ -85,12 +85,29 @@
 		DELETE FROM sekki_member WHERE id=#{id}
 	</delete> 
 	
-	<select id="findIdByMobile">
+		<select id="findIdByMobile">
 		SELECT id FROM sekki_member WHERE user_name=#{userName} AND mobile=#{mobile}
 	</select>
 	
 	<select id="findIdByEmail">
 		SELECT id FROM sekki_member WHERE user_name=#{userName} AND email=#{email}
+	</select>
+
+	<resultMap type="com.care.sekki.member.SubscriberDTO" id="subscriberDto">
+		<id column="id" property="id"/>
+		<result column="registration_Date" property="registration_Date"/>
+		<result column="subscriber_Count" property="subscriber_Count"/>
+		<result column="is_Subscribed" property="is_Subscribed"/>
+		<result column="member_id" property="member_id"/>
+		
+	</resultMap>	
+
+    <select id="subscriberList" resultType="com.care.sekki.member.SubscriberDTO">
+	   SELECT id, registration_Date, subscriber_Count, is_Subscribed, member_id FROM subscribers
+    </select>
+
+	<select id="findById" resultMap="memberDto">
+    	SELECT * FROM sekki_member WHERE id=#{id}
 	</select>
 	
 </mapper>
