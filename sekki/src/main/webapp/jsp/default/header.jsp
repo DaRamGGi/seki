@@ -40,7 +40,7 @@
     </c:if>
 
       <li><a href="${context }recipeBoard">레시피</a></li>
-
+	  <li><a href="${context }mypage">마이페이지</a></li>
       <li><a href="${context }boardForm">커뮤니티</a></li>
       <li><a href="${context }memberInfo">스토어</a></li>
       <li><a href="${context }announcement">고객센터</a></li>

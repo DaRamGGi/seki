@@ -273,6 +273,10 @@ public class MemberService {
 		if (select == null) {
 			select = "";
 		}
+		
+		if (search == null) {
+	        search = ""; // search가 null일 경우 빈 문자열로 초기화
+	    }
 
 		int currentPage = 1;
 		
@@ -287,6 +291,7 @@ public class MemberService {
 		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
 
 		ArrayList<SubscriberDTO> subscriberList = memberMapper.subscriberList(begin, end, select, search);
+		
 		int totalCount = memberMapper.count(select, search);
 		String url = "subscriberList?select=" + select + "&search=" + search + "&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
@@ -329,8 +334,8 @@ public class MemberService {
         return reviewList;
     }
 	
-	/*
-	public void memberInfo(String cp, String select, String search, Model model) {
+	
+	/*public void memberInfo(String cp, String select, String search, Model model) {
 		if (select == null) {
 			select = "";
 		}
@@ -348,7 +353,7 @@ public class MemberService {
 
 		ArrayList<MemberDTO> members = memberMapper.memberInfo(begin, end, select, search);
 		int totalCount = memberMapper.count(select, search);
-		String url = "memberInfo?select=" + select + "&search=" + search + "&currentPage=";
+		String url = "subscriberList?select=" + select + "&search=" + search + "&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 
 		model.addAttribute("members", members);
@@ -415,7 +420,7 @@ public class MemberService {
 		return memberMapper.findIdByMobile(userName, mobile);
 	}
 
-public String findIdByEmail(String userName, String emailInput, String emailSelect) {
+	public String findIdByEmail(String userName, String emailInput, String emailSelect) {
 		String email = emailInput + emailSelect;
 		return memberMapper.findIdByEmail(userName, email);
 	}

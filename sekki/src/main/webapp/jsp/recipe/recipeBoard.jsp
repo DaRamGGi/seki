@@ -40,7 +40,8 @@
 		<li>
 		<a href="${context }recipeBoardWrite"> 
 		<span>글 작성하기</span>
-		</a></li>
+		</a>
+		</li>
 	</ul>
 	
 	<div class="pages"> ${result } </div>

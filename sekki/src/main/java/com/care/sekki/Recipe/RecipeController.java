@@ -28,8 +28,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class RecipeController {
 	
-	@Autowired
-	private RecipeService recipeService;
+	@Autowired private RecipeService recipeService;
 	@Autowired private HttpSession session;
 	@Autowired private RecipeMapper recipemapper;
 	
@@ -165,11 +164,6 @@ public class RecipeController {
 		}
 
 		model.addAttribute("reciment", reciment);
-
-
-
-
-
 
 ;
 
